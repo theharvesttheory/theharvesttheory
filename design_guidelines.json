@@ -1,0 +1,128 @@
+{
+  "theme": "light",
+  "typography": {
+    "display": "Fraunces, 'Playfair Display', serif",
+    "body": "Outfit, Manrope, sans-serif",
+    "hierarchy": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter leading-none text-[#1A3B2B]",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight text-[#1A3B2B]",
+      "h3": "text-xl md:text-2xl font-light tracking-tight text-[#1A3B2B]",
+      "body": "text-base md:text-lg font-light leading-relaxed tracking-wide text-[#546A5E]",
+      "overline": "text-xs uppercase tracking-[0.2em] font-medium text-[#C1775B]"
+    },
+    "instructions": "Avoid generic sans for headings. Use Fraunces for editorial elegance. Never center by default—use purposeful alignment. Include Google Fonts link for Fraunces and Outfit in index.html."
+  },
+  "colors": {
+    "background": "#F9F6F0",
+    "surface": "#FAF9F6",
+    "primary": "#1A3B2B",
+    "secondary": "#A4B49F",
+    "accent": "#C1775B",
+    "wood": "#8C5A35",
+    "text_main": "#1A3B2B",
+    "text_muted": "#546A5E",
+    "border": "#E5DFD3",
+    "instructions": "Use warm cream as the dominant background. Deep botanical green for text and key actions. No pure white or black. Terracotta and sage for subtle accents. AVOID: standard green/white healthy food cliches. DO NOT use generic gradients."
+  },
+  "visual_enhancers": {
+    "surfaces": "Minimal borders. Use generous spacing (p-12+) instead of boxes to separate content.",
+    "images": "Treated deliberately—use spotlight effects, slightly clipped frames, and gentle corner radii (rounded-none or very slight rounded-sm).",
+    "textures": "Include a subtle noise overlay spanning the entire site to remove digital flatness.",
+    "logo": "Create a distinctive original SVG mark for 'The Harvest Theory'. Abstract botanical curve or highly tracked elegant serif lockup. Usable as favicon."
+  },
+  "layouts": {
+    "spacing_scale": "Use generous spacing: p-6, p-12, p-16, p-24, py-32. Minimum gap-8 for grids.",
+    "page_layouts": {
+      "home": [
+        "Hero: Large kinetic hero with line-by-line masked reveal. Subtle 3D/parallax image wrapper.",
+        "Brand Statement: Large typography, generous whitespace, asymmetrical alignment.",
+        "Marquee: Slow editorial marquee displaying product philosophy.",
+        "Featured Products: Overlapping layout or strict bento grid (wide gap-8) showcasing top 3 categories.",
+        "Philosophy/Sourcing: Text-heavy editorial section with one striking ingredient image, warm wood accent colors.",
+        "Final CTA: Deep green background (#1A3B2B) with cream text."
+      ],
+      "products": [
+        "Header: Spacious introduction to the brand's expansive catalog.",
+        "Filters/Nav: Horizontal sticky sub-nav. Do not design around tea alone.",
+        "Grid: Asymmetrical or staggered product grid. Strong photography with generous whitespace. Minimal copy.",
+        "Categories: Botanical beverages, teas, matcha, coffee, traditional foods, seeds, seafood, future wellness."
+      ],
+      "product_detail_modal": [
+        "Layout: Split screen. Left side locked sticky image with smooth reveal, right side scrollable content.",
+        "Content: Title, precise ingredient list, sourcing story, elegant 'Add to Cart' / 'Explore' button."
+      ],
+      "story": [
+        "Layout: Long-scroll editorial narrative. Alternating large imagery and offset text blocks. Warm, calm, confident tone."
+      ],
+      "contact": [
+        "Layout: Refined form handling consumer, retail, export enquiries. No default select boxes (use customized Shadcn). Split layout with brand imagery."
+      ]
+    }
+  },
+  "motion": {
+    "libraries": "Framer Motion, Lenis (for smooth scrolling).",
+    "scroll": "MANDATORY: Use `lenis` for smooth momentum scrolling.",
+    "reveals": "Framer-motion for on-scroll reveals. Use `initial={{ opacity: 0, y: 20 }}` with `duration: 0.8, ease: [0.16, 1, 0.3, 1]`.",
+    "hero_kinetic": "Masked line-by-line text reveal. Wrap lines in `overflow-hidden` spans and translate Y from 100% to 0%.",
+    "hover": "Restrained hovers. Subtle scale (`scale-[1.02]`) and slow transition for product images (`duration-700 ease-out`).",
+    "marquee": "One slow editorial marquee (e.g., using `react-fast-marquee`). Serif font, tracking wide, muted colors."
+  },
+  "components": {
+    "navigation": "Crystal Glass sticky header (backdrop-blur-xl bg-[#F9F6F0]/80) after scroll, with a delicate bottom border (`border-[#E5DFD3]`). Desktop must show inline links, NO hamburger on desktop.",
+    "buttons": "Pill-shaped or refined rectangular buttons. Primary: `bg-[#1A3B2B] text-[#F9F6F0] hover:bg-[#254F3A]`. Include `data-testid`."
+  },
+  "media": {
+    "image_urls": {
+      "hero": {
+        "url": "https://images.unsplash.com/photo-1786602181654-202756704a93"
+      },
+      "matcha_botanical": {
+        "url": "https://images.unsplash.com/photo-1786602181654-202756704a93"
+      },
+      "tea_infusion": {
+        "url": "https://images.unsplash.com/photo-1762328868620-76572366d607"
+      },
+      "traditional_foods": {
+        "url": "https://images.unsplash.com/photo-1782720326392-5ee6f6319194"
+      },
+      "nutritional_seeds": {
+        "url": "https://images.unsplash.com/photo-1642177057604-bcbe54bedcb1"
+      },
+      "future_wellness": {
+        "url": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108"
+      },
+      "ingredients": {
+        "url": "https://images.unsplash.com/photo-1547736388-1b87be7a1ada"
+      }
+    },
+    "ai_image_prompts": {
+      "style": "warm editorial still-life, cream/botanical palette, consistent lighting, minimalist high-end aesthetics",
+      "hero": "Warm editorial still-life, wide composition, premium botanical beverages and clean traditional foods arranged asymmetrically on a warm cream surface with soft organic shadows, consistent warm lighting.",
+      "botanical_beverages": "Premium botanical beverage in a ribbed crystal glass, garnished with subtle herbs, soft sage background, editorial still-life, warm consistent lighting.",
+      "teas_infusions": "High-end loose leaf tea infusion in an elegant glass teapot, minimalist cream palette, warm lighting, natural shadows.",
+      "matcha": "Ceremonial grade matcha in a contemporary ceramic bowl, natural wood accents, clean minimalist styling, warm editorial lighting.",
+      "coffee_functional": "Sleek functional coffee beverage on a muted terracotta surface, sharp lighting, editorial composition.",
+      "traditional_foods": "Premium traditional foods presented in modern, minimalist ceramic tableware, warm wood background, highly considered layout.",
+      "seeds_nutritional": "Artisanal seeds and nutritional supplements displayed on a minimalist stone pedestal, cream background, warm botanical shadows.",
+      "seafood": "Highly curated, premium tinned seafood on a clean off-white plate with a single botanical garnish, editorial still-life, muted warm palette.",
+      "future_wellness": "Contemporary futuristic wellness supplement bottle, amber glass, bathed in warm natural sunlight with delicate leaf shadows on a cream wall.",
+      "sourcing_craftsmanship": "Close-up macro shot of premium raw ingredients, warm natural lighting, deep botanical green undertones, conveying purity and craft."
+    }
+  },
+  "testing": {
+    "instructions": "All interactive and key informational elements MUST include a `data-testid` attribute (kebab-case, role-based). Example: `data-testid='hero-cta-button'`"
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. In frontend design, this creates what users call the 'AI slop' aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Do not make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy and glass-morphism (backdrop-blur).",
+    "NEVER apply universal transition like `transition: all`.",
+    "NEVER center align the app container (`.App { text-align: center; }`). Keep text left-aligned for natural reading.",
+    "Use modern button styles with interaction animations.",
+    "NEVER use AI assistant Emoji characters for icons.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects.",
+    "DO NOT use transparent backgrounds for dropdowns, headers overlaying content, or modals.",
+    "Rely heavily on typography and spacing over bounding boxes and borders."
+  ]
+}

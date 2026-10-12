@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 40 38% 94%;
+        --foreground: 69 19% 15%;
+        --card: 40 33% 92%;
+        --card-foreground: 69 19% 15%;
+        --popover: 40 38% 94%;
+        --popover-foreground: 69 19% 15%;
+        --primary: 61 25% 29%;
+        --primary-foreground: 40 38% 94%;
+        --secondary: 41 30% 89%;
+        --secondary-foreground: 69 19% 15%;
+        --muted: 41 30% 89%;
+        --muted-foreground: 64 31% 37%;
+        --accent: 40 49% 50%;
+        --accent-foreground: 69 19% 15%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 40 30% 87%;
+        --input: 40 30% 87%;
+        --ring: 61 25% 29%;
+        --chart-1: 61 25% 29%;
+        --chart-2: 40 49% 50%;
+        --chart-3: 27 45% 52%;
+        --chart-4: 74 25% 60%;
+        --chart-5: 29 38% 38%;
+        --radius: 0.25rem;
+    }
+    .dark {
+        --background: 69 22% 11%;
+        --foreground: 40 38% 94%;
+        --card: 69 22% 11%;
+        --card-foreground: 40 38% 94%;
+        --popover: 69 22% 11%;
+        --popover-foreground: 40 38% 94%;
+        --primary: 40 38% 94%;
+        --primary-foreground: 69 22% 11%;
+        --secondary: 69 15% 18%;
+        --secondary-foreground: 40 38% 94%;
+        --muted: 69 15% 18%;
+        --muted-foreground: 40 15% 70%;
+        --accent: 69 15% 18%;
+        --accent-foreground: 40 38% 94%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 69 15% 22%;
+        --input: 69 15% 22%;
+        --ring: 40 49% 50%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+    body {
+        @apply bg-cream text-ink font-sans antialiased;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+    }
+    ::selection {
+        background: rgba(171, 142, 84, 0.35);
+        color: #242716;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f6f2e9;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #d9d1bd;
+        border-radius: 8px;
+        border: 2px solid #f6f2e9;
+    }
+}
+
+/* Lenis smooth-scroll recommended styles */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+@layer components {
+    .eyebrow {
+        @apply text-[11px] md:text-xs uppercase tracking-[0.24em] text-terracotta font-normal;
+    }
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-3 bg-olive text-cream px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-olivedeep;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-3 border border-ink/25 text-ink px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:border-olive hover:text-olive;
+    }
+    .btn-cream {
+        @apply inline-flex items-center justify-center gap-3 bg-cream text-olivedeep px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-gold hover:text-cream;
+    }
+    .field-label {
+        @apply block text-[11px] uppercase tracking-[0.2em] text-ink/50 mb-2;
+    }
+    .field-input {
+        @apply w-full bg-transparent border-0 border-b border-ink/20 rounded-none py-3 text-base font-light text-ink placeholder:text-ink/30 focus:border-olive focus:outline-none transition-colors duration-300;
+    }
+}
+
+/* Film-grain overlay — kills digital flatness */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Slow editorial marquee */
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+.marquee-track {
+    animation: marquee 48s linear infinite;
+    will-change: transform;
+}
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+/* Scroll hint line */
+@keyframes scrollhint {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    45% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    55% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+}
+.scroll-hint-line {
+    animation: scrollhint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track,
+    .scroll-hint-line {
+        animation: none;
+    }
+}
