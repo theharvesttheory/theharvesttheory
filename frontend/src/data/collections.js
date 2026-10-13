@@ -45,3 +45,10 @@ export const collectionProducts = (collection) =>
   collection.productSlugs
     .map((s) => products.find((p) => p.slug === s))
     .filter(Boolean);
+
+// Tin gift-set configurations (2 boxed tins + a single tin). Edit images here.
+export const tinConfigs = [
+  { id: 1, label: "Tin configuration I", image: "/images/editorial/tin-config-1.jpg" },
+  { id: 2, label: "Tin configuration II", image: "/images/editorial/tin-config-2.jpg" },
+  { id: 3, label: "Tin configuration III", image: "/images/editorial/tin-config-3.jpg" },
+];

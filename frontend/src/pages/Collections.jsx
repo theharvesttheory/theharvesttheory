@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
-import { collections } from "@/data/collections";
+import { collections, tinConfigs } from "@/data/collections";
 
 export default function Collections() {
   return (
@@ -25,7 +25,7 @@ export default function Collections() {
         </FadeUp>
       </header>
 
-      <section data-testid="collections-grid" className="pb-28 md:pb-36">
+      <section data-testid="collections-grid" className="pb-20 md:pb-28">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <div className="grid gap-16 md:grid-cols-2 lg:gap-20">
             {collections.map((c, i) => (
@@ -35,7 +35,7 @@ export default function Collections() {
                   data-testid={`collection-card-${c.slug}`}
                   className="group block"
                 >
-                  <div className="relative overflow-hidden rounded-sm bg-creamdeep aspect-[4/5]">
+                  <div className="relative overflow-hidden rounded-sm bg-creamdeep aspect-[3/2]">
                     <img
                       src={c.image}
                       alt={`${c.name} curated box`}
@@ -62,6 +62,36 @@ export default function Collections() {
                     />
                   </div>
                 </Link>
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section data-testid="tin-configs" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
+        <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
+          <FadeUp>
+            <p className="eyebrow">The tin configurations</p>
+            <h2 className="mt-6 font-display text-4xl font-light tracking-tight text-ink md:text-5xl">
+              Dressed for <span className="font-accent italic">gifting.</span>
+            </h2>
+            <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-ink/65">
+              Two boxed tins and a single, in three configurations — our teas,
+              ready to be given.
+            </p>
+          </FadeUp>
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
+            {tinConfigs.map((t, i) => (
+              <FadeUp key={t.id} delay={i * 0.08}>
+                <div className="overflow-hidden rounded-sm bg-cream aspect-[3/2]">
+                  <img
+                    src={t.image}
+                    alt={t.label}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                  />
+                </div>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/40">{t.label}</p>
               </FadeUp>
             ))}
           </div>

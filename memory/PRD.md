@@ -52,6 +52,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Desktop + mobile screenshots all pages; no overflow-x
 - Rotating hero words cycle (Calmness → Nourishment observed); lifestyle filter (5 ceremonial-indulgence), category filter (9 teas); collection detail shows 6 teas; tea detail shows all 9 sections; order button toast "Ordering will be available shortly."; contact retail form renders 8 fields, submits to success; product-orders state verified; mobile menu navigates
 
+## Implemented (2026-10-13b) — real packaging assets
+- Sacred Spring + Nexus collection cards and detail heroes now use the final packaging renders (converted from user PNGs)
+- New "The tin configurations" showcase on /collections: the 3 tin gift-set renders (2 boxed tins + single), editable in src/data/collections.js (tinConfigs)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

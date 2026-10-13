@@ -35,7 +35,7 @@ export default function CollectionDetail() {
                 <img
                   src={collection.image}
                   alt={`${collection.name} curated box`}
-                  className="aspect-[3/4] w-full rounded-sm object-cover"
+                  className="aspect-[4/3] w-full rounded-sm object-cover"
                 />
               </FadeUp>
             </div>
