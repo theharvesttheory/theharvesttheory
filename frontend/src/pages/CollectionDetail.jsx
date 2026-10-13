@@ -1,6 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { FadeUp, Page } from "@/components/Reveal";
+import { FadeUp, Page, Breadcrumb } from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { collectionBySlug, collectionProducts } from "@/data/collections";
 
@@ -15,18 +15,13 @@ export default function CollectionDetail() {
       <article data-testid="collection-detail">
         <div className="mx-auto max-w-[1500px] px-6 pt-32 md:px-10 md:pt-40 lg:px-16">
           <FadeUp y={12}>
-            <Link
-              to="/collections"
-              data-testid="collection-back-link"
-              className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/55 transition-colors duration-300 hover:text-olive"
-            >
-              <ArrowLeft
-                size={15}
-                strokeWidth={1.5}
-                className="transition-transform duration-500 group-hover:-translate-x-1"
-              />
-              All gift assortments
-            </Link>
+            <Breadcrumb
+              items={[
+                { to: "/", label: "Home" },
+                { to: "/collections", label: "Gift Assortments" },
+                { label: collection.name },
+              ]}
+            />
           </FadeUp>
 
           <div className="mt-12 grid gap-14 pb-24 lg:grid-cols-2 lg:gap-20">

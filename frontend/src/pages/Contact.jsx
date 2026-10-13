@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { FadeUp, MaskedLines, Page, EASE } from "@/components/Reveal";
+import { FadeUp, MaskedLines, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import { CONTACT_TYPES } from "@/data/contact-options";
 
 function Field({ f, value, onChange }) {
@@ -85,8 +85,11 @@ export default function Contact() {
 
   return (
     <Page>
-      <div className="mx-auto grid max-w-[1500px] gap-16 px-6 pt-40 pb-28 md:px-10 md:pt-48 lg:grid-cols-12 lg:px-16">
+      <div className="mx-auto grid max-w-[1500px] gap-16 px-6 pt-32 pb-28 md:px-10 md:pt-40 lg:grid-cols-12 lg:px-16">
         <div className="lg:col-span-5">
+          <FadeUp y={12}>
+            <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Contact" }]} />
+          </FadeUp>
           <FadeUp>
             <p className="eyebrow">Contact</p>
           </FadeUp>

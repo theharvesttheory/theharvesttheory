@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
+import { FadeUp, MaskedLines, Page, Breadcrumb } from "@/components/Reveal";
 import { FOUNDERS } from "@/data/site";
 
 const MUST_EARN = [
@@ -21,18 +21,9 @@ export default function Story() {
     <Page>
       <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-20 md:px-10 md:pt-40 lg:px-16">
         <FadeUp y={12}>
-          <Link
-            to="/"
-            data-testid="story-back-home"
-            className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/55 transition-colors duration-300 hover:text-olive"
-          >
-            <ArrowLeft
-              size={15}
-              strokeWidth={1.5}
-              className="transition-transform duration-500 group-hover:-translate-x-1"
-            />
-            Home
-          </Link>
+          <Breadcrumb
+            items={[{ to: "/", label: "Home" }, { label: "Our Story / Our Theory" }]}
+          />
         </FadeUp>
         <FadeUp>
           <Eyebrow>Our story / our theory</Eyebrow>

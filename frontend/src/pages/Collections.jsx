@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
+import { FadeUp, MaskedLines, Page, Breadcrumb } from "@/components/Reveal";
 import { collections, tinConfigs } from "@/data/collections";
 
 export default function Collections() {
   return (
     <Page>
-      <header className="mx-auto max-w-[1500px] px-6 pt-40 pb-16 md:px-10 md:pt-48 lg:px-16">
+      <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
+        <FadeUp y={12}>
+          <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Gift Assortments" }]} />
+        </FadeUp>
         <FadeUp>
           <p className="eyebrow">Gift Assortments</p>
         </FadeUp>

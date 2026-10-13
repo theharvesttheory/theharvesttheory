@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { FadeUp, Page, EASE } from "@/components/Reveal";
+import { FadeUp, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import { categoryLabel, products } from "@/data/products";
 import { lifestyleLabel } from "@/data/lifestyles";
 
@@ -43,18 +43,13 @@ export default function ProductDetail() {
       <article data-testid="product-detail">
         <div className="mx-auto max-w-[1500px] px-6 pt-32 md:px-10 md:pt-40 lg:px-16">
           <FadeUp y={12}>
-            <Link
-              to="/products"
-              data-testid="product-back-link"
-              className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/55 transition-colors duration-300 hover:text-olive"
-            >
-              <ArrowLeft
-                size={15}
-                strokeWidth={1.5}
-                className="transition-transform duration-500 group-hover:-translate-x-1"
-              />
-              All products
-            </Link>
+            <Breadcrumb
+              items={[
+                { to: "/", label: "Home" },
+                { to: "/products", label: "Products" },
+                { label: p.name },
+              ]}
+            />
           </FadeUp>
 
           <div className="mt-12 grid gap-14 pb-24 lg:grid-cols-2 lg:gap-20">

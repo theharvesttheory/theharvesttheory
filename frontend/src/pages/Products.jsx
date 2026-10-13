@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FadeUp, MaskedLines, Page, EASE } from "@/components/Reveal";
+import { FadeUp, MaskedLines, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/data/products";
 import { lifestyles } from "@/data/lifestyles";
@@ -42,7 +42,10 @@ export default function Products() {
 
   return (
     <Page>
-      <header className="mx-auto max-w-[1500px] px-6 pt-40 pb-16 md:px-10 md:pt-48 lg:px-16">
+      <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
+        <FadeUp y={12}>
+          <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Products" }]} />
+        </FadeUp>
         <FadeUp>
           <p className="eyebrow">Our products</p>
         </FadeUp>
@@ -63,7 +66,7 @@ export default function Products() {
 
       <div
         data-testid="products-filter-bar"
-        className="sticky top-[72px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
+        className="sticky top-[81px] md:top-[90px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-[1500px] items-center gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-3 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-ink/40">

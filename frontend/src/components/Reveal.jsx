@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export const EASE = [0.16, 1, 0.3, 1];
@@ -61,5 +62,39 @@ export function Page({ children, className = "" }) {
     >
       {children}
     </motion.main>
+  );
+}
+
+/**
+ * Site-wide breadcrumbs. items: [{ to?, label }] — the last item is the
+ * current page (rendered as plain text, no link).
+ */
+export function Breadcrumb({ items = [] }) {
+  return (
+    <nav
+      data-testid="breadcrumb"
+      aria-label="Breadcrumb"
+      className="flex flex-wrap items-center gap-x-2.5 text-[11px] uppercase tracking-[0.18em]"
+    >
+      {items.map((it, i) => {
+        const last = i === items.length - 1;
+        return (
+          <span key={i} className="flex items-center gap-x-2.5">
+            {i > 0 && <span className="text-ink/30">/</span>}
+            {it.to && !last ? (
+              <Link
+                to={it.to}
+                data-testid={`breadcrumb-${it.label.toLowerCase().replace(/[\s/]+/g, "-")}`}
+                className="text-ink/50 transition-colors duration-300 hover:text-olive"
+              >
+                {it.label}
+              </Link>
+            ) : (
+              <span className={last ? "text-olive" : "text-ink/50"}>{it.label}</span>
+            )}
+          </span>
+        );
+      })}
+    </nav>
   );
 }

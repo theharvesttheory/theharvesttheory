@@ -96,6 +96,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Lopchu: new render showing the bright orange pekoe liquor; description now references the orange-hued cup
 - Dream Weaver: new individual render with chamomile flowers and lavender (replacing the gift-set crop)
 
+## Implemented (2026-10-13l) — logo size & site-wide breadcrumbs
+- Header logo enlarged to 48px mobile / 56px desktop (was 36/40) for legibility; products filter bar sticky offset adjusted to sit flush under the taller header
+- Breadcrumbs on every inner page: Products, product detail (Home / Products / name), Gift Assortments, collection detail (Home / Gift Assortments / name), Our Approach, Our Story / Our Theory, Contact — last crumb is the current page, parents are links; replaces the one-off back links
+- Fixed: collection detail crash from a missing Breadcrumb import (caught by ErrorBoundary) — verified recovered
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
