@@ -64,6 +64,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13d) — theory copy
 - "The theory" section on Our Story / Our Theory replaced with the user's final copy verbatim (mango/avocado timing, "Our theory is the sum of all those choices", "That is the bounty of our theory"); the old numbered sequence rows were removed
 
+## Implemented (2026-10-13e) — naming
+- Tin configurations named: Pink Symphony Assortment, Birds and Bees Collection, A Ballad in Blue (edit in src/data/collections.js)
+- Header nav label changed Collections → Gift Assortments (desktop + mobile); footer link still reads Collections; homepage philosophy stays short per user choice
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
