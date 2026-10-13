@@ -132,6 +132,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Type darkened site-wide: ink base #2E311F → #202312, all body-text opacities raised (e.g. /65 → /80), footer cream text brightened, italic accents set to full olive — noticeably more legible on laptops
 - Richer canvas: base cream #F6F2E9 → parchment #F1EBDC (creamdeep #E6DECA), limewash texture rolled out on every page, film grain retained — large-screen whitespace now feels filled
 
+## Implemented (2026-10-13v) — products tagline
+- Products sub-line replaced with "Turning Exotics to Staples." set in the italic accent style
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

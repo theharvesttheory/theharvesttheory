@@ -64,10 +64,8 @@ export default function Products() {
             className="mt-6 font-display text-[clamp(2rem,3.2vw,3.25rem)] font-light leading-[1.1] tracking-[-0.01em] text-ink"
           />
           <FadeUp delay={0.4}>
-            <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
-              Beverages, foods and pantry staples across categories — united by
-              short labels, named sources and slow methods. The collection grows;
-              the standard doesn&rsquo;t.
+            <p className="mt-6 max-w-lg font-accent text-2xl italic leading-snug text-olive md:text-3xl">
+              Turning Exotics to Staples.
             </p>
           </FadeUp>
         </div>
