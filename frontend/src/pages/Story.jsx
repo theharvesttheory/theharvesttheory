@@ -87,6 +87,19 @@ export default function Story() {
                   <span className="font-accent italic">every harvest.</span>
                 </h2>
               </FadeUp>
+              <FadeUp y={30} delay={0.15}>
+                <figure data-testid="story-fig-mango" className="mt-14 max-w-[240px]">
+                  <img
+                    src="/images/editorial/fig-mango.jpg"
+                    alt="A ripe mango resting on a stone pedestal in golden light"
+                    loading="lazy"
+                    className="aspect-square w-full rounded-sm object-cover"
+                  />
+                  <figcaption className="mt-3 text-[10px] uppercase tracking-[0.2em] text-ink/40">
+                    Fig. 01 — Mango, at the moment of ripeness
+                  </figcaption>
+                </figure>
+              </FadeUp>
             </div>
             <div className="lg:col-span-5 lg:col-start-7">
               <FadeUp delay={0.1}>
@@ -185,23 +198,40 @@ export default function Story() {
       </section>
 
       <section data-testid="story-customer" className="border-t border-linewarm py-24 md:py-32">
-        <div className="mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16">
-          <FadeUp>
-            <Eyebrow>Slow time</Eyebrow>
-            <p className="mt-8 text-lg font-light leading-relaxed text-ink/88 md:text-xl">
-              Our customer is urban, curious and time-constrained — exploring
-              better food and aspiring to healthier habits, if not always
-              consistently. The experience we want to create feels like slow
-              time: aroma rising from a cup, colour developing, a little
-              preparation, a little anticipation.
-            </p>
-            <blockquote className="mt-12 font-accent text-3xl italic leading-snug text-olive md:text-4xl">
-              &ldquo;I started today by prioritising myself.&rdquo;
-            </blockquote>
-            <p className="mt-8 text-base font-light leading-relaxed text-ink/75">
-              We want to provide the spread for a more mindful dining experience.
-            </p>
-          </FadeUp>
+        <div className="mx-auto grid max-w-[1500px] gap-14 px-6 md:px-10 lg:grid-cols-12 lg:px-16">
+          <div className="lg:col-span-6 lg:col-start-2">
+            <FadeUp>
+              <Eyebrow>Slow time</Eyebrow>
+              <p className="mt-8 text-lg font-light leading-relaxed text-ink/88 md:text-xl">
+                Our customer is urban, curious and time-constrained — exploring
+                better food and aspiring to healthier habits, if not always
+                consistently. The experience we want to create feels like slow
+                time: aroma rising from a cup, colour developing, a little
+                preparation, a little anticipation.
+              </p>
+              <blockquote className="mt-12 font-accent text-3xl italic leading-snug text-olive md:text-4xl">
+                &ldquo;I started today by prioritising myself.&rdquo;
+              </blockquote>
+              <p className="mt-8 text-base font-light leading-relaxed text-ink/75">
+                We want to provide the spread for a more mindful dining experience.
+              </p>
+            </FadeUp>
+          </div>
+          <div className="lg:col-span-3 lg:col-start-10 lg:pt-24">
+            <FadeUp y={30} delay={0.12}>
+              <figure data-testid="story-fig-cup">
+                <img
+                  src="/images/editorial/fig-cup.jpg"
+                  alt="A small ceramic cup of steeping tea, steam rising by a window"
+                  loading="lazy"
+                  className="aspect-square w-full rounded-sm object-cover"
+                />
+                <figcaption className="mt-3 text-[10px] uppercase tracking-[0.2em] text-ink/55">
+                  Fig. 02 — The cup, allowed to wait
+                </figcaption>
+              </figure>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

@@ -135,6 +135,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13v) — products tagline
 - Products sub-line replaced with "Turning Exotics to Staples." set in the italic accent style
 
+## Implemented (2026-10-13w) — story vignettes
+- Field-notebook style "Fig." studies fill the empty left columns on the theory page: Fig. 01 (ripe mango on stone pedestal, golden light) under "There is a theory behind every harvest."; Fig. 02 (steeping cup by a window) beside "Slow time" — gentle, artistic, captioned in small caps
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
