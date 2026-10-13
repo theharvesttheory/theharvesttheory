@@ -9,7 +9,7 @@ export const collections = [
     name: "Sacred Spring",
     tagline: "A seasonal curated box for the season of renewal.",
     description:
-      "Six teas chosen for the turning of the season — floral, bright and restorative. Hibiscus and cranberry, blue pea and warm spices, green tea and turmeric, Darjeeling black tea, chamomile and lavender, mint and lemongrass.",
+      "Six teas chosen for the turning of the season — floral, bright and restorative. Hibiscus and cranberry, blueberry and warm spices, green tea and turmeric, Darjeeling black tea, chamomile and lavender, mint and lemongrass.",
     image: "/images/products/sacred-spring-box.jpg",
     note: "Available individually in 50 g packs, or as part of our seasonal curated boxes.",
     productSlugs: [

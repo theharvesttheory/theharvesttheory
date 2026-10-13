@@ -91,6 +91,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Verified end-to-end: hero Discover Our Theory → story → Home; story ↔ approach cross-links; no overflow
 - Pending user decision: "Enquire about this product" on product pages (explained, not yet added)
 
+## Implemented (2026-10-13k) — tea imagery to spec
+- Blue Spice: new render (blueberries, cinnamon, cloves, berry-toned brew); copy updated to "Blueberry & Warm Spices" with matching ingredients/notes; Sacred Spring description corrected to "blueberry and warm spices"
+- Lopchu: new render showing the bright orange pekoe liquor; description now references the orange-hued cup
+- Dream Weaver: new individual render with chamomile flowers and lavender (replacing the gift-set crop)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
