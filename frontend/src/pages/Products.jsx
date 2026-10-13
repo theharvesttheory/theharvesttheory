@@ -66,6 +66,9 @@ export default function Products() {
         className="sticky top-[72px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-[1500px] items-center gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-3 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-ink/40">
+            Browse by
+          </span>
           <button
             data-testid="products-mode-category"
             onClick={() => setMode("category")}

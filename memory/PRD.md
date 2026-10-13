@@ -56,6 +56,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Sacred Spring + Nexus collection cards and detail heroes now use the final packaging renders (converted from user PNGs)
 - New "The tin configurations" showcase on /collections: the 3 tin gift-set renders (2 boxed tins + single), editable in src/data/collections.js (tinConfigs)
 
+## Implemented (2026-10-13c) — brews & teas only
+- Dream Weaver, Blue Spice and Lopchu product pages/cards now use the final tin gift-set renders
+- Hero still-life and Root & Leaf regenerated with brews-and-teas imagery only; all wine-bottle-shaped and superseded AI images deleted from the media library
+- "Browse by" label added beside the Category/Lifestyle controls on Home and in the Products filter bar
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

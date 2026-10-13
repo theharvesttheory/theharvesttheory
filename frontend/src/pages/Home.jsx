@@ -226,8 +226,9 @@ function ExploreProducts() {
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <div className="flex gap-8">
-              {tabBtn("category", "By Category")}
+            <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
+              <span className="text-[13px] uppercase tracking-[0.18em] text-ink/40">Browse by</span>
+              {tabBtn("category", "Category")}
               {tabBtn("lifestyle", "Lifestyle")}
             </div>
           </FadeUp>
