@@ -1,0 +1,39 @@
+{
+  "summary": "End-to-end UI testing of the new Harvest Journal (landing /journal, 6 article pages, filters, SEO/JSON-LD, nav/footer integration, no-health-claims compliance, responsive, regression). Frontend-only app, no backend tests required.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Seo.jsx replaces entire head without a cleanup for prior ld+json inserted by a previous Seo instance mounting order; current implementation works because each component owns its own script ref and both effects run — fine, but worth noting if multiple Seo components ever co-exist.",
+    "JournalArticle breadcrumb container is not wrapped in <nav aria-label='Breadcrumb'> at the DOM level (depends on Breadcrumb component). Minor a11y nit — not blocking.",
+    "Nav uses location.pathname.startsWith('/journal') to compute active state, which correctly highlights the Journal link both on landing and article pages (verified)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "N/A",
+  "seed_data_creation": "None (data-driven from src/data/journal.js, 6 articles).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Journal module is stable. All 6 articles present with correct titles/JSON-LD/og:type=article/Blog JSON-LD on landing. Category filters validated: ingredients=3, brewing=1, tea-ritual=1, origins=1 (featured Lopchu), the-harvest-theory=0 (empty state renders). Prohibited health-claim phrases absent from all articles. Mobile 390x844 no horizontal overflow on /journal and article. Header fits at 1440/1280/1024 (nav scrollWidth==clientWidth). Framer Motion FadeUp wraps article header, so when running Playwright inner_text immediately after navigation some content appears empty — use .textContent via evaluate() or wait >=2s. Seo correctly resets title to default 'The Harvest Theory — Nourishment, by intent' when navigating away from Journal to /products. All sources open in new tab with rel='noopener noreferrer'. Taste module links to correct product (/products/lopchu). Product price card still renders (product-price-* testid present). No console errors observed on /journal routes.",
+  "verified_flows": [
+    "/journal landing hero + featured + 5 grid cards",
+    "Category filters (all/ingredients/brewing/the-harvest-theory) with URL ?cat= updates and empty state",
+    "Article page: hero, eyebrow, H1, meta row, body with headings/italics/pull quote/fact box/internal link to /approach",
+    "Sources (3 external links, target=_blank rel=noopener noreferrer)",
+    "Taste module links to /products/lopchu",
+    "Related stories (2 cards)",
+    "Breadcrumb Home / Journal / title",
+    "Per-route <title>, meta description, og:type=article, Article JSON-LD",
+    "Journal landing @type=Blog JSON-LD and title 'The Harvest Journal — Tea, Ingredients & Ritual'",
+    "Title reset to default on navigation to /products",
+    "nav-link-journal, nav-mobile-link-journal, footer-link-journal present",
+    "No horizontal overflow on mobile 390x844",
+    "Regression: /, /products, /collections, /approach, /story, /contact all 200; product-price card present on /products",
+    "No-health-claims: 'detox', 'boosts immunity', 'cures', 'treats', 'prevents disease', 'weight loss', 'guarantees sleep', 'reduces anxiety' absent in all 6 articles"
+  ]
+}

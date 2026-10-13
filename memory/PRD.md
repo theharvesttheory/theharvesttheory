@@ -163,8 +163,17 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Product detail: price surfaced beside the "Order — Coming Soon" button (display type, data-testid product-detail-cta-price) in addition to the details list
 - Verified desktop (1440) + mobile (390): 13/13 price labels render, CTA price present, no overflow-x
 
+## Implemented (2026-10-14d) — The Harvest Journal
+- New editorial section at /journal (nav label JOURNAL; added to desktop nav, mobile nav, footer Explore) — landing has hero ("Stories about what we grow, what we drink, and why it matters."), featured story (Lopchu) + 2-col editorial grid, category filters (Tea & Ritual / Ingredients / Origins / The Harvest Theory / Brewing) with ?cat= params and empty state
+- 6 seeded, researched articles in src/data/journal.js (typed body blocks: lead/p/h2/quote/image/fact/list; *italic* accents and [label](/path) internal links parsed by RichText): Lopchu provenance (featured), Blue Pea chemistry, chamomile history, hibiscus across cultures, mint/menthol-TRPM8 + lemongrass, floral-infusions field guide — each with category, excerpt, date, computed reading time, byline "The Harvest Theory", image alt text
+- Every article: Sources & further reading (real verified external links: Wikipedia, NCCIH, AHPA, McGill OSS, ACS, Nature, NCBI, AramcoWorld, Serious Eats), restrained "Taste what you've been reading about" product module (links to real product pages), "More from the Journal" related stories (same category first)
+- HEALTH-CLAIM POLICY (user requirement): no therapeutic claims anywhere — tradition/sensory framing ("traditionally consumed", "research has investigated… evidence remains limited"), explicit "nothing here is medical advice" note; testing agent grep-verified prohibited phrases absent
+- SEO: custom dependency-free Seo.jsx head manager (react-helmet-async avoided on React 19) — per-article unique title/description/og:type=article/article:published_time/Article JSON-LD, Blog JSON-LD on landing, restore-on-unmount to static defaults; robots.txt + llms.txt added; canonical/og:url/sitemap intentionally omitted until a production domain is confirmed (per SEO skill policy)
+- Architecture: adding an article = one object in src/data/journal.js; it appears in grid, filters, related stories, JSON-LD automatically
+- Design: existing limewash/typography/tokens reused unchanged; no other pages redesigned
+- Testing agent: 100% pass — filters (ingredients=3, brewing=1, tea-ritual=1, origins=1, harvest-theory=0 empty state), SEO tags + title reset, nav fits at 1440/1280/1024, mobile 390 no overflow, regression on all existing pages + prices intact, no console errors
+
 ## Backlog
 - P1: Real pricing (placeholders ₹ 320–₹ 550 currently shown) + real provenance data (field exists, blank); real founder portraits; FSSAI details
-- P1: Ingredients / Our Approach standalone page; Journal
-- P1: Backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
+- P1: Journal growth — provenance-led stories on turmeric, lemongrass, moringa, matcha and the farms/suppliers behind THT ingredients (user direction); backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
 - P2: Reviews capability; ecommerce checkout; lab reports, batch traceability, export certifications
