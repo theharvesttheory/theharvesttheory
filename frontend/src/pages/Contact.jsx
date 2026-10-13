@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeUp, MaskedLines, Page, EASE } from "@/components/Reveal";
 import { CONTACT_TYPES } from "@/data/contact-options";
@@ -46,6 +47,22 @@ export default function Contact() {
   const [typeId, setTypeId] = useState(null);
   const [values, setValues] = useState({});
   const [sent, setSent] = useState(false);
+
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    const t = params.get("type");
+    const item = params.get("item");
+    const schema = CONTACT_TYPES.find((c) => c.id === t);
+    if (schema) setTypeId(schema.id);
+    if (item && schema) {
+      const fid = (schema.fields.find((f) =>
+        ["products", "offering", "customisation", "subject", "about", "notes", "message"].includes(f.id),
+      ) || {}).id;
+      if (fid) setValues((v) => ({ ...v, [fid]: item }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const schema = CONTACT_TYPES.find((t) => t.id === typeId) || null;
 

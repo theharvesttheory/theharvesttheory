@@ -83,15 +83,26 @@ export default function Collections() {
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {tinConfigs.map((t, i) => (
               <FadeUp key={t.id} delay={i * 0.08}>
-                <div className="overflow-hidden rounded-sm bg-cream aspect-[3/2]">
-                  <img
-                    src={t.image}
-                    alt={t.label}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
-                  />
-                </div>
-                <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/40">{t.label}</p>
+                <Link
+                  to={`/contact?type=product-orders&item=${encodeURIComponent(t.label)}`}
+                  data-testid={`tin-config-link-${t.id}`}
+                  className="group block"
+                >
+                  <div className="overflow-hidden rounded-sm bg-cream aspect-[3/2]">
+                    <img
+                      src={t.image}
+                      alt={t.label}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/40 transition-colors duration-300 group-hover:text-olive">
+                    {t.label}
+                  </p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-olive/60 transition-colors duration-300 group-hover:text-olive">
+                    Enquire about this assortment
+                  </p>
+                </Link>
               </FadeUp>
             ))}
           </div>

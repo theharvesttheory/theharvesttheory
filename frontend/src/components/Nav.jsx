@@ -64,7 +64,7 @@ export default function Nav() {
             <Logo className="h-9 md:h-10 w-auto" />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-7 lg:gap-10 xl:gap-14">
+          <nav className="hidden lg:flex items-center gap-6 lg:gap-8 xl:gap-12">
             {LINKS.map((l) => (
               <Link
                 key={l.to}
@@ -86,7 +86,7 @@ export default function Nav() {
             <Link
               to="/contact"
               data-testid="nav-cta"
-              className="ml-2 border border-olive/40 px-5 py-2 text-[11px] uppercase tracking-[0.18em] text-olive transition-colors duration-300 hover:bg-olive hover:text-cream"
+              className="ml-2 bg-olive px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-cream transition-colors duration-300 hover:bg-olivedeep"
             >
               Get in Touch
             </Link>
@@ -94,7 +94,7 @@ export default function Nav() {
 
           <button
             data-testid="nav-mobile-toggle"
-            className="md:hidden flex flex-col justify-center items-end gap-[7px] w-10 h-10"
+            className="lg:hidden flex flex-col justify-center items-end gap-[7px] w-10 h-10"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
           >

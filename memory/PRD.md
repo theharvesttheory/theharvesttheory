@@ -77,6 +77,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13g) — header spacing
 - Header links reduced to 11px with added vertical padding (py-2) for click targets, larger inter-link gaps (28/40/56px responsive), compact Get in Touch button; clear logo-to-links separation verified at 1440px and 1100px
 
+## Implemented (2026-10-13h) — enquiry links & header polish
+- Each named tin configuration is clickable → /contact with Product Orders pre-selected and the Products field prefilled with that assortment's name ("Enquire about this assortment" affordance); mechanism is generic (?type=&item=) and works for any assortment
+- Header: nav pushed right with guaranteed clear logo separation (456px at 1440), 11px links, desktop nav from 1024px up, hamburger below; Get in Touch now solid olive matching the primary button style
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
