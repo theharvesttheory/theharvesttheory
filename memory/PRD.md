@@ -178,6 +178,7 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - FOUNDERS data in src/data/site.js now carries an image field (null = placeholder); Story.jsx renders photo when present, placeholder when not — drop-in replacement for Shiva's later
 - Verified desktop (1440) + mobile (390): both photos render correctly matched to the right founder per the uploaded filenames, placeholder intact, no overflow
 - Shiva Chaitanya's portrait added (founders/shiva.jpg, from "Shiv founder pic.png") — all three founders now show real portraits; placeholder path retained in Story.jsx as fallback for any future null image
+- Vartika's portrait replaced with the newer upload (brown blazer version) — same vartika.jpg filename, drop-in replacement, no code change
 
 ## Backlog
 - P1: Real pricing (placeholders ₹ 320–₹ 550 currently shown) + real provenance data (field exists, blank); real founder portraits; FSSAI details
