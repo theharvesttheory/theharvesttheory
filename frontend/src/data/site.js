@@ -37,7 +37,7 @@ export const FOUNDERS = [
     name: "Shiva Chaitanya",
     role: "Co-founder",
     initials: "SC",
-    image: null,
+    image: "/images/founders/shiva.jpg",
     bio: "A long entrepreneurial background spanning business, agriculture, fisheries, manufacturing and operations.",
   },
 ];
