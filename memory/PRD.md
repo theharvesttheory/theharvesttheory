@@ -109,6 +109,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13n) — products header refinement
 - Headline reduced to a compact size with "carefully considered ingredients." in italic accent; background image opacity doubled to 30% so the ingredient still-life reads clearly behind the header
 
+## Implemented (2026-10-13o) — hero backdrop
+- Homepage hero now carries the same subtle ingredient still-life backdrop (18% opacity, cream gradient blend) behind the rotating headline and CTAs, matching the products header treatment; verified desktop + mobile with no overflow
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
