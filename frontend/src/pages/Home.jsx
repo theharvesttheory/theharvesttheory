@@ -410,9 +410,18 @@ function Approach() {
             ))}
           </div>
           <FadeUp delay={0.1}>
-            <p className="mt-10 text-[11px] uppercase tracking-[0.22em] text-ink/40">
-              Our approach page arrives with the next release
-            </p>
+            <Link
+              to="/approach"
+              data-testid="approach-page-link"
+              className="group mt-10 inline-flex items-center gap-3 text-[13px] uppercase tracking-[0.18em] text-olive"
+            >
+              Explore our full approach
+              <ArrowRight
+                size={16}
+                strokeWidth={1.5}
+                className="transition-transform duration-500 group-hover:translate-x-1.5"
+              />
+            </Link>
           </FadeUp>
         </div>
       </div>

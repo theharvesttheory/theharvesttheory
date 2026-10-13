@@ -11,6 +11,7 @@ import Products from "@/pages/Products";
 import ProductDetail from "@/pages/ProductDetail";
 import Collections from "@/pages/Collections";
 import CollectionDetail from "@/pages/CollectionDetail";
+import Approach from "@/pages/Approach";
 import Story from "@/pages/Story";
 import Contact from "@/pages/Contact";
 import { IntroContext, lenisRef } from "@/context/app";
@@ -45,6 +46,7 @@ function AnimatedRoutes() {
         <Route path="/products/:slug" element={<ProductDetail />} />
         <Route path="/collections" element={<Collections />} />
         <Route path="/collections/:slug" element={<CollectionDetail />} />
+        <Route path="/approach" element={<Approach />} />
         <Route path="/story" element={<Story />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Home />} />

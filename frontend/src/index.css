@@ -111,6 +111,9 @@ html.lenis body {
     .btn-cream {
         @apply inline-flex items-center justify-center gap-3 bg-cream text-olivedeep px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-gold hover:text-cream;
     }
+    .btn-cream-ghost {
+        @apply inline-flex items-center justify-center gap-3 border border-cream/40 text-cream px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-cream hover:text-olivedeep;
+    }
     .field-label {
         @apply block text-[11px] uppercase tracking-[0.2em] text-ink/50 mb-2;
     }

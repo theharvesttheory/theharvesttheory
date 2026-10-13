@@ -8,6 +8,7 @@ import { lenisRef } from "@/context/app";
 const LINKS = [
   { to: "/products", label: "Products" },
   { to: "/collections", label: "Gift Assortments" },
+  { to: "/approach", label: "Our Approach" },
   { to: "/story", label: "Our Theory" },
 ];
 
@@ -15,6 +16,7 @@ const MOBILE_LINKS = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
   { to: "/collections", label: "Gift Assortments" },
+  { to: "/approach", label: "Our Approach" },
   { to: "/story", label: "Our Story / Our Theory" },
   { to: "/contact", label: "Contact" },
 ];

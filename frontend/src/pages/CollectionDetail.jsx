@@ -25,7 +25,7 @@ export default function CollectionDetail() {
                 strokeWidth={1.5}
                 className="transition-transform duration-500 group-hover:-translate-x-1"
               />
-              All collections
+              All gift assortments
             </Link>
           </FadeUp>
 

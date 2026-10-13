@@ -8,7 +8,7 @@ export default function Collections() {
     <Page>
       <header className="mx-auto max-w-[1500px] px-6 pt-40 pb-16 md:px-10 md:pt-48 lg:px-16">
         <FadeUp>
-          <p className="eyebrow">Collections</p>
+          <p className="eyebrow">Gift Assortments</p>
         </FadeUp>
         <MaskedLines
           as="h1"

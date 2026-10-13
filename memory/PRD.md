@@ -68,6 +68,12 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Tin configurations named: Pink Symphony Assortment, Birds and Bees Collection, A Ballad in Blue (edit in src/data/collections.js)
 - Header nav label changed Collections → Gift Assortments (desktop + mobile); footer link still reads Collections; homepage philosophy stays short per user choice
 
+## Implemented (2026-10-13f) — approach page, naming, tea renders
+- New Ingredients / Our Approach page at /approach: four pillars (Selection & sourcing, Formulation, Testing & manufacturing, Ritual & format) with alternating imagery, trust placeholders (FSSAI/certifications) structured for future lab reports, batch traceability and export certifications; linked in nav (desktop + mobile), footer and homepage
+- "Gift Assortments" naming now consistent: header nav, footer link, page eyebrow and back links
+- Remaining six teas re-rendered (caddy + brewed cup + ingredient still-lifes) replacing all AI placeholder pack shots
+- Footer: "Explore Our Theory" (primary) + "Explore Our Products" (ghost) buttons under the theory heading
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

@@ -7,7 +7,8 @@ import { FadeUp } from "./Reveal";
 const explore = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
-  { to: "/collections", label: "Collections" },
+  { to: "/collections", label: "Gift Assortments" },
+  { to: "/approach", label: "Our Approach" },
   { to: "/story", label: "Our Story / Our Theory" },
   { to: "/contact", label: "Contact" },
 ];
@@ -78,9 +79,15 @@ export default function Footer() {
                 <br />
                 <span className="font-accent italic text-cream/80">every harvest.</span>
               </h2>
-              <Link to="/products" data-testid="footer-cta-products" className="btn-cream mt-10">
-                Explore Our Products
-              </Link>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link to="/story" data-testid="footer-cta-theory" className="btn-cream">
+                  Explore Our Theory
+                </Link>
+                <Link to="/products" data-testid="footer-cta-products" className="btn-cream-ghost">
+                  Explore Our Products
+                  <ArrowRight size={16} strokeWidth={1.5} />
+                </Link>
+              </div>
             </FadeUp>
           </div>
 
