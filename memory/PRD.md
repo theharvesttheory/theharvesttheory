@@ -150,6 +150,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Product detail restructured: image reduced to a compact 4:3 (sticky beside the text), headline tightened, detail rows condensed (py-8→py-6), CTA row tightened — image + name + subname + tagline + description + first detail rows all visible in the first 900px viewport (measured: image bottom 586px, name 281px, description 445px)
 - Fixed a regression where the text column lost its grid span and collapsed to one word per line; limewash retained
 
+## Implemented (2026-10-14a) — compact product cards
+- Product card images reduced from tall 3:4 to compact 4:3, card text tightened, staggered offsets removed, grid gaps reduced — a full row of 2 products (image + description) now measures ~570px and fits within one screen on desktop (mobile card ~350px); the every-4 interlude rhythm still aligns
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

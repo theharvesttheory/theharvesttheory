@@ -124,7 +124,7 @@ export default function Products() {
 
       <section data-testid="products-grid" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
-          <div className="grid gap-x-10 gap-y-20 md:grid-cols-2 lg:gap-x-16">
+          <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:gap-x-12 lg:gap-y-14">
             {list.map((p, i) => {
               const row = [];
               if (i > 0 && i % 4 === 0 && i < list.length) {
@@ -141,11 +141,7 @@ export default function Products() {
                 );
               }
               row.push(
-                <FadeUp
-                  key={p.slug}
-                  delay={(i % 2) * 0.08}
-                  className={i % 2 === 1 ? "md:mt-24" : ""}
-                >
+                <FadeUp key={p.slug} delay={(i % 2) * 0.06}>
                   <ProductCard product={p} index={i} />
                 </FadeUp>,
               );
