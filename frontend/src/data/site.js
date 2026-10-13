@@ -23,18 +23,21 @@ export const FOUNDERS = [
     name: "Punith Prasad",
     role: "Co-founder",
     initials: "PP",
+    image: "/images/founders/punith.jpg",
     bio: "Background in product, technology, programme leadership and operations. Strong personal interests in food, cooking, fitness, racquet sports, and the pursuit of quality and product experience.",
   },
   {
     name: "Vartika Verma",
     role: "Co-founder",
     initials: "VV",
+    image: "/images/founders/vartika.jpg",
     bio: "Background in global marketing, brand, go-to-market, positioning and growth. A strong aesthetic and brand sensibility.",
   },
   {
     name: "Shiva Chaitanya",
     role: "Co-founder",
     initials: "SC",
+    image: null,
     bio: "A long entrepreneurial background spanning business, agriculture, fisheries, manufacturing and operations.",
   },
 ];

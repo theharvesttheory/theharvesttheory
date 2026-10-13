@@ -253,15 +253,26 @@ export default function Story() {
           <div className="mt-16 grid gap-12 md:grid-cols-3 lg:gap-16">
             {FOUNDERS.map((f, i) => (
               <FadeUp key={f.name} delay={i * 0.08}>
-                <div
-                  data-testid={`founder-card-${f.initials.toLowerCase()}`}
-                  className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep/70"
-                >
-                  <span className="font-accent text-6xl italic text-gold/70">{f.initials}</span>
-                  <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/50">
-                    Portrait to come
-                  </span>
-                </div>
+                {f.image ? (
+                  <div className="relative overflow-hidden rounded-sm bg-creamdeep aspect-[3/4]">
+                    <img
+                      src={f.image}
+                      alt={`Portrait of ${f.name}, co-founder of The Harvest Theory`}
+                      loading={i < 2 ? "eager" : "lazy"}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    data-testid={`founder-card-${f.initials.toLowerCase()}`}
+                    className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep/70"
+                  >
+                    <span className="font-accent text-6xl italic text-gold/70">{f.initials}</span>
+                    <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/50">
+                      Portrait to come
+                    </span>
+                  </div>
+                )}
                 <h3 className="mt-6 font-display text-2xl font-light tracking-tight text-ink">
                   {f.name}
                 </h3>

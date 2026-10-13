@@ -173,6 +173,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Design: existing limewash/typography/tokens reused unchanged; no other pages redesigned
 - Testing agent: 100% pass — filters (ingredients=3, brewing=1, tea-ritual=1, origins=1, harvest-theory=0 empty state), SEO tags + title reset, nav fits at 1440/1280/1024, mobile 390 no overflow, regression on all existing pages + prices intact, no console errors
 
+## Implemented (2026-10-14e) — founder portraits
+- Real portraits added for two of three founders from user-uploaded assets: Punith Prasad (founders/punith.jpg, from "Punith Founder Pic.jpeg") and Vartika Verma (founders/vartika.jpg, PNG converted/optimised to JPG) — rendered in the Story page founders section in the 3:4 cards with descriptive alt text; Shiva Chaitanya keeps the initials placeholder ("Portrait to come") until his portrait arrives
+- FOUNDERS data in src/data/site.js now carries an image field (null = placeholder); Story.jsx renders photo when present, placeholder when not — drop-in replacement for Shiva's later
+- Verified desktop (1440) + mobile (390): both photos render correctly matched to the right founder per the uploaded filenames, placeholder intact, no overflow
+
 ## Backlog
 - P1: Real pricing (placeholders ₹ 320–₹ 550 currently shown) + real provenance data (field exists, blank); real founder portraits; FSSAI details
 - P1: Journal growth — provenance-led stories on turmeric, lemongrass, moringa, matcha and the farms/suppliers behind THT ingredients (user direction); backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
