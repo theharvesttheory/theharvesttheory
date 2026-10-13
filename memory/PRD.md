@@ -61,6 +61,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Hero still-life and Root & Leaf regenerated with brews-and-teas imagery only; all wine-bottle-shaped and superseded AI images deleted from the media library
 - "Browse by" label added beside the Category/Lifestyle controls on Home and in the Products filter bar
 
+## Implemented (2026-10-13d) — theory copy
+- "The theory" section on Our Story / Our Theory replaced with the user's final copy verbatim (mango/avocado timing, "Our theory is the sum of all those choices", "That is the bounty of our theory"); the old numbered sequence rows were removed
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

@@ -3,17 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
 import { FOUNDERS } from "@/data/site";
 
-const SEQUENCE = [
-  "Cultivation",
-  "Climate",
-  "Soil",
-  "Maturity",
-  "Harvest",
-  "Handling",
-  "Preparation",
-  "Formulation",
-];
-
 const MUST_EARN = [
   { title: "Taste", line: "It must be genuinely enjoyable — never something consumed purely because it is considered healthy." },
   { title: "Ingredient quality", line: "We begin with ingredients we are confident enough to stand behind." },
@@ -118,44 +107,59 @@ export default function Story() {
       <section data-testid="story-theory" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <div className="grid gap-14 lg:grid-cols-12">
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-4 lg:col-start-2">
               <FadeUp>
                 <Eyebrow>The theory</Eyebrow>
                 <h2 className="mt-8 font-display text-3xl font-light leading-[1.08] tracking-tight text-ink md:text-4xl">
-                  Long before food reaches our tables, an extraordinary
-                  sequence has already{" "}
-                  <span className="font-accent italic">taken place.</span>
+                  There is a theory behind{" "}
+                  <span className="font-accent italic">every harvest.</span>
                 </h2>
-                <p className="mt-8 max-w-md text-base font-light leading-relaxed text-ink/65">
-                  Timing matters. A mango harvested too early may never develop
-                  its full sweetness and aroma. Many foods have ideal maturity
-                  and harvest windows that materially affect flavour, texture
-                  and quality.
-                </p>
-                <p className="mt-6 max-w-md text-base font-light leading-relaxed text-ink/65">
-                  There is science in choosing an ingredient, in how it is
-                  grown, when it is harvested, in preserving what makes it
-                  valuable, in how it is processed and how it complements other
-                  ingredients — and in the form in which it is finally consumed.
-                  Our theory is the sum of those choices.
-                </p>
               </FadeUp>
             </div>
-            <div className="lg:col-span-6 lg:col-start-7">
-              <div>
-                {SEQUENCE.map((s, i) => (
-                  <FadeUp key={s} delay={i * 0.04}>
-                    <div className="flex items-baseline gap-8 border-t border-ink/10 py-6 last:border-b">
-                      <span className="font-accent italic text-lg text-gold">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="font-display text-xl font-light tracking-tight text-ink md:text-2xl">
-                        {s}
-                      </span>
-                    </div>
-                  </FadeUp>
-                ))}
-              </div>
+            <div className="lg:col-span-5 lg:col-start-7">
+              <FadeUp delay={0.1}>
+                <p className="text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                  Long before food reaches our tables, an extraordinary chain
+                  of events has already taken place — from the conditions that
+                  allow a plant to grow, to the soil, climate and cultivation
+                  that shape it, to the precise moment at which it should be
+                  harvested.
+                </p>
+                <p className="mt-6 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                  Timing matters. A mango harvested too early may never develop
+                  its full sweetness and aroma. An avocado left too long on the
+                  tree can move past its ideal maturity and develop
+                  undesirable flavours. The ingredient may be the same, but
+                  when and how it is grown and harvested changes what finally
+                  reaches us.
+                </p>
+                <p className="mt-10 font-accent text-2xl italic leading-snug text-olive md:text-3xl">
+                  That is the idea behind The Harvest Theory.
+                </p>
+                <p className="mt-8 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                  We believe nutrition should not be taken for granted simply
+                  because food is available to us. There is science in choosing
+                  the right ingredient, growing it well, harvesting it at the
+                  right moment, preserving what makes it valuable, and
+                  understanding how it should be combined with other
+                  ingredients.
+                </p>
+                <p className="mt-10 font-accent text-2xl italic leading-snug text-olive md:text-3xl">
+                  Our &ldquo;theory&rdquo; is the sum of all those choices.
+                </p>
+                <p className="mt-8 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                  We start with ingredients that are already remarkable on
+                  their own and bring them together deliberately — for
+                  nutrition, flavour, texture, aroma and the experience of
+                  eating itself. Because the whole, when thoughtfully
+                  constructed, can be greater than its parts.
+                </p>
+                <p className="mt-6 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                  The Harvest Theory is therefore an invitation to slow down
+                  and pay attention: to know what you are eating, where it came
+                  from, why it was chosen and how it came together.
+                </p>
+              </FadeUp>
             </div>
           </div>
 
@@ -165,6 +169,9 @@ export default function Story() {
               the right time.{" "}
               <span className="font-accent italic">Brought together with purpose.</span>&rdquo;
             </blockquote>
+            <p className="mt-8 font-accent text-2xl italic text-olive md:text-3xl">
+              That is the bounty of our theory.
+            </p>
           </FadeUp>
         </div>
       </section>
