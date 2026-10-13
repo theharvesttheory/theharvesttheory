@@ -16,16 +16,16 @@ export default function RotatingWord({ words = [], interval = 3200, className = 
   return (
     <span
       data-testid="hero-word-rotator"
-      className={`relative block overflow-hidden pb-[0.09em] -mb-[0.09em] ${className}`}
+      className={`relative block h-[1.05em] overflow-hidden ${className}`}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.span
           key={words[i]}
-          className="block will-change-transform"
-          initial={{ y: "72%", opacity: 0 }}
+          className="absolute inset-x-0 top-0 block will-change-transform"
+          initial={{ y: "65%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-72%", opacity: 0 }}
-          transition={{ duration: 0.75, ease: EASE }}
+          exit={{ y: "-45%", opacity: 0 }}
+          transition={{ duration: 0.7, ease: EASE }}
         >
           {words[i]}
         </motion.span>

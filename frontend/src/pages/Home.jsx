@@ -57,7 +57,7 @@ function Hero() {
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.18] saturate-[0.6]"
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream" />
-      <div className="relative mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 pt-32 pb-20 md:px-10 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:pt-28">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 pt-32 pb-20 md:px-10 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:pt-28">
         <div className="lg:col-span-7">
           <FadeUp delay={d(0.05)} y={14}>
             <p className="eyebrow">A premium food &amp; wellness house</p>
@@ -73,7 +73,7 @@ function Hero() {
                 animate={{ y: "0%" }}
                 transition={{ duration: 1.15, ease: EASE, delay: d(0.4) }}
               >
-                by design.
+                by intent.
               </motion.span>
             </span>
           </h1>

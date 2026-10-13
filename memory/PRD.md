@@ -116,6 +116,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Origin rewritten: "a year of introspection and personal growth" (no challenging year, no stress narrative); Japan section removed entirely; unified first-person voice and present tense throughout
 - Removed redundant "whole, greater than its parts" section (covered verbatim in the theory copy) and the duplicated page eyebrow; page ~30% shorter; theory copy left verbatim per user instruction
 
+## Implemented (2026-10-13q) — hero text & rotation
+- Hero phrase changed to "by intent." everywhere (headline + browser tab/OG title); rotating word now crossfades continuously (old word slides out while the new slides in) so the ingredient backdrop always sits behind fully visible text; content layer explicitly above the backdrop
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
