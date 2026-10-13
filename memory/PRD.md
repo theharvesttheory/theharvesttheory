@@ -143,6 +143,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Products: interlude inserted mid-grid after the 6th card ("Patience / Good things steep.") when a view has 7+ items; Story: "Ceremony / Between convenience and ceremony."; Approach: "Consistency / Every batch, the same standard."
 - Revert = delete the three usages (and optionally the component)
 
+## Implemented (2026-10-13y) — break rule
+- Products grid now inserts an Interlude after every 4 products (row-aligned in the 2-col grid), cycling through editable lines in src/data/site.js (PRODUCT_BREAKS): Patience/Ritual/Purpose; verified 3 breaks on All(13), 2 on Teas(9), 0 on Botanical(1)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FadeUp, MaskedLines, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import Interlude from "@/components/Interlude";
+import { HERO_WORDS, FEATURED_SLUGS, PRODUCT_BREAKS } from "@/data/site";
 import ProductCard from "@/components/ProductCard";
 import { products, categories } from "@/data/products";
 import { lifestyles } from "@/data/lifestyles";
@@ -124,34 +125,32 @@ export default function Products() {
       <section data-testid="products-grid" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <div className="grid gap-x-10 gap-y-20 md:grid-cols-2 lg:gap-x-16">
-            {list.slice(0, 6).map((p, i) => (
-              <FadeUp
-                key={p.slug}
-                delay={(i % 2) * 0.08}
-                className={i % 2 === 1 ? "md:mt-24" : ""}
-              >
-                <ProductCard product={p} index={i} />
-              </FadeUp>
-            ))}
-            {list.length > 6 && (
-              <div className="md:col-span-2">
-                <Interlude
-                  testid="products-interlude"
-                  word="Patience"
-                  phrase="Good things steep."
-                  caption="The pantry grows with each harvest"
-                />
-              </div>
-            )}
-            {list.slice(6).map((p, i) => (
-              <FadeUp
-                key={p.slug}
-                delay={(i % 2) * 0.08}
-                className={i % 2 === 1 ? "md:mt-24" : ""}
-              >
-                <ProductCard product={p} index={i + 6} />
-              </FadeUp>
-            ))}
+            {list.map((p, i) => {
+              const row = [];
+              if (i > 0 && i % 4 === 0 && i < list.length) {
+                const brk = PRODUCT_BREAKS[(i / 4 - 1) % PRODUCT_BREAKS.length];
+                row.push(
+                  <div key={`break-${i}`} className="md:col-span-2">
+                    <Interlude
+                      testid={`products-interlude-${i / 4}`}
+                      word={brk.word}
+                      phrase={brk.phrase}
+                      caption={brk.caption}
+                    />
+                  </div>,
+                );
+              }
+              row.push(
+                <FadeUp
+                  key={p.slug}
+                  delay={(i % 2) * 0.08}
+                  className={i % 2 === 1 ? "md:mt-24" : ""}
+                >
+                  <ProductCard product={p} index={i} />
+                </FadeUp>,
+              );
+              return row;
+            })}
           </div>
           {list.length === 0 && (
             <p className="py-24 text-center font-display text-2xl text-ink/65">

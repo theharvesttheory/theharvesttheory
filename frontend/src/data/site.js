@@ -11,6 +11,13 @@ export const MARQUEE_ITEMS = [
 
 export const FEATURED_SLUGS = ["root-and-leaf", "coco-matcha", "lopchu"];
 
+// Scroll-break lines shown between products (one after every 4 items, cycling).
+export const PRODUCT_BREAKS = [
+  { word: "Patience", phrase: "Good things steep.", caption: "The pantry grows with each harvest" },
+  { word: "Ritual", phrase: "A little preparation, a little anticipation.", caption: null },
+  { word: "Purpose", phrase: "Brought together, on purpose.", caption: null },
+];
+
 export const FOUNDERS = [
   {
     name: "Punith Prasad",
