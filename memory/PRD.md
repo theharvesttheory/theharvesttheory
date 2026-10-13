@@ -74,6 +74,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Remaining six teas re-rendered (caddy + brewed cup + ingredient still-lifes) replacing all AI placeholder pack shots
 - Footer: "Explore Our Theory" (primary) + "Explore Our Products" (ghost) buttons under the theory heading
 
+## Implemented (2026-10-13g) — header spacing
+- Header links reduced to 11px with added vertical padding (py-2) for click targets, larger inter-link gaps (28/40/56px responsive), compact Get in Touch button; clear logo-to-links separation verified at 1440px and 1100px
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

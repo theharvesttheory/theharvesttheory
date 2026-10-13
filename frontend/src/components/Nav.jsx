@@ -64,13 +64,13 @@ export default function Nav() {
             <Logo className="h-9 md:h-10 w-auto" />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10 lg:gap-12">
+          <nav className="hidden md:flex items-center gap-7 lg:gap-10 xl:gap-14">
             {LINKS.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 data-testid={`nav-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
-                className={`relative text-[13px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+                className={`relative px-1 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
                   isActive(l.to) ? "text-olive" : "text-ink/60 hover:text-olive"
                 }`}
               >
@@ -78,7 +78,7 @@ export default function Nav() {
                 {isActive(l.to) && (
                   <motion.span
                     layoutId="nav-underline"
-                    className="absolute -bottom-1.5 left-0 right-0 h-px bg-olive"
+                    className="absolute bottom-1 left-1 right-1 h-px bg-olive"
                   />
                 )}
               </Link>
@@ -86,7 +86,7 @@ export default function Nav() {
             <Link
               to="/contact"
               data-testid="nav-cta"
-              className="border border-olive/40 px-6 py-2.5 text-[13px] uppercase tracking-[0.18em] text-olive transition-colors duration-300 hover:bg-olive hover:text-cream"
+              className="ml-2 border border-olive/40 px-5 py-2 text-[11px] uppercase tracking-[0.18em] text-olive transition-colors duration-300 hover:bg-olive hover:text-cream"
             >
               Get in Touch
             </Link>
