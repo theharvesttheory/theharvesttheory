@@ -42,31 +42,40 @@ export default function Products() {
 
   return (
     <Page>
-      <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
-        <FadeUp y={12}>
-          <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Products" }]} />
-        </FadeUp>
-        <FadeUp>
-          <p className="eyebrow">Our products</p>
-        </FadeUp>
-        <MaskedLines
-          as="h1"
-          delay={0.15}
-          lines={["A pantry of", { text: "considered things.", className: "font-accent italic" }]}
-          className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
+      <header className="relative overflow-hidden mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
+        <img
+          src="/images/editorial/preloader-ingredients.jpg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.15] saturate-[0.7]"
         />
-        <FadeUp delay={0.4}>
-          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
-            Beverages, foods and pantry staples across categories — united by
-            short labels, named sources and slow methods. The collection grows;
-            the standard doesn&rsquo;t.
-          </p>
-        </FadeUp>
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/60 via-transparent to-cream" />
+        <div className="relative">
+          <FadeUp y={12}>
+            <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Products" }]} />
+          </FadeUp>
+          <FadeUp>
+            <p className="eyebrow">Our products</p>
+          </FadeUp>
+          <MaskedLines
+            as="h1"
+            delay={0.15}
+            lines={["A pantry of carefully", { text: "considered ingredients.", className: "font-accent italic" }]}
+            className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
+          />
+          <FadeUp delay={0.4}>
+            <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+              Beverages, foods and pantry staples across categories — united by
+              short labels, named sources and slow methods. The collection grows;
+              the standard doesn&rsquo;t.
+            </p>
+          </FadeUp>
+        </div>
       </header>
 
       <div
         data-testid="products-filter-bar"
-        className="sticky top-[81px] md:top-[90px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
+        className="sticky top-[89px] md:top-[97px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-[1500px] items-center gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-3 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-ink/40">

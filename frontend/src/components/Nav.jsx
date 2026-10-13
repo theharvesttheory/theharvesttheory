@@ -61,7 +61,7 @@ export default function Nav() {
             className="flex items-center"
             aria-label="The Harvest Theory — home"
           >
-            <Logo className="h-12 md:h-14 w-auto" />
+            <Logo className="h-14 md:h-16 w-auto" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6 lg:gap-8 xl:gap-12">

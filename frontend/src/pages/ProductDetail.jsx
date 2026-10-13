@@ -130,7 +130,7 @@ export default function ProductDetail() {
               </div>
 
               <FadeUp>
-                <div className="mt-14 flex flex-wrap items-center gap-6">
+                <div className="mt-14 flex flex-wrap items-center gap-4 md:gap-6">
                   <button
                     data-testid="product-buy-button"
                     onClick={() =>
@@ -142,9 +142,13 @@ export default function ProductDetail() {
                   >
                     Order — Coming Soon
                   </button>
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-ink/40">
-                    Available individually in 50 g packs{p.packSize ? "" : " soon"}
-                  </span>
+                  <Link
+                    to={`/contact?type=product-orders&item=${encodeURIComponent(p.name)}`}
+                    data-testid="product-enquire-link"
+                    className="btn-ghost"
+                  >
+                    Enquire About This Product
+                  </Link>
                 </div>
               </FadeUp>
             </div>

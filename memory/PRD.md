@@ -101,6 +101,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Breadcrumbs on every inner page: Products, product detail (Home / Products / name), Gift Assortments, collection detail (Home / Gift Assortments / name), Our Approach, Our Story / Our Theory, Contact — last crumb is the current page, parents are links; replaces the one-off back links
 - Fixed: collection detail crash from a missing Breadcrumb import (caught by ErrorBoundary) — verified recovered
 
+## Implemented (2026-10-13m) — products header & enquire links
+- Products headline changed to "A pantry of carefully considered ingredients." with a very transparent ingredient still-life filling the header background (cream gradient blend)
+- Header logo enlarged again: 56px mobile / 64px desktop; filter-bar sticky offset matched
+- "Enquire About This Product" ghost button beside "Order — Coming Soon" on all 13 product pages → contact with Product Orders pre-selected and the product name prefilled (verified with Blue Spice)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
