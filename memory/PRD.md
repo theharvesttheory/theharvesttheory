@@ -85,6 +85,12 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Homepage explore section: "Two ways to browse" removed; "Browse by" now the display heading with Category/Lifestyle tabs beside it, left-aligned
 - Sacred Spring and Nexus cards (and both detail pages) carry "Enquire about this assortment" links → contact with Product Orders pre-selected and the assortment name prefilled
 
+## Implemented (2026-10-13j) — cross-page navigation
+- Our Story / Our Theory page: "← Home" back link at top, and end-of-page buttons Explore Our Products + Our Approach + Back to Home
+- Our Approach page: same treatment (← Home top; Explore Our Products + Our Story / Our Theory + Back to Home at end)
+- Verified end-to-end: hero Discover Our Theory → story → Home; story ↔ approach cross-links; no overflow
+- Pending user decision: "Enquire about this product" on product pages (explained, not yet added)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

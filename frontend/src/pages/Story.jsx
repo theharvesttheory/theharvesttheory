@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
 import { FOUNDERS } from "@/data/site";
 
@@ -19,7 +19,21 @@ function Eyebrow({ children }) {
 export default function Story() {
   return (
     <Page>
-      <header className="mx-auto max-w-[1500px] px-6 pt-40 pb-20 md:px-10 md:pt-48 lg:px-16">
+      <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-20 md:px-10 md:pt-40 lg:px-16">
+        <FadeUp y={12}>
+          <Link
+            to="/"
+            data-testid="story-back-home"
+            className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/55 transition-colors duration-300 hover:text-olive"
+          >
+            <ArrowLeft
+              size={15}
+              strokeWidth={1.5}
+              className="transition-transform duration-500 group-hover:-translate-x-1"
+            />
+            Home
+          </Link>
+        </FadeUp>
         <FadeUp>
           <Eyebrow>Our story / our theory</Eyebrow>
         </FadeUp>
@@ -305,10 +319,18 @@ export default function Story() {
             <h2 className="max-w-3xl font-display text-4xl font-light leading-[1.05] tracking-tight text-cream md:text-6xl">
               See what the theory <span className="font-accent italic">makes.</span>
             </h2>
-            <Link to="/products" data-testid="story-cta-products" className="btn-cream mt-12">
-              Explore Our Products
-              <ArrowRight size={16} strokeWidth={1.5} />
-            </Link>
+            <div className="mt-12 flex flex-wrap gap-4">
+              <Link to="/products" data-testid="story-cta-products" className="btn-cream">
+                Explore Our Products
+                <ArrowRight size={16} strokeWidth={1.5} />
+              </Link>
+              <Link to="/approach" data-testid="story-cta-approach" className="btn-cream-ghost">
+                Our Approach
+              </Link>
+              <Link to="/" data-testid="story-back-home-bottom" className="btn-cream-ghost">
+                Back to Home
+              </Link>
+            </div>
           </FadeUp>
         </div>
       </section>
