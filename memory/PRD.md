@@ -112,6 +112,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13o) — hero backdrop
 - Homepage hero now carries the same subtle ingredient still-life backdrop (18% opacity, cream gradient blend) behind the rotating headline and CTAs, matching the products header treatment; verified desktop + mobile with no overflow
 
+## Implemented (2026-10-13p) — story page brevity pass
+- Origin rewritten: "a year of introspection and personal growth" (no challenging year, no stress narrative); Japan section removed entirely; unified first-person voice and present tense throughout
+- Removed redundant "whole, greater than its parts" section (covered verbatim in the theory copy) and the duplicated page eyebrow; page ~30% shorter; theory copy left verbatim per user instruction
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

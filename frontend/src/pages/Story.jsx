@@ -25,9 +25,6 @@ export default function Story() {
             items={[{ to: "/", label: "Home" }, { label: "Our Story / Our Theory" }]}
           />
         </FadeUp>
-        <FadeUp>
-          <Eyebrow>Our story / our theory</Eyebrow>
-        </FadeUp>
         <MaskedLines
           as="h1"
           delay={0.15}
@@ -58,51 +55,21 @@ export default function Story() {
             <FadeUp>
               <Eyebrow>Where it began</Eyebrow>
               <p className="mt-8 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
-                The Harvest Theory was born after a challenging personal year
-                for its founders.
+                The Harvest Theory began in a year of introspection and
+                personal growth for our founders.
               </p>
             </FadeUp>
           </div>
           <div className="lg:col-span-5 lg:col-start-7">
             <FadeUp delay={0.12}>
               <p className="text-base font-light leading-relaxed text-ink/65 md:text-lg">
-                We experienced how stress can easily turn eating into something
-                hurried, irregular and thoughtless. Food may still fill us,
-                while the act of actually nourishing ourselves becomes
-                incidental.
+                We saw how easily eating becomes hurried, irregular and
+                thoughtless — food fills us, while nourishing ourselves
+                becomes incidental.
               </p>
               <p className="mt-6 text-base font-light leading-relaxed text-ink/65 md:text-lg">
                 We kept circling one question: how did the most basic act of
                 self-care become the easiest to skip?
-              </p>
-            </FadeUp>
-          </div>
-        </div>
-
-        <div className="mt-24 grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-5 lg:col-start-2">
-            <FadeUp y={30}>
-              <img
-                src="/images/editorial/ritual-pour.jpg"
-                alt="Hot water poured in a thin stream into a glass teapot of blooming tea"
-                loading="lazy"
-                className="aspect-[4/3] w-full rounded-sm object-cover"
-              />
-            </FadeUp>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-8">
-            <FadeUp>
-              <Eyebrow>A journey through Japan</Eyebrow>
-              <p className="mt-8 text-base font-light leading-relaxed text-ink/65 md:text-lg">
-                A subsequent journey through Japan became the catalyst. We were
-                struck not simply by the quality of the food, but by the
-                thought surrounding it — ingredient quality, preparation,
-                presentation, balance, ritual, cleanliness, consistency,
-                sensory detail.
-              </p>
-              <p className="mt-6 text-base font-light leading-relaxed text-ink/65 md:text-lg">
-                Meals could evoke comfort, anticipation, pleasure and calm.
-                That experience helped shape The Harvest Theory.
               </p>
             </FadeUp>
           </div>
@@ -181,37 +148,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-parts" className="py-24 md:py-32">
-        <div className="mx-auto grid max-w-[1500px] gap-14 px-6 md:px-10 lg:grid-cols-12 lg:px-16">
-          <div className="lg:col-span-5 lg:col-start-2">
-            <FadeUp>
-              <Eyebrow>The whole, greater than its parts</Eyebrow>
-              <p className="mt-8 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
-                We start with ingredients that are already remarkable
-                individually and bring them together deliberately — for
-                flavour, nutrition, texture, aroma, function and sensory
-                experience.
-              </p>
-              <p className="mt-6 text-base font-light leading-relaxed text-ink/65 md:text-lg">
-                Because when thoughtfully constructed, the whole can be greater
-                than the sum of its parts.
-              </p>
-            </FadeUp>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-8 lg:pt-16">
-            <FadeUp y={30} delay={0.1}>
-              <img
-                src="/images/editorial/ritual-whisk.jpg"
-                alt="A hand slowly whisking bright matcha in a ceramic bowl"
-                loading="lazy"
-                className="aspect-[4/3] w-full rounded-sm object-cover"
-              />
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      <section data-testid="story-product-philosophy" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
+      <section data-testid="story-product-philosophy" className="border-t border-linewarm bg-cream py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>What a product must earn</Eyebrow>
@@ -237,31 +174,26 @@ export default function Story() {
           <FadeUp delay={0.1}>
             <p className="mt-12 max-w-xl text-base font-light leading-relaxed text-ink/65 md:text-lg">
               Preparation should invite participation — tearing open a package,
-              boiling water, warming milk, whisking, steeping, stirring — but
-              never become burdensome. We want The Harvest Theory to become
-              part of a customer&rsquo;s everyday ritual of self-love: a small
-              moment of choosing something nourishing, and taking a little time
-              for oneself.
+              boiling water, whisking, steeping, stirring — but never become
+              burdensome. We want The Harvest Theory to become part of a
+              customer&rsquo;s everyday ritual of self-love: a small moment of
+              choosing something nourishing, and taking a little time for
+              oneself.
             </p>
           </FadeUp>
         </div>
       </section>
 
-      <section data-testid="story-customer" className="py-24 md:py-32">
+      <section data-testid="story-customer" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
         <div className="mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>Slow time</Eyebrow>
             <p className="mt-8 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
               Our customer is urban, curious and time-constrained — exploring
               better food and aspiring to healthier habits, if not always
-              consistently. Where frustration exists, it is around poor taste,
-              inconsistent quality, unclear benefits and wellness that demands
-              too much effort.
-            </p>
-            <p className="mt-6 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
-              The experience we want to create feels like slow time. Aroma
-              rising from a cup. Colour developing. A little preparation. A
-              little anticipation.
+              consistently. The experience we want to create feels like slow
+              time: aroma rising from a cup, colour developing, a little
+              preparation, a little anticipation.
             </p>
             <blockquote className="mt-12 font-accent text-3xl italic leading-snug text-olive md:text-4xl">
               &ldquo;I started today by prioritising myself.&rdquo;
@@ -273,7 +205,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-founders" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
+      <section data-testid="story-founders" className="border-t border-linewarm bg-cream py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>The founders</Eyebrow>
@@ -286,7 +218,7 @@ export default function Story() {
               <FadeUp key={f.name} delay={i * 0.08}>
                 <div
                   data-testid={`founder-card-${f.initials.toLowerCase()}`}
-                  className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-cream"
+                  className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep"
                 >
                   <span className="font-accent text-6xl italic text-gold/70">{f.initials}</span>
                   <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/35">
