@@ -153,6 +153,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-14a) — compact product cards
 - Product card images reduced from tall 3:4 to compact 4:3, card text tightened, staggered offsets removed, grid gaps reduced — a full row of 2 products (image + description) now measures ~570px and fits within one screen on desktop (mobile card ~350px); the every-4 interlude rhythm still aligns
 
+## Implemented (2026-10-14b) — prices & japan purge
+- The last Japan reference (homepage story teaser) replaced with the introspection story — zero Japan/trip references anywhere on the site (grep-verified)
+- All 13 products now carry placeholder prices (₹ 320–₹ 550 by category) in the editable price field, shown on each product page
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

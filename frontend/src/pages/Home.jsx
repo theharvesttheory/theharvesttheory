@@ -478,9 +478,9 @@ function StoryTeaser() {
         <FadeUp>
           <p className="eyebrow">Our story</p>
           <blockquote className="mt-8 font-display text-3xl font-light leading-[1.15] tracking-tight text-ink md:text-5xl">
-            &ldquo;It began with a difficult year — and a journey through Japan
-            that changed how we thought about{" "}
-            <span className="font-accent italic">food itself.</span>&rdquo;
+            &ldquo;The Harvest Theory began in a year of introspection and
+            personal growth — and became{" "}
+            <span className="font-accent italic">a theory of nourishment.</span>&rdquo;
           </blockquote>
           <Link
             to="/story"
