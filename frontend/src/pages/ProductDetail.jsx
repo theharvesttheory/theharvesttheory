@@ -9,9 +9,9 @@ import { lifestyleLabel } from "@/data/lifestyles";
 function DetailRow({ label, children, testid }) {
   return (
     <FadeUp>
-      <div data-testid={testid} className="border-t border-ink/10 py-8">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/60">{label}</p>
-        <div className="mt-4">{children}</div>
+      <div data-testid={testid} className="border-t border-ink/10 py-6">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/55">{label}</p>
+        <div className="mt-3">{children}</div>
       </div>
     </FadeUp>
   );
@@ -19,7 +19,7 @@ function DetailRow({ label, children, testid }) {
 
 function ListRow({ items }) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="space-y-2">
       {items.map((n) => (
         <li key={n} className="flex items-baseline gap-3 font-light text-ink/88">
           <span className="h-1 w-1 shrink-0 rotate-45 bg-gold" />
@@ -41,7 +41,7 @@ export default function ProductDetail() {
   return (
     <Page className="limewash">
       <article data-testid="product-detail">
-        <div className="mx-auto max-w-[1500px] px-6 pt-32 md:px-10 md:pt-40 lg:px-16">
+        <div className="mx-auto max-w-[1500px] px-6 pt-28 md:px-10 md:pt-36 lg:px-16">
           <FadeUp y={12}>
             <Breadcrumb
               items={[
@@ -52,41 +52,44 @@ export default function ProductDetail() {
             />
           </FadeUp>
 
-          <div className="mt-12 grid gap-14 pb-24 lg:grid-cols-2 lg:gap-20">
-            <div className="lg:sticky lg:top-28 lg:self-start">
+          <div className="mt-10 grid gap-10 pb-20 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-5 lg:sticky lg:top-32 lg:self-start">
               <motion.div
-                initial={{ opacity: 0, scale: 1.05 }}
+                initial={{ opacity: 0, scale: 1.04 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, ease: EASE, delay: 0.1 }}
-                className="overflow-hidden rounded-sm bg-creamdeep"
+                transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
+                className="overflow-hidden rounded-sm bg-creamdeep aspect-[4/3]"
               >
-                <img src={p.image} alt={p.name} className="aspect-[3/4] w-full object-cover" />
+                <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
               </motion.div>
+              <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-ink/55">
+                {p.name} {p.packSize ? `· ${p.packSize.replace(" individual pack", "")}` : ""}
+              </p>
             </div>
 
-            <div>
+            <div className="lg:col-span-7">
               <FadeUp>
                 <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
                   {categoryLabel(p.category)}
                 </p>
-                <h1 className="mt-5 font-display text-4xl font-light leading-[1.02] tracking-tight text-ink md:text-6xl">
+                <h1 className="mt-4 font-display text-3xl font-light leading-[1.04] tracking-tight text-ink md:text-5xl">
                   {p.name}
                 </h1>
-                <p className="mt-3 font-accent text-2xl italic text-olive">{p.subname}</p>
-                <p className="mt-8 max-w-lg font-accent text-xl italic leading-snug text-olive">
+                <p className="mt-2 font-accent text-xl italic text-olive md:text-2xl">{p.subname}</p>
+                <p className="mt-5 max-w-xl font-accent text-xl italic leading-snug text-olive md:text-2xl">
                   {p.tagline}
                 </p>
-                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
+                <p className="mt-5 max-w-xl text-base font-light leading-relaxed text-ink/80">
                   {p.description}
                 </p>
                 {p.lifestyle && p.lifestyle.length > 0 && (
-                  <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-ink/55">
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/55">
                     {p.lifestyle.map(lifestyleLabel).join(" · ")}
                   </p>
                 )}
               </FadeUp>
 
-              <div className="mt-12">
+              <div className="mt-8">
                 <DetailRow label="Ingredients" testid="product-ingredients">
                   <p className="font-light leading-relaxed text-ink/88">
                     {p.ingredients.join(" · ")}
@@ -96,11 +99,11 @@ export default function ProductDetail() {
                   <p className="font-light leading-relaxed text-ink/88">{p.prep}</p>
                 </DetailRow>
                 <DetailRow label="Flavour & tasting notes" testid="product-notes">
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {p.notes.map((n) => (
                       <span
                         key={n}
-                        className="border border-ink/15 px-4 py-1.5 text-[12px] tracking-[0.08em] text-ink/85"
+                        className="border border-ink/15 px-3.5 py-1.5 text-[12px] tracking-[0.08em] text-ink/88"
                       >
                         {n}
                       </span>
@@ -120,17 +123,17 @@ export default function ProductDetail() {
                   <p className="font-light text-ink/88">{p.price || "—"}</p>
                 </DetailRow>
                 <DetailRow label="Provenance" testid="product-provenance">
-                  <p className="font-light leading-relaxed text-ink/65">
+                  <p className="font-light leading-relaxed text-ink/70">
                     {p.provenance || "Provenance details are being documented — coming soon."}
                   </p>
                 </DetailRow>
                 <DetailRow label="Reviews" testid="product-reviews">
-                  <p className="text-sm font-light text-ink/60">Reviews are on the way.</p>
+                  <p className="text-sm font-light text-ink/55">Reviews are on the way.</p>
                 </DetailRow>
               </div>
 
               <FadeUp>
-                <div className="mt-14 flex flex-wrap items-center gap-4 md:gap-6">
+                <div className="mt-10 flex flex-wrap items-center gap-4 md:gap-6">
                   <button
                     data-testid="product-buy-button"
                     onClick={() =>
@@ -163,7 +166,7 @@ export default function ProductDetail() {
             <Link
               to={`/products/${prev.slug}`}
               data-testid="product-prev"
-              className="group flex items-center gap-4 border-b border-linewarm px-6 py-10 md:border-b-0 md:border-r md:px-10 lg:px-16"
+              className="group flex items-center gap-4 border-b border-linewarm px-6 py-8 md:border-b-0 md:border-r md:px-10 lg:px-16"
             >
               <ArrowLeft
                 size={18}
@@ -182,7 +185,7 @@ export default function ProductDetail() {
             <Link
               to={`/products/${next.slug}`}
               data-testid="product-next"
-              className="group flex items-center justify-end gap-4 px-6 py-10 text-right md:px-10 lg:px-16"
+              className="group flex items-center justify-end gap-4 px-6 py-8 text-right md:px-10 lg:px-16"
             >
               <span>
                 <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/55">

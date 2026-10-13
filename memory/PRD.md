@@ -146,6 +146,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13y) — break rule
 - Products grid now inserts an Interlude after every 4 products (row-aligned in the 2-col grid), cycling through editable lines in src/data/site.js (PRODUCT_BREAKS): Patience/Ritual/Purpose; verified 3 breaks on All(13), 2 on Teas(9), 0 on Botanical(1)
 
+## Implemented (2026-10-13z) — product pages fit one screen
+- Product detail restructured: image reduced to a compact 4:3 (sticky beside the text), headline tightened, detail rows condensed (py-8→py-6), CTA row tightened — image + name + subname + tagline + description + first detail rows all visible in the first 900px viewport (measured: image bottom 586px, name 281px, description 445px)
+- Fixed a regression where the text column lost its grid span and collapsed to one word per line; limewash retained
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
