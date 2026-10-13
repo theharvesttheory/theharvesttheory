@@ -18,7 +18,7 @@ function Eyebrow({ children }) {
 
 export default function Story() {
   return (
-    <Page>
+    <Page className="limewash">
       <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-20 md:px-10 md:pt-40 lg:px-16">
         <FadeUp y={12}>
           <Breadcrumb
@@ -76,7 +76,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-theory" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
+      <section data-testid="story-theory" className="border-t border-linewarm py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-4 lg:col-start-2">
@@ -148,7 +148,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-product-philosophy" className="border-t border-linewarm bg-cream py-24 md:py-32">
+      <section data-testid="story-product-philosophy" className="border-t border-linewarm py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>What a product must earn</Eyebrow>
@@ -184,7 +184,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-customer" className="border-t border-linewarm bg-creamdeep/60 py-24 md:py-32">
+      <section data-testid="story-customer" className="border-t border-linewarm py-24 md:py-32">
         <div className="mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>Slow time</Eyebrow>
@@ -205,7 +205,7 @@ export default function Story() {
         </div>
       </section>
 
-      <section data-testid="story-founders" className="border-t border-linewarm bg-cream py-24 md:py-32">
+      <section data-testid="story-founders" className="border-t border-linewarm py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>The founders</Eyebrow>
@@ -218,7 +218,7 @@ export default function Story() {
               <FadeUp key={f.name} delay={i * 0.08}>
                 <div
                   data-testid={`founder-card-${f.initials.toLowerCase()}`}
-                  className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep"
+                  className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep/70"
                 >
                   <span className="font-accent text-6xl italic text-gold/70">{f.initials}</span>
                   <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/35">
