@@ -138,6 +138,11 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13w) — story vignettes
 - Field-notebook style "Fig." studies fill the empty left columns on the theory page: Fig. 01 (ripe mango on stone pedestal, golden light) under "There is a theory behind every harvest."; Fig. 02 (steeping cup by a window) beside "Slow time" — gentle, artistic, captioned in small caps
 
+## Implemented (2026-10-13x) — scroll interludes (interim, easily revertible)
+- New reusable Interlude component (components/Interlude.jsx): full-width pause with a giant ghost italic word + one quiet phrase + small caption
+- Products: interlude inserted mid-grid after the 6th card ("Patience / Good things steep.") when a view has 7+ items; Story: "Ceremony / Between convenience and ceremony."; Approach: "Consistency / Every batch, the same standard."
+- Revert = delete the three usages (and optionally the component)
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

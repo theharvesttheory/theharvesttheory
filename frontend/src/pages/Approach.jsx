@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FadeUp, MaskedLines, Page, Breadcrumb } from "@/components/Reveal";
+import Interlude from "@/components/Interlude";
 
 const PILLARS = [
   {
@@ -125,6 +126,12 @@ export default function Approach() {
           </div>
         </section>
       ))}
+
+      <Interlude
+        testid="interlude-approach"
+        word="Consistency"
+        phrase="Every batch, the same standard."
+      />
 
       <section
         data-testid="approach-trust"

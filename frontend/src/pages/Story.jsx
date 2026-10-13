@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FadeUp, MaskedLines, Page, Breadcrumb } from "@/components/Reveal";
+import Interlude from "@/components/Interlude";
 import { FOUNDERS } from "@/data/site";
 
 const MUST_EARN = [
@@ -160,6 +161,12 @@ export default function Story() {
           </FadeUp>
         </div>
       </section>
+
+      <Interlude
+        testid="interlude-story"
+        word="Ceremony"
+        phrase="Between convenience and ceremony."
+      />
 
       <section data-testid="story-product-philosophy" className="border-t border-linewarm py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
