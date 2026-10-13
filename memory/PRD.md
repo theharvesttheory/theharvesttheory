@@ -157,8 +157,14 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - The last Japan reference (homepage story teaser) replaced with the introspection story — zero Japan/trip references anywhere on the site (grep-verified)
 - All 13 products now carry placeholder prices (₹ 320–₹ 550 by category) in the editable price field, shown on each product page
 
+## Implemented (2026-10-14c) — prices visible while browsing
+- Root cause of "I don't see the prices": prices existed in the data and on product detail pages, but ProductCard never rendered them — the Products grid and Home featured section showed no prices at all
+- Price now shown as a small elegant line under each card's description (13/13 cards, ₹ 320–₹ 550), with data-testid product-price-{slug}
+- Product detail: price surfaced beside the "Order — Coming Soon" button (display type, data-testid product-detail-cta-price) in addition to the details list
+- Verified desktop (1440) + mobile (390): 13/13 price labels render, CTA price present, no overflow-x
+
 ## Backlog
-- P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
+- P1: Real pricing (placeholders ₹ 320–₹ 550 currently shown) + real provenance data (field exists, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
 - P1: Backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
 - P2: Reviews capability; ecommerce checkout; lab reports, batch traceability, export certifications

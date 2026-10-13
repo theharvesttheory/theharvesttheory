@@ -134,6 +134,14 @@ export default function ProductDetail() {
 
               <FadeUp>
                 <div className="mt-10 flex flex-wrap items-center gap-4 md:gap-6">
+                  {p.price ? (
+                    <p
+                      data-testid="product-detail-cta-price"
+                      className="font-display text-xl font-light tracking-tight text-ink md:text-2xl"
+                    >
+                      {p.price}
+                    </p>
+                  ) : null}
                   <button
                     data-testid="product-buy-button"
                     onClick={() =>

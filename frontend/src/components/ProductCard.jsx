@@ -30,6 +30,14 @@ export default function ProductCard({ product, index = 0 }) {
           <p className="mt-1.5 max-w-md text-sm font-light leading-relaxed text-ink/70">
             {product.tagline}
           </p>
+          {product.price ? (
+            <p
+              data-testid={`product-price-${product.slug}`}
+              className="mt-3 text-sm tracking-[0.08em] text-ink/85"
+            >
+              {product.price}
+            </p>
+          ) : null}
         </div>
         <ArrowUpRight
           size={18}
