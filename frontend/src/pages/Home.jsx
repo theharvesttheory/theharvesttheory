@@ -54,7 +54,7 @@ function Hero() {
         src="/images/editorial/preloader-ingredients.jpg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.18] saturate-[0.6]"
+        className="pointer-events-none absolute inset-0 h-full w-full -translate-y-[10%] scale-[1.3] object-cover opacity-[0.12] saturate-[0.6]"
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream" />
       <div className="relative z-10 mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 pt-32 pb-20 md:px-10 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:pt-28">

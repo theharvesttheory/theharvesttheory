@@ -119,6 +119,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13q) — hero text & rotation
 - Hero phrase changed to "by intent." everywhere (headline + browser tab/OG title); rotating word now crossfades continuously (old word slides out while the new slides in) so the ingredient backdrop always sits behind fully visible text; content layer explicitly above the backdrop
 
+## Implemented (2026-10-13r) — backdrop positioning & transparency
+- Hero backdrop raised so the ingredient line sits directly behind the rotating word + "by intent." (scaled/translated up), opacity reduced to 12%; products header backdrop reduced to 20%
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

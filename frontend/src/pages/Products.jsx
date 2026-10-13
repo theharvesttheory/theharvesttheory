@@ -47,7 +47,7 @@ export default function Products() {
           src="/images/editorial/preloader-ingredients.jpg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.3] saturate-[0.7]"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.2] saturate-[0.7]"
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream" />
         <div className="relative">
