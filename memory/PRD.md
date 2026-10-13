@@ -81,6 +81,10 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Each named tin configuration is clickable → /contact with Product Orders pre-selected and the Products field prefilled with that assortment's name ("Enquire about this assortment" affordance); mechanism is generic (?type=&item=) and works for any assortment
 - Header: nav pushed right with guaranteed clear logo separation (456px at 1440), 11px links, desktop nav from 1024px up, hamburger below; Get in Touch now solid olive matching the primary button style
 
+## Implemented (2026-10-13i) — browse heading & collection enquiries
+- Homepage explore section: "Two ways to browse" removed; "Browse by" now the display heading with Category/Lifestyle tabs beside it, left-aligned
+- Sacred Spring and Nexus cards (and both detail pages) carry "Enquire about this assortment" links → contact with Product Orders pre-selected and the assortment name prefilled
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

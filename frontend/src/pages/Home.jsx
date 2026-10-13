@@ -218,21 +218,16 @@ function ExploreProducts() {
       className="border-t border-linewarm py-28 md:py-36"
     >
       <div className="mx-auto max-w-[1500px] px-6 md:px-10 lg:px-16">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <FadeUp>
-            <p className="eyebrow">Explore products</p>
-            <h2 className="mt-6 font-display text-4xl font-light tracking-tight text-ink md:text-5xl">
-              Two ways to <span className="font-accent italic">browse</span>
+        <FadeUp>
+          <p className="eyebrow">Explore products</p>
+          <div className="mt-6 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+            <h2 className="font-display text-4xl font-light tracking-tight text-ink md:text-5xl">
+              Browse by
             </h2>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
-              <span className="text-[13px] uppercase tracking-[0.18em] text-ink/40">Browse by</span>
-              {tabBtn("category", "Category")}
-              {tabBtn("lifestyle", "Lifestyle")}
-            </div>
-          </FadeUp>
-        </div>
+            {tabBtn("category", "Category")}
+            {tabBtn("lifestyle", "Lifestyle")}
+          </div>
+        </FadeUp>
 
         <AnimatePresence mode="wait">
           <motion.div

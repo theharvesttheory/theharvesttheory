@@ -65,9 +65,13 @@ export default function CollectionDetail() {
                     Explore the full catalogue
                     <ArrowRight size={16} strokeWidth={1.5} />
                   </Link>
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-ink/40">
-                    Ordering opens with our first release
-                  </span>
+                  <Link
+                    to={`/contact?type=product-orders&item=${encodeURIComponent(collection.name)}`}
+                    data-testid="collection-enquire-link"
+                    className="btn-ghost"
+                  >
+                    Enquire About This Assortment
+                  </Link>
                 </div>
               </FadeUp>
             </div>
