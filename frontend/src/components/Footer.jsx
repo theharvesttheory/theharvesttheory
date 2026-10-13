@@ -8,6 +8,7 @@ const explore = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
   { to: "/collections", label: "Gift Assortments" },
+  { to: "/journal", label: "Journal" },
   { to: "/approach", label: "Our Approach" },
   { to: "/story", label: "Our Story / Our Theory" },
   { to: "/contact", label: "Contact" },
