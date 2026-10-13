@@ -7,7 +7,16 @@ import { lenisRef } from "@/context/app";
 
 const LINKS = [
   { to: "/products", label: "Products" },
-  { to: "/story", label: "Our Story" },
+  { to: "/collections", label: "Collections" },
+  { to: "/story", label: "Our Theory" },
+];
+
+const MOBILE_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/products", label: "Products" },
+  { to: "/collections", label: "Collections" },
+  { to: "/story", label: "Our Story / Our Theory" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {
@@ -53,7 +62,7 @@ export default function Nav() {
             <Logo className="h-9 md:h-10 w-auto" />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-12">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             {LINKS.map((l) => (
               <Link
                 key={l.to}
@@ -105,28 +114,24 @@ export default function Nav() {
         {open && (
           <motion.div
             data-testid="nav-mobile-menu"
-            className="fixed inset-0 z-40 bg-cream flex flex-col justify-between pt-28 pb-10 px-6"
+            className="fixed inset-0 z-40 bg-cream flex flex-col justify-between pt-28 pb-10 px-6 overflow-y-auto"
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.45, ease: EASE }}
           >
-            <nav className="flex flex-col gap-2">
-              {[
-                { to: "/", label: "Home" },
-                ...LINKS,
-                { to: "/contact", label: "Contact" },
-              ].map((l, i) => (
+            <nav className="flex flex-col gap-1">
+              {MOBILE_LINKS.map((l, i) => (
                 <motion.div
                   key={l.to}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: EASE, delay: 0.08 + i * 0.07 }}
+                  transition={{ duration: 0.6, ease: EASE, delay: 0.08 + i * 0.06 }}
                 >
                   <Link
                     to={l.to}
-                    data-testid={`nav-mobile-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className={`block font-display font-light text-5xl leading-tight py-2 ${
+                    data-testid={`nav-mobile-link-${l.label.toLowerCase().replace(/[\s/]+/g, "-")}`}
+                    className={`block font-display font-light text-[2.6rem] leading-tight py-2 ${
                       location.pathname === l.to ? "text-olive" : "text-ink"
                     }`}
                   >
@@ -141,7 +146,7 @@ export default function Nav() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Nourishment, by design
+              The right ingredients. Harvested at the right time.
             </motion.p>
           </motion.div>
         )}

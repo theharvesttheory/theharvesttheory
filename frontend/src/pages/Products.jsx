@@ -1,12 +1,44 @@
-import { useState } from "react";
-import { FadeUp, MaskedLines, Page } from "@/components/Reveal";
+import { useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FadeUp, MaskedLines, Page, EASE } from "@/components/Reveal";
 import ProductCard from "@/components/ProductCard";
-import { categories, products } from "@/data/products";
+import { products, categories } from "@/data/products";
+import { lifestyles } from "@/data/lifestyles";
 
 export default function Products() {
-  const [active, setActive] = useState("all");
+  const [params, setParams] = useSearchParams();
+  const mode = params.get("mode") === "lifestyle" ? "lifestyle" : "category";
+  const activeCat = params.get("cat") || "all";
+  const activeLife = params.get("life") || "all";
+
+  const update = (key, val) => {
+    const next = new URLSearchParams(params);
+    if (val === "all") next.delete(key);
+    else next.set(key, val);
+    setParams(next);
+  };
+
+  const setMode = (m) => {
+    const next = new URLSearchParams();
+    if (m === "lifestyle") next.set("mode", "lifestyle");
+    setParams(next);
+  };
+
   const list =
-    active === "all" ? products : products.filter((p) => p.category === active);
+    mode === "category"
+      ? activeCat === "all"
+        ? products
+        : products.filter((p) => p.category === activeCat)
+      : activeLife === "all"
+        ? products
+        : products.filter((p) => (p.lifestyle || []).includes(activeLife));
+
+  const filters =
+    mode === "category"
+      ? categories
+      : [{ id: "all", label: "All" }, ...lifestyles.map((l) => ({ id: l.id, label: l.name }))];
+  const active = mode === "category" ? activeCat : activeLife;
+  const prefix = mode === "category" ? "filter-cat" : "filter-life";
 
   return (
     <Page>
@@ -21,7 +53,7 @@ export default function Products() {
           className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
         />
         <FadeUp delay={0.4}>
-          <p className="mt-8 max-w-lg text-base md:text-lg font-light leading-relaxed text-ink/65">
+          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
             Beverages, foods and pantry staples across categories — united by
             short labels, named sources and slow methods. The collection grows;
             the standard doesn&rsquo;t.
@@ -33,17 +65,40 @@ export default function Products() {
         data-testid="products-filter-bar"
         className="sticky top-[72px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
       >
-        <div className="mx-auto flex max-w-[1500px] gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-6 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {categories.map((c) => {
+        <div className="mx-auto flex max-w-[1500px] items-center gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-3 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <button
+            data-testid="products-mode-category"
+            onClick={() => setMode("category")}
+            className={`shrink-0 border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+              mode === "category"
+                ? "border-olive bg-olive text-cream"
+                : "border-ink/20 text-ink/55 hover:border-olive hover:text-olive"
+            }`}
+          >
+            Category
+          </button>
+          <button
+            data-testid="products-mode-lifestyle"
+            onClick={() => setMode("lifestyle")}
+            className={`shrink-0 border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+              mode === "lifestyle"
+                ? "border-olive bg-olive text-cream"
+                : "border-ink/20 text-ink/55 hover:border-olive hover:text-olive"
+            }`}
+          >
+            Lifestyle
+          </button>
+          <span className="mx-3 h-5 w-px shrink-0 bg-ink/15" />
+          {filters.map((c) => {
             const isActive = active === c.id;
             return (
               <button
                 key={c.id}
-                data-testid={`filter-${c.id}`}
-                onClick={() => setActive(c.id)}
-                className={`relative shrink-0 whitespace-nowrap px-4 py-2 text-[12px] uppercase tracking-[0.16em] transition-colors duration-300 ${
-                  isActive ? "text-cream" : "text-ink/55 hover:text-olive"
-                } ${isActive ? "bg-olive" : ""}`}
+                data-testid={`${prefix}-${c.id}`}
+                onClick={() => update(mode === "category" ? "cat" : "life", c.id)}
+                className={`shrink-0 whitespace-nowrap px-4 py-2 text-[12px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                  isActive ? "bg-olive text-cream" : "text-ink/55 hover:text-olive"
+                }`}
               >
                 {c.label}
               </button>

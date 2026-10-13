@@ -15,13 +15,15 @@ export default function ProductCard({ product, index = 0 }) {
           loading={index < 3 ? "eager" : "lazy"}
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
         />
-        <span className="absolute top-4 left-4 bg-cream/90 backdrop-blur px-3 py-1.5 text-[9px] uppercase tracking-[0.22em] text-olive">
-          Coming soon
-        </span>
+        {product.packSize ? (
+          <span className="absolute top-4 left-4 bg-cream/90 backdrop-blur px-3 py-1.5 text-[9px] uppercase tracking-[0.22em] text-olive">
+            {product.packSize.replace(" individual pack", "")}
+          </span>
+        ) : null}
       </div>
       <div className="mt-6 flex items-start justify-between gap-6">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.24em] text-gold">{product.categoryLabel}</p>
+          <p className="text-[10px] uppercase tracking-[0.24em] text-gold">{product.subname}</p>
           <h3 className="mt-2 font-display font-light text-2xl md:text-[1.65rem] tracking-tight text-ink transition-colors duration-300 group-hover:text-olive">
             {product.name}
           </h3>

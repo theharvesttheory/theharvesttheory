@@ -35,12 +35,25 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Mobile nav drawer, glass sticky header
 - data-testids on all interactive elements
 
-## Verified
-- Desktop (1440) + mobile (390) screenshots of all pages; no overflow-x
-- Filters (seafood → 1 card), product detail, buy toast, contact fill→submit→success, mobile menu open→navigate
+## Implemented (2026-10-13) — content & structure refinement (visual language preserved)
+- Hero: rotating words Nourishment/Upliftment/Calmness with static italic "by design."; CTAs "Explore Our Products" + "Discover Our Theory" above the fold
+- Preloader: ingredient still-life watermark ("These are the parts. The theory is what we do with them.")
+- Homepage Explore section: By Category (5 categories) / Lifestyle (6 groups) tabs, deep-link to /products?cat= / ?mode=lifestyle&life=
+- Catalogue rebuilt: 13 products (Root & Leaf, Coco Matcha, Woodland Brew, Teesi + 9 teas in 50 g packs) — all data in src/data/products.js
+- Lifestyle mapping on products (lifestyle arrays) + groups in src/data/lifestyles.js
+- Collections: nav tab + /collections + /collections/:slug (Sacred Spring 6 teas, Nexus 4 teas) — composition in src/data/collections.js; teas remain individually purchasable
+- Product page: what it is / ingredients / prepare / tasting notes / nutrition / benefits / pack size / price (blank) / provenance (blank) / reviews (low priority)
+- Story page: full theory + origin story (life → Japan → theory → parts → product philosophy → customer) + 3 founder profiles with portrait placeholders (src/data/site.js)
+- Contact: "What can we help you with?" — 9 enquiry types, per-type field schemas in src/data/contact-options.js; Product Orders shows "Ordering will be available shortly."; architecture ready for email→Slack later
+- Footer: FSSAI/certification placeholders, socials, legal placeholders, newsletter signup, Made in India
+- Marquee now carries the brand line; nav = Products / Collections / Our Theory + mobile full set
+
+## Verified (2026-10-13)
+- Desktop + mobile screenshots all pages; no overflow-x
+- Rotating hero words cycle (Calmness → Nourishment observed); lifestyle filter (5 ceremonial-indulgence), category filter (9 teas); collection detail shows 6 teas; tea detail shows all 9 sections; order button toast "Ordering will be available shortly."; contact retail form renders 8 fields, submits to success; product-orders state verified; mobile menu navigates
 
 ## Backlog
-- P1: Ingredients / Our Approach page (structure reserved on home + footer "Soon")
-- P1: Real story copy on /story (user to provide)
-- P1: Backend for contact enquiries (currently frontend-only by choice)
-- P2: Journal; ecommerce checkout; real product assets & prices; export/wholesale catalogue
+- P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
+- P1: Ingredients / Our Approach standalone page; Journal
+- P1: Backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
+- P2: Reviews capability; ecommerce checkout; lab reports, batch traceability, export certifications

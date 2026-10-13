@@ -1,17 +1,10 @@
 import { FadeUp } from "./Reveal";
-
-const ITEMS = [
-  "Thoughtfully formulated",
-  "High-quality ingredients",
-  "Considered sourcing",
-  "Contemporary formats",
-  "Made for every day",
-];
+import { MARQUEE_ITEMS } from "@/data/site";
 
 function Row({ ariaHidden = false }) {
   return (
     <div aria-hidden={ariaHidden} className="flex shrink-0 items-center">
-      {ITEMS.map((item, i) => (
+      {MARQUEE_ITEMS.map((item, i) => (
         <span key={i} className="flex shrink-0 items-center">
           <span
             className={`whitespace-nowrap px-8 md:px-14 text-2xl md:text-4xl font-display font-light tracking-tight ${

@@ -9,6 +9,8 @@ import Preloader from "@/components/Preloader";
 import Home from "@/pages/Home";
 import Products from "@/pages/Products";
 import ProductDetail from "@/pages/ProductDetail";
+import Collections from "@/pages/Collections";
+import CollectionDetail from "@/pages/CollectionDetail";
 import Story from "@/pages/Story";
 import Contact from "@/pages/Contact";
 import { IntroContext, lenisRef } from "@/context/app";
@@ -41,6 +43,8 @@ function AnimatedRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<ProductDetail />} />
+        <Route path="/collections" element={<Collections />} />
+        <Route path="/collections/:slug" element={<CollectionDetail />} />
         <Route path="/story" element={<Story />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Home />} />
@@ -59,7 +63,7 @@ function AppShell() {
       setIntroDone(true);
       return;
     }
-    const t = setTimeout(() => setIntroDone(true), 2000);
+    const t = setTimeout(() => setIntroDone(true), 2200);
     return () => clearTimeout(t);
   }, []);
 

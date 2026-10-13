@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { FadeUp, Page, EASE } from "@/components/Reveal";
 import { categoryLabel, products } from "@/data/products";
+import { lifestyleLabel } from "@/data/lifestyles";
 
 function DetailRow({ label, children, testid }) {
   return (
@@ -13,6 +14,19 @@ function DetailRow({ label, children, testid }) {
         <div className="mt-4">{children}</div>
       </div>
     </FadeUp>
+  );
+}
+
+function ListRow({ items }) {
+  return (
+    <ul className="space-y-2.5">
+      {items.map((n) => (
+        <li key={n} className="flex items-baseline gap-3 font-light text-ink/75">
+          <span className="h-1 w-1 shrink-0 rotate-45 bg-gold" />
+          {n}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -34,7 +48,11 @@ export default function ProductDetail() {
               data-testid="product-back-link"
               className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] text-ink/55 transition-colors duration-300 hover:text-olive"
             >
-              <ArrowLeft size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:-translate-x-1" />
+              <ArrowLeft
+                size={15}
+                strokeWidth={1.5}
+                className="transition-transform duration-500 group-hover:-translate-x-1"
+              />
               All products
             </Link>
           </FadeUp>
@@ -47,11 +65,7 @@ export default function ProductDetail() {
                 transition={{ duration: 1.2, ease: EASE, delay: 0.1 }}
                 className="overflow-hidden rounded-sm bg-creamdeep"
               >
-                <img
-                  src={p.image}
-                  alt={p.name}
-                  className="aspect-[3/4] w-full object-cover"
-                />
+                <img src={p.image} alt={p.name} className="aspect-[3/4] w-full object-cover" />
               </motion.div>
             </div>
 
@@ -60,15 +74,21 @@ export default function ProductDetail() {
                 <p className="text-[11px] uppercase tracking-[0.24em] text-gold">
                   {categoryLabel(p.category)}
                 </p>
-                <h1 className="mt-5 font-display text-4xl md:text-6xl font-light leading-[1.02] tracking-tight text-ink">
+                <h1 className="mt-5 font-display text-4xl font-light leading-[1.02] tracking-tight text-ink md:text-6xl">
                   {p.name}
                 </h1>
-                <p className="mt-6 font-accent text-2xl italic leading-snug text-olive/80">
+                <p className="mt-3 font-accent text-2xl italic text-olive/80">{p.subname}</p>
+                <p className="mt-8 max-w-lg font-accent text-xl italic leading-snug text-olive/80">
                   {p.tagline}
                 </p>
-                <p className="mt-8 max-w-lg text-base md:text-lg font-light leading-relaxed text-ink/65">
+                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
                   {p.description}
                 </p>
+                {p.lifestyle && p.lifestyle.length > 0 && (
+                  <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+                    {p.lifestyle.map(lifestyleLabel).join(" · ")}
+                  </p>
+                )}
               </FadeUp>
 
               <div className="mt-12">
@@ -77,7 +97,10 @@ export default function ProductDetail() {
                     {p.ingredients.join(" · ")}
                   </p>
                 </DetailRow>
-                <DetailRow label="Tasting notes" testid="product-notes">
+                <DetailRow label="How to prepare" testid="product-prep">
+                  <p className="font-light leading-relaxed text-ink/75">{p.prep}</p>
+                </DetailRow>
+                <DetailRow label="Flavour & tasting notes" testid="product-notes">
                   <div className="flex flex-wrap gap-3">
                     {p.notes.map((n) => (
                       <span
@@ -89,11 +112,25 @@ export default function ProductDetail() {
                     ))}
                   </div>
                 </DetailRow>
-                <DetailRow label="Preparation" testid="product-prep">
-                  <p className="font-light leading-relaxed text-ink/75">{p.prep}</p>
+                <DetailRow label="Nutritional value" testid="product-nutrition">
+                  <ListRow items={p.nutrition} />
                 </DetailRow>
-                <DetailRow label="Good to know" testid="product-goodtoknow">
-                  <p className="font-light leading-relaxed text-ink/75">{p.goodToKnow}</p>
+                <DetailRow label="Functional benefits" testid="product-benefits">
+                  <ListRow items={p.benefits} />
+                </DetailRow>
+                <DetailRow label="Pack size" testid="product-packsize">
+                  <p className="font-light text-ink/75">{p.packSize || "—"}</p>
+                </DetailRow>
+                <DetailRow label="Price" testid="product-price">
+                  <p className="font-light text-ink/75">{p.price || "—"}</p>
+                </DetailRow>
+                <DetailRow label="Provenance" testid="product-provenance">
+                  <p className="font-light leading-relaxed text-ink/50">
+                    {p.provenance || "Provenance details are being documented — coming soon."}
+                  </p>
+                </DetailRow>
+                <DetailRow label="Reviews" testid="product-reviews">
+                  <p className="text-sm font-light text-ink/45">Reviews are on the way.</p>
                 </DetailRow>
               </div>
 
@@ -102,16 +139,16 @@ export default function ProductDetail() {
                   <button
                     data-testid="product-buy-button"
                     onClick={() =>
-                      toast("Online shopping arrives with our first release.", {
-                        description: `${p.name} is coming soon.`,
+                      toast("Ordering will be available shortly.", {
+                        description: `${p.name} — we'll let you know the moment it opens.`,
                       })
                     }
                     className="btn-primary"
                   >
-                    Purchase — Coming Soon
+                    Order — Coming Soon
                   </button>
                   <span className="text-[11px] uppercase tracking-[0.2em] text-ink/40">
-                    Joining the collection shortly
+                    Available individually in 50 g packs{p.packSize ? "" : " soon"}
                   </span>
                 </div>
               </FadeUp>
@@ -129,10 +166,18 @@ export default function ProductDetail() {
               data-testid="product-prev"
               className="group flex items-center gap-4 border-b border-linewarm px-6 py-10 md:border-b-0 md:border-r md:px-10 lg:px-16"
             >
-              <ArrowLeft size={18} strokeWidth={1.25} className="text-olive transition-transform duration-500 group-hover:-translate-x-1.5" />
+              <ArrowLeft
+                size={18}
+                strokeWidth={1.25}
+                className="text-olive transition-transform duration-500 group-hover:-translate-x-1.5"
+              />
               <span>
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">Previous</span>
-                <span className="mt-1 block font-display text-xl font-light text-ink">{prev.name}</span>
+                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">
+                  Previous
+                </span>
+                <span className="mt-1 block font-display text-xl font-light text-ink">
+                  {prev.name}
+                </span>
               </span>
             </Link>
             <Link
@@ -141,10 +186,18 @@ export default function ProductDetail() {
               className="group flex items-center justify-end gap-4 px-6 py-10 text-right md:px-10 lg:px-16"
             >
               <span>
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">Next</span>
-                <span className="mt-1 block font-display text-xl font-light text-ink">{next.name}</span>
+                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">
+                  Next
+                </span>
+                <span className="mt-1 block font-display text-xl font-light text-ink">
+                  {next.name}
+                </span>
               </span>
-              <ArrowRight size={18} strokeWidth={1.25} className="text-olive transition-transform duration-500 group-hover:translate-x-1.5" />
+              <ArrowRight
+                size={18}
+                strokeWidth={1.25}
+                className="text-olive transition-transform duration-500 group-hover:translate-x-1.5"
+              />
             </Link>
           </div>
         </nav>
