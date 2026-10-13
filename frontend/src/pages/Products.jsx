@@ -47,9 +47,9 @@ export default function Products() {
           src="/images/editorial/preloader-ingredients.jpg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.15] saturate-[0.7]"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.3] saturate-[0.7]"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/60 via-transparent to-cream" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream" />
         <div className="relative">
           <FadeUp y={12}>
             <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Products" }]} />
@@ -60,8 +60,8 @@ export default function Products() {
           <MaskedLines
             as="h1"
             delay={0.15}
-            lines={["A pantry of carefully", { text: "considered ingredients.", className: "font-accent italic" }]}
-            className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
+            lines={["A pantry of", { text: "carefully considered ingredients.", className: "font-accent italic" }]}
+            className="mt-6 font-display text-[clamp(2rem,3.2vw,3.25rem)] font-light leading-[1.1] tracking-[-0.01em] text-ink"
           />
           <FadeUp delay={0.4}>
             <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">

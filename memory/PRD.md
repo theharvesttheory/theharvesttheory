@@ -106,6 +106,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Header logo enlarged again: 56px mobile / 64px desktop; filter-bar sticky offset matched
 - "Enquire About This Product" ghost button beside "Order — Coming Soon" on all 13 product pages → contact with Product Orders pre-selected and the product name prefilled (verified with Blue Spice)
 
+## Implemented (2026-10-13n) — products header refinement
+- Headline reduced to a compact size with "carefully considered ingredients." in italic accent; background image opacity doubled to 30% so the ingredient still-life reads clearly behind the header
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal
