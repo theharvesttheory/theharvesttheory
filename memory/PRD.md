@@ -125,6 +125,9 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 ## Implemented (2026-10-13s) — limewash texture
 - Our Story / Our Theory page now carries a subtle limewash-style wash for its full length: an SVG-turbulence cloud layer (~5% alpha, olive-toned) plus soft sage/gold/terracotta radial washes on the cream base; the flat alternating section bands were replaced by the continuous wash with hairline dividers (.limewash class in index.css — reusable on any page)
 
+## Implemented (2026-10-13t) — agentic edit: hero raised
+- Hero content block top-aligned to sit just below the header (section items-start, top padding 96px desktop / 96px mobile instead of 112/128); verified on both viewports, no overflow
+
 ## Backlog
 - P1: Prices + real provenance data (fields exist, blank); real founder portraits; FSSAI details
 - P1: Ingredients / Our Approach standalone page; Journal

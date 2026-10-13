@@ -48,7 +48,7 @@ function Hero() {
     <section
       ref={ref}
       data-testid="home-hero"
-      className="relative flex min-h-[100svh] items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-start overflow-hidden"
     >
       <img
         src="/images/editorial/preloader-ingredients.jpg"
@@ -57,7 +57,7 @@ function Hero() {
         className="pointer-events-none absolute inset-0 h-full w-full -translate-y-[10%] scale-[1.3] object-cover opacity-[0.12] saturate-[0.6]"
       />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-cream/40 via-transparent to-cream" />
-      <div className="relative z-10 mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 pt-32 pb-20 md:px-10 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:pt-28">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1500px] items-center gap-14 px-6 pt-24 pb-20 md:px-10 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:pt-24">
         <div className="lg:col-span-7">
           <FadeUp delay={d(0.05)} y={14}>
             <p className="eyebrow">A premium food &amp; wellness house</p>
