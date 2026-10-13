@@ -71,7 +71,7 @@ export default function Nav() {
                 to={l.to}
                 data-testid={`nav-link-${l.label.toLowerCase().replace(/\s+/g, "-")}`}
                 className={`relative px-1 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
-                  isActive(l.to) ? "text-olive" : "text-ink/60 hover:text-olive"
+                  isActive(l.to) ? "text-olive" : "text-ink/75 hover:text-olive"
                 }`}
               >
                 {l.label}
@@ -143,7 +143,7 @@ export default function Nav() {
               ))}
             </nav>
             <motion.p
-              className="text-[11px] uppercase tracking-[0.24em] text-ink/40"
+              className="text-[11px] uppercase tracking-[0.24em] text-ink/55"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}

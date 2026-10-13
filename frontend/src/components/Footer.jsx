@@ -31,7 +31,7 @@ function Newsletter() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
   return done ? (
-    <p data-testid="newsletter-success" className="mt-6 text-sm font-light text-cream/70">
+    <p data-testid="newsletter-success" className="mt-6 text-sm font-light text-cream/85">
       Thank you — you&rsquo;re on the list.
     </p>
   ) : (
@@ -42,7 +42,7 @@ function Newsletter() {
       }}
       className="mt-6"
     >
-      <p className="text-[11px] uppercase tracking-[0.24em] text-cream/40">The seasonal letter</p>
+      <p className="text-[11px] uppercase tracking-[0.24em] text-cream/55">The seasonal letter</p>
       <div className="mt-4 flex max-w-xs items-center border-b border-cream/25 transition-colors duration-300 focus-within:border-gold">
         <input
           data-testid="newsletter-input"
@@ -51,13 +51,13 @@ function Newsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email"
-          className="w-full bg-transparent py-3 text-sm font-light text-cream placeholder:text-cream/35 focus:outline-none"
+          className="w-full bg-transparent py-3 text-sm font-light text-cream placeholder:text-cream/50 focus:outline-none"
         />
         <button
           type="submit"
           data-testid="newsletter-submit"
           aria-label="Subscribe"
-          className="p-2 text-cream/60 transition-colors duration-300 hover:text-gold"
+          className="p-2 text-cream/75 transition-colors duration-300 hover:text-gold"
         >
           <ArrowRight size={16} strokeWidth={1.5} />
         </button>
@@ -77,7 +77,7 @@ export default function Footer() {
               <h2 className="mt-6 font-display text-4xl font-light leading-[1.05] tracking-tight md:text-5xl">
                 There is a theory behind
                 <br />
-                <span className="font-accent italic text-cream/80">every harvest.</span>
+                <span className="font-accent italic text-cream/90">every harvest.</span>
               </h2>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link to="/story" data-testid="footer-cta-theory" className="btn-cream">
@@ -93,14 +93,14 @@ export default function Footer() {
 
           <div className="md:col-span-3">
             <FadeUp delay={0.08}>
-              <p className="text-[11px] uppercase tracking-[0.24em] text-cream/40">Explore</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-cream/55">Explore</p>
               <ul className="mt-6 space-y-3">
                 {explore.map((l) => (
                   <li key={l.to}>
                     <Link
                       to={l.to}
                       data-testid={`footer-link-${l.label.toLowerCase().replace(/[\s/]+/g, "-")}`}
-                      className="font-light text-cream/80 transition-colors duration-300 hover:text-gold"
+                      className="font-light text-cream/90 transition-colors duration-300 hover:text-gold"
                     >
                       {l.label}
                     </Link>
@@ -113,7 +113,7 @@ export default function Footer() {
 
           <div className="md:col-span-3">
             <FadeUp delay={0.16}>
-              <p className="text-[11px] uppercase tracking-[0.24em] text-cream/40">Trust</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-cream/55">Trust</p>
               <ul className="mt-6 space-y-3 font-light">
                 {trust.map((t) => (
                   <li key={t.label}>
@@ -121,21 +121,21 @@ export default function Footer() {
                       <Link
                         to={t.to}
                         data-testid={`footer-trust-${t.label.toLowerCase().replace(/[\s/]+/g, "-")}`}
-                        className="text-cream/80 transition-colors duration-300 hover:text-gold"
+                        className="text-cream/90 transition-colors duration-300 hover:text-gold"
                       >
                         {t.label}
                       </Link>
                     ) : (
-                      <span className="text-cream/80">
+                      <span className="text-cream/90">
                         {t.label}
-                        <span className="mt-0.5 block text-xs text-cream/40">{t.value}</span>
+                        <span className="mt-0.5 block text-xs text-cream/55">{t.value}</span>
                       </span>
                     )}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-10 text-[11px] uppercase tracking-[0.24em] text-cream/40">Follow</p>
+              <p className="mt-10 text-[11px] uppercase tracking-[0.24em] text-cream/55">Follow</p>
               <ul className="mt-6 space-y-3 font-light">
                 {social.map((s) => (
                   <li key={s.label}>
@@ -143,7 +143,7 @@ export default function Footer() {
                       href="#"
                       onClick={(e) => e.preventDefault()}
                       data-testid={s.testid}
-                      className="text-cream/80 transition-colors duration-300 hover:text-gold"
+                      className="text-cream/90 transition-colors duration-300 hover:text-gold"
                     >
                       {s.label}
                     </a>
@@ -153,7 +153,7 @@ export default function Footer() {
                   <a
                     href="mailto:hello@theharvesttheory.com"
                     data-testid="footer-email"
-                    className="text-cream/80 transition-colors duration-300 hover:text-gold"
+                    className="text-cream/90 transition-colors duration-300 hover:text-gold"
                   >
                     hello@theharvesttheory.com
                   </a>
@@ -170,7 +170,7 @@ export default function Footer() {
               href="#"
               onClick={(e) => e.preventDefault()}
               data-testid={`footer-legal-${l.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
-              className="text-[11px] uppercase tracking-[0.18em] text-cream/40 transition-colors duration-300 hover:text-cream"
+              className="text-[11px] uppercase tracking-[0.18em] text-cream/55 transition-colors duration-300 hover:text-cream"
             >
               {l}
             </a>
@@ -179,7 +179,7 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <Logo variant="cream" className="h-10 md:h-12 w-auto opacity-90" />
-          <p className="text-xs uppercase tracking-[0.14em] text-cream/40">
+          <p className="text-xs uppercase tracking-[0.14em] text-cream/55">
             © {new Date().getFullYear()} The Harvest Theory · Made in India
           </p>
         </div>

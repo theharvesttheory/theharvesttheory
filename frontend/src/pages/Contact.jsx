@@ -84,7 +84,7 @@ export default function Contact() {
   };
 
   return (
-    <Page>
+    <Page className="limewash">
       <div className="mx-auto grid max-w-[1500px] gap-16 px-6 pt-32 pb-28 md:px-10 md:pt-40 lg:grid-cols-12 lg:px-16">
         <div className="lg:col-span-5">
           <FadeUp y={12}>
@@ -100,7 +100,7 @@ export default function Contact() {
             className="mt-8 font-display text-[clamp(2.6rem,6vw,5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
           />
           <FadeUp delay={0.4}>
-            <p className="mt-8 max-w-md text-base font-light leading-relaxed text-ink/65 md:text-lg">
+            <p className="mt-8 max-w-md text-base font-light leading-relaxed text-ink/80 md:text-lg">
               Product orders, general questions, retail and distribution,
               corporate gifting, export, collaborations, press, wholesale and
               sourcing — tell us what you need and the right person will pick
@@ -125,10 +125,10 @@ export default function Contact() {
                 <h2 className="mt-8 font-display text-3xl font-light text-ink">
                   {schema.successTitle}
                 </h2>
-                <p className="mx-auto mt-4 max-w-sm text-sm font-light leading-relaxed text-ink/60">
+                <p className="mx-auto mt-4 max-w-sm text-sm font-light leading-relaxed text-ink/75">
                   {schema.successNote}
                 </p>
-                <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-ink/35">
+                <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-ink/50">
                   Preview build — submissions aren&rsquo;t sent anywhere yet
                 </p>
                 <button
@@ -142,7 +142,7 @@ export default function Contact() {
             ) : (
               <div>
                 <FadeUp>
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-ink/45">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-ink/60">
                     What can we help you with?
                   </p>
                 </FadeUp>
@@ -155,7 +155,7 @@ export default function Contact() {
                       className={`border px-4 py-3 text-left text-[12px] leading-snug tracking-[0.06em] transition-colors duration-300 ${
                         typeId === t.id
                           ? "border-olive bg-olive text-cream"
-                          : "border-ink/15 text-ink/70 hover:border-olive hover:text-olive"
+                          : "border-ink/15 text-ink/85 hover:border-olive hover:text-olive"
                       }`}
                     >
                       {t.label}
@@ -199,7 +199,7 @@ export default function Contact() {
                 </AnimatePresence>
 
                 {!schema && (
-                  <p className="mt-10 text-sm font-light text-ink/45">
+                  <p className="mt-10 text-sm font-light text-ink/60">
                     Choose an enquiry type above and the form will adapt.
                   </p>
                 )}

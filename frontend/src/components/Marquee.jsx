@@ -8,7 +8,7 @@ function Row({ ariaHidden = false }) {
         <span key={i} className="flex shrink-0 items-center">
           <span
             className={`whitespace-nowrap px-8 md:px-14 text-2xl md:text-4xl font-display font-light tracking-tight ${
-              i % 2 === 1 ? "font-accent italic text-ink/45" : "text-ink/80"
+              i % 2 === 1 ? "font-accent italic text-ink/60" : "text-ink/80"
             }`}
           >
             {item}

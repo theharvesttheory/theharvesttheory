@@ -27,7 +27,7 @@ export default function ProductCard({ product, index = 0 }) {
           <h3 className="mt-2 font-display font-light text-2xl md:text-[1.65rem] tracking-tight text-ink transition-colors duration-300 group-hover:text-olive">
             {product.name}
           </h3>
-          <p className="mt-2 max-w-sm text-sm font-light leading-relaxed text-ink/55">
+          <p className="mt-2 max-w-sm text-sm font-light leading-relaxed text-ink/70">
             {product.tagline}
           </p>
         </div>

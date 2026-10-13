@@ -56,9 +56,9 @@ module.exports = {
           '5': 'hsl(var(--chart-5))'
         },
         // The Harvest Theory brand palette — anchored to the final logo (olive #5A5C37, gold #AB8E54)
-        cream: '#F6F2E9',
-        creamdeep: '#EDE7D9',
-        ink: '#2E311F',
+        cream: '#F1EBDC',
+        creamdeep: '#E6DECA',
+        ink: '#202312',
         olive: '#5A5C37',
         olivedeep: '#242716',
         sage: '#A9B48F',

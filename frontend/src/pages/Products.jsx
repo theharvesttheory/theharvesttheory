@@ -41,7 +41,7 @@ export default function Products() {
   const prefix = mode === "category" ? "filter-cat" : "filter-life";
 
   return (
-    <Page>
+    <Page className="limewash">
       <header className="relative overflow-hidden mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
         <img
           src="/images/editorial/preloader-ingredients.jpg"
@@ -64,7 +64,7 @@ export default function Products() {
             className="mt-6 font-display text-[clamp(2rem,3.2vw,3.25rem)] font-light leading-[1.1] tracking-[-0.01em] text-ink"
           />
           <FadeUp delay={0.4}>
-            <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+            <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
               Beverages, foods and pantry staples across categories — united by
               short labels, named sources and slow methods. The collection grows;
               the standard doesn&rsquo;t.
@@ -78,7 +78,7 @@ export default function Products() {
         className="sticky top-[89px] md:top-[97px] z-30 border-y border-linewarm bg-cream/85 backdrop-blur-xl"
       >
         <div className="mx-auto flex max-w-[1500px] items-center gap-2 overflow-x-auto px-6 py-4 md:px-10 lg:gap-3 lg:px-16 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-ink/40">
+          <span className="shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-ink/55">
             Browse by
           </span>
           <button
@@ -87,7 +87,7 @@ export default function Products() {
             className={`shrink-0 border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
               mode === "category"
                 ? "border-olive bg-olive text-cream"
-                : "border-ink/20 text-ink/55 hover:border-olive hover:text-olive"
+                : "border-ink/20 text-ink/70 hover:border-olive hover:text-olive"
             }`}
           >
             Category
@@ -98,7 +98,7 @@ export default function Products() {
             className={`shrink-0 border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${
               mode === "lifestyle"
                 ? "border-olive bg-olive text-cream"
-                : "border-ink/20 text-ink/55 hover:border-olive hover:text-olive"
+                : "border-ink/20 text-ink/70 hover:border-olive hover:text-olive"
             }`}
           >
             Lifestyle
@@ -112,7 +112,7 @@ export default function Products() {
                 data-testid={`${prefix}-${c.id}`}
                 onClick={() => update(mode === "category" ? "cat" : "life", c.id)}
                 className={`shrink-0 whitespace-nowrap px-4 py-2 text-[12px] uppercase tracking-[0.16em] transition-colors duration-300 ${
-                  isActive ? "bg-olive text-cream" : "text-ink/55 hover:text-olive"
+                  isActive ? "bg-olive text-cream" : "text-ink/70 hover:text-olive"
                 }`}
               >
                 {c.label}
@@ -136,7 +136,7 @@ export default function Products() {
             ))}
           </div>
           {list.length === 0 && (
-            <p className="py-24 text-center font-display text-2xl text-ink/50">
+            <p className="py-24 text-center font-display text-2xl text-ink/65">
               Products arriving soon in this category.
             </p>
           )}

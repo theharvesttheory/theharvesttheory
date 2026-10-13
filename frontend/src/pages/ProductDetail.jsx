@@ -10,7 +10,7 @@ function DetailRow({ label, children, testid }) {
   return (
     <FadeUp>
       <div data-testid={testid} className="border-t border-ink/10 py-8">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/45">{label}</p>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/60">{label}</p>
         <div className="mt-4">{children}</div>
       </div>
     </FadeUp>
@@ -21,7 +21,7 @@ function ListRow({ items }) {
   return (
     <ul className="space-y-2.5">
       {items.map((n) => (
-        <li key={n} className="flex items-baseline gap-3 font-light text-ink/75">
+        <li key={n} className="flex items-baseline gap-3 font-light text-ink/88">
           <span className="h-1 w-1 shrink-0 rotate-45 bg-gold" />
           {n}
         </li>
@@ -39,7 +39,7 @@ export default function ProductDetail() {
   const next = products[(idx + 1) % products.length];
 
   return (
-    <Page>
+    <Page className="limewash">
       <article data-testid="product-detail">
         <div className="mx-auto max-w-[1500px] px-6 pt-32 md:px-10 md:pt-40 lg:px-16">
           <FadeUp y={12}>
@@ -72,15 +72,15 @@ export default function ProductDetail() {
                 <h1 className="mt-5 font-display text-4xl font-light leading-[1.02] tracking-tight text-ink md:text-6xl">
                   {p.name}
                 </h1>
-                <p className="mt-3 font-accent text-2xl italic text-olive/80">{p.subname}</p>
-                <p className="mt-8 max-w-lg font-accent text-xl italic leading-snug text-olive/80">
+                <p className="mt-3 font-accent text-2xl italic text-olive">{p.subname}</p>
+                <p className="mt-8 max-w-lg font-accent text-xl italic leading-snug text-olive">
                   {p.tagline}
                 </p>
-                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
                   {p.description}
                 </p>
                 {p.lifestyle && p.lifestyle.length > 0 && (
-                  <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+                  <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-ink/55">
                     {p.lifestyle.map(lifestyleLabel).join(" · ")}
                   </p>
                 )}
@@ -88,19 +88,19 @@ export default function ProductDetail() {
 
               <div className="mt-12">
                 <DetailRow label="Ingredients" testid="product-ingredients">
-                  <p className="font-light leading-relaxed text-ink/75">
+                  <p className="font-light leading-relaxed text-ink/88">
                     {p.ingredients.join(" · ")}
                   </p>
                 </DetailRow>
                 <DetailRow label="How to prepare" testid="product-prep">
-                  <p className="font-light leading-relaxed text-ink/75">{p.prep}</p>
+                  <p className="font-light leading-relaxed text-ink/88">{p.prep}</p>
                 </DetailRow>
                 <DetailRow label="Flavour & tasting notes" testid="product-notes">
                   <div className="flex flex-wrap gap-3">
                     {p.notes.map((n) => (
                       <span
                         key={n}
-                        className="border border-ink/15 px-4 py-1.5 text-[12px] tracking-[0.08em] text-ink/70"
+                        className="border border-ink/15 px-4 py-1.5 text-[12px] tracking-[0.08em] text-ink/85"
                       >
                         {n}
                       </span>
@@ -114,18 +114,18 @@ export default function ProductDetail() {
                   <ListRow items={p.benefits} />
                 </DetailRow>
                 <DetailRow label="Pack size" testid="product-packsize">
-                  <p className="font-light text-ink/75">{p.packSize || "—"}</p>
+                  <p className="font-light text-ink/88">{p.packSize || "—"}</p>
                 </DetailRow>
                 <DetailRow label="Price" testid="product-price">
-                  <p className="font-light text-ink/75">{p.price || "—"}</p>
+                  <p className="font-light text-ink/88">{p.price || "—"}</p>
                 </DetailRow>
                 <DetailRow label="Provenance" testid="product-provenance">
-                  <p className="font-light leading-relaxed text-ink/50">
+                  <p className="font-light leading-relaxed text-ink/65">
                     {p.provenance || "Provenance details are being documented — coming soon."}
                   </p>
                 </DetailRow>
                 <DetailRow label="Reviews" testid="product-reviews">
-                  <p className="text-sm font-light text-ink/45">Reviews are on the way.</p>
+                  <p className="text-sm font-light text-ink/60">Reviews are on the way.</p>
                 </DetailRow>
               </div>
 
@@ -171,7 +171,7 @@ export default function ProductDetail() {
                 className="text-olive transition-transform duration-500 group-hover:-translate-x-1.5"
               />
               <span>
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">
+                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/55">
                   Previous
                 </span>
                 <span className="mt-1 block font-display text-xl font-light text-ink">
@@ -185,7 +185,7 @@ export default function ProductDetail() {
               className="group flex items-center justify-end gap-4 px-6 py-10 text-right md:px-10 lg:px-16"
             >
               <span>
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/40">
+                <span className="block text-[10px] uppercase tracking-[0.22em] text-ink/55">
                   Next
                 </span>
                 <span className="mt-1 block font-display text-xl font-light text-ink">

@@ -4,11 +4,11 @@
 
 @layer base {
     :root {
-        --background: 40 38% 94%;
+        --background: 40 33% 90%;
         --foreground: 69 19% 15%;
-        --card: 40 33% 92%;
+        --card: 40 33% 89%;
         --card-foreground: 69 19% 15%;
-        --popover: 40 38% 94%;
+        --popover: 40 33% 90%;
         --popover-foreground: 69 19% 15%;
         --primary: 61 25% 29%;
         --primary-foreground: 40 38% 94%;
@@ -115,10 +115,10 @@ html.lenis body {
         @apply inline-flex items-center justify-center gap-3 border border-cream/40 text-cream px-8 py-4 text-[13px] uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-cream hover:text-olivedeep;
     }
     .field-label {
-        @apply block text-[11px] uppercase tracking-[0.2em] text-ink/50 mb-2;
+        @apply block text-[11px] uppercase tracking-[0.2em] text-ink/65 mb-2;
     }
     .field-input {
-        @apply w-full bg-transparent border-0 border-b border-ink/20 rounded-none py-3 text-base font-light text-ink placeholder:text-ink/30 focus:border-olive focus:outline-none transition-colors duration-300;
+        @apply w-full bg-transparent border-0 border-b border-ink/20 rounded-none py-3 text-base font-light text-ink placeholder:text-ink/45 focus:border-olive focus:outline-none transition-colors duration-300;
     }
 }
 

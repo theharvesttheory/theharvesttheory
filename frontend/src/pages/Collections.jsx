@@ -5,7 +5,7 @@ import { collections, tinConfigs } from "@/data/collections";
 
 export default function Collections() {
   return (
-    <Page>
+    <Page className="limewash">
       <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
         <FadeUp y={12}>
           <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Gift Assortments" }]} />
@@ -20,7 +20,7 @@ export default function Collections() {
           className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
         />
         <FadeUp delay={0.4}>
-          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
             Seasonal gifting experiences built around our teas. Every tea
             inside is also available individually — the box is simply a
             different way to begin.
@@ -55,7 +55,7 @@ export default function Collections() {
                         <h2 className="font-display text-3xl font-light tracking-tight text-ink transition-colors duration-300 group-hover:text-olive md:text-4xl">
                           {c.name}
                         </h2>
-                        <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-ink/55">
+                        <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-ink/70">
                           {c.tagline}
                         </p>
                       </div>
@@ -71,7 +71,7 @@ export default function Collections() {
                   <Link
                     to={`/contact?type=product-orders&item=${encodeURIComponent(c.name)}`}
                     data-testid={`collection-enquire-${c.slug}`}
-                    className="mt-4 inline-block text-[10px] uppercase tracking-[0.18em] text-olive/60 transition-colors duration-300 hover:text-olive"
+                    className="mt-4 inline-block text-[10px] uppercase tracking-[0.18em] text-olive transition-colors duration-300 hover:text-olive"
                   >
                     Enquire about this assortment
                   </Link>
@@ -89,7 +89,7 @@ export default function Collections() {
             <h2 className="mt-6 font-display text-4xl font-light tracking-tight text-ink md:text-5xl">
               Dressed for <span className="font-accent italic">gifting.</span>
             </h2>
-            <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-ink/65">
+            <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-ink/80">
               Two boxed tins and a single, in three configurations — our teas,
               ready to be given.
             </p>
@@ -110,10 +110,10 @@ export default function Collections() {
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     />
                   </div>
-                  <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/40 transition-colors duration-300 group-hover:text-olive">
+                  <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/55 transition-colors duration-300 group-hover:text-olive">
                     {t.label}
                   </p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-olive/60 transition-colors duration-300 group-hover:text-olive">
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-olive transition-colors duration-300 group-hover:text-olive">
                     Enquire about this assortment
                   </p>
                 </Link>

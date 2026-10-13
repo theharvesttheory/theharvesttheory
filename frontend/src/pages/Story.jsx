@@ -32,7 +32,7 @@ export default function Story() {
           className="mt-8 font-display text-[clamp(2.4rem,6vw,5.25rem)] font-light leading-[1.04] tracking-[-0.02em] text-ink"
         />
         <FadeUp delay={0.4}>
-          <p className="mt-10 max-w-xl text-lg font-light leading-relaxed text-ink/70 md:text-xl">
+          <p className="mt-10 max-w-xl text-lg font-light leading-relaxed text-ink/85 md:text-xl">
             The Harvest Theory is a premium food and wellness brand built on a
             simple belief — that the whole can be greater than the sum of its
             parts.
@@ -54,7 +54,7 @@ export default function Story() {
           <div className="lg:col-span-4 lg:col-start-2">
             <FadeUp>
               <Eyebrow>Where it began</Eyebrow>
-              <p className="mt-8 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
+              <p className="mt-8 text-lg font-light leading-relaxed text-ink/88 md:text-xl">
                 The Harvest Theory began in a year of introspection and
                 personal growth for our founders.
               </p>
@@ -62,12 +62,12 @@ export default function Story() {
           </div>
           <div className="lg:col-span-5 lg:col-start-7">
             <FadeUp delay={0.12}>
-              <p className="text-base font-light leading-relaxed text-ink/65 md:text-lg">
+              <p className="text-base font-light leading-relaxed text-ink/80 md:text-lg">
                 We saw how easily eating becomes hurried, irregular and
                 thoughtless — food fills us, while nourishing ourselves
                 becomes incidental.
               </p>
-              <p className="mt-6 text-base font-light leading-relaxed text-ink/65 md:text-lg">
+              <p className="mt-6 text-base font-light leading-relaxed text-ink/80 md:text-lg">
                 We kept circling one question: how did the most basic act of
                 self-care become the easiest to skip?
               </p>
@@ -90,14 +90,14 @@ export default function Story() {
             </div>
             <div className="lg:col-span-5 lg:col-start-7">
               <FadeUp delay={0.1}>
-                <p className="text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                <p className="text-base font-light leading-relaxed text-ink/85 md:text-lg">
                   Long before food reaches our tables, an extraordinary chain
                   of events has already taken place — from the conditions that
                   allow a plant to grow, to the soil, climate and cultivation
                   that shape it, to the precise moment at which it should be
                   harvested.
                 </p>
-                <p className="mt-6 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                <p className="mt-6 text-base font-light leading-relaxed text-ink/85 md:text-lg">
                   Timing matters. A mango harvested too early may never develop
                   its full sweetness and aroma. An avocado left too long on the
                   tree can move past its ideal maturity and develop
@@ -108,7 +108,7 @@ export default function Story() {
                 <p className="mt-10 font-accent text-2xl italic leading-snug text-olive md:text-3xl">
                   That is the idea behind The Harvest Theory.
                 </p>
-                <p className="mt-8 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                <p className="mt-8 text-base font-light leading-relaxed text-ink/85 md:text-lg">
                   We believe nutrition should not be taken for granted simply
                   because food is available to us. There is science in choosing
                   the right ingredient, growing it well, harvesting it at the
@@ -119,14 +119,14 @@ export default function Story() {
                 <p className="mt-10 font-accent text-2xl italic leading-snug text-olive md:text-3xl">
                   Our &ldquo;theory&rdquo; is the sum of all those choices.
                 </p>
-                <p className="mt-8 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                <p className="mt-8 text-base font-light leading-relaxed text-ink/85 md:text-lg">
                   We start with ingredients that are already remarkable on
                   their own and bring them together deliberately — for
                   nutrition, flavour, texture, aroma and the experience of
                   eating itself. Because the whole, when thoughtfully
                   constructed, can be greater than its parts.
                 </p>
-                <p className="mt-6 text-base font-light leading-relaxed text-ink/70 md:text-lg">
+                <p className="mt-6 text-base font-light leading-relaxed text-ink/85 md:text-lg">
                   The Harvest Theory is therefore an invitation to slow down
                   and pay attention: to know what you are eating, where it came
                   from, why it was chosen and how it came together.
@@ -164,7 +164,7 @@ export default function Story() {
                   <h3 className="font-display text-xl font-light tracking-tight text-ink md:text-2xl">
                     {m.title}
                   </h3>
-                  <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-ink/60 md:text-base">
+                  <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-ink/75 md:text-base">
                     {m.line}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ export default function Story() {
             ))}
           </div>
           <FadeUp delay={0.1}>
-            <p className="mt-12 max-w-xl text-base font-light leading-relaxed text-ink/65 md:text-lg">
+            <p className="mt-12 max-w-xl text-base font-light leading-relaxed text-ink/80 md:text-lg">
               Preparation should invite participation — tearing open a package,
               boiling water, whisking, steeping, stirring — but never become
               burdensome. We want The Harvest Theory to become part of a
@@ -188,7 +188,7 @@ export default function Story() {
         <div className="mx-auto max-w-[1100px] px-6 md:px-10 lg:px-16">
           <FadeUp>
             <Eyebrow>Slow time</Eyebrow>
-            <p className="mt-8 text-lg font-light leading-relaxed text-ink/75 md:text-xl">
+            <p className="mt-8 text-lg font-light leading-relaxed text-ink/88 md:text-xl">
               Our customer is urban, curious and time-constrained — exploring
               better food and aspiring to healthier habits, if not always
               consistently. The experience we want to create feels like slow
@@ -198,7 +198,7 @@ export default function Story() {
             <blockquote className="mt-12 font-accent text-3xl italic leading-snug text-olive md:text-4xl">
               &ldquo;I started today by prioritising myself.&rdquo;
             </blockquote>
-            <p className="mt-8 text-base font-light leading-relaxed text-ink/60">
+            <p className="mt-8 text-base font-light leading-relaxed text-ink/75">
               We want to provide the spread for a more mindful dining experience.
             </p>
           </FadeUp>
@@ -221,7 +221,7 @@ export default function Story() {
                   className="relative flex aspect-[3/4] items-center justify-center rounded-sm border border-linewarm bg-creamdeep/70"
                 >
                   <span className="font-accent text-6xl italic text-gold/70">{f.initials}</span>
-                  <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/35">
+                  <span className="absolute bottom-5 text-[10px] uppercase tracking-[0.22em] text-ink/50">
                     Portrait to come
                   </span>
                 </div>
@@ -229,7 +229,7 @@ export default function Story() {
                   {f.name}
                 </h3>
                 <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-gold">{f.role}</p>
-                <p className="mt-4 text-sm font-light leading-relaxed text-ink/60">{f.bio}</p>
+                <p className="mt-4 text-sm font-light leading-relaxed text-ink/75">{f.bio}</p>
               </FadeUp>
             ))}
           </div>

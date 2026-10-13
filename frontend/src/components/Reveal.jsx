@@ -80,17 +80,17 @@ export function Breadcrumb({ items = [] }) {
         const last = i === items.length - 1;
         return (
           <span key={i} className="flex items-center gap-x-2.5">
-            {i > 0 && <span className="text-ink/30">/</span>}
+            {i > 0 && <span className="text-ink/45">/</span>}
             {it.to && !last ? (
               <Link
                 to={it.to}
                 data-testid={`breadcrumb-${it.label.toLowerCase().replace(/[\s/]+/g, "-")}`}
-                className="text-ink/50 transition-colors duration-300 hover:text-olive"
+                className="text-ink/65 transition-colors duration-300 hover:text-olive"
               >
                 {it.label}
               </Link>
             ) : (
-              <span className={last ? "text-olive" : "text-ink/50"}>{it.label}</span>
+              <span className={last ? "text-olive" : "text-ink/65"}>{it.label}</span>
             )}
           </span>
         );

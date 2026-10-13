@@ -78,7 +78,7 @@ function Hero() {
             </span>
           </h1>
           <FadeUp delay={d(0.6)} y={20}>
-            <p className="mt-10 max-w-md text-base md:text-lg font-light leading-relaxed text-ink/65">
+            <p className="mt-10 max-w-md text-base md:text-lg font-light leading-relaxed text-ink/80">
               The right ingredients. Grown the right way. Harvested at the right
               time. Brought together with purpose.
             </p>
@@ -92,7 +92,7 @@ function Hero() {
               <Link
                 to="/story"
                 data-testid="hero-link-theory"
-                className="group text-[13px] uppercase tracking-[0.18em] text-ink/60 transition-colors duration-300 hover:text-olive"
+                className="group text-[13px] uppercase tracking-[0.18em] text-ink/75 transition-colors duration-300 hover:text-olive"
               >
                 Discover Our Theory
                 <span className="mt-0.5 block h-px w-full origin-left scale-x-100 bg-ink/25 transition-transform duration-500 group-hover:scale-x-50" />
@@ -124,7 +124,7 @@ function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 lg:flex">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-ink/40">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-ink/55">Scroll</span>
         <span className="scroll-hint-line block h-10 w-px bg-ink/30" />
       </div>
     </section>
@@ -146,12 +146,12 @@ function Philosophy() {
             </h2>
           </FadeUp>
           <FadeUp delay={0.16}>
-            <p className="mt-10 max-w-xl text-base md:text-lg font-light leading-relaxed text-ink/65">
+            <p className="mt-10 max-w-xl text-base md:text-lg font-light leading-relaxed text-ink/80">
               Long before food reaches our tables, an extraordinary sequence has
               already taken place — cultivation, climate, soil, maturity,
               harvest, handling, preparation and formulation. Timing matters.
             </p>
-            <p className="mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed text-ink/65">
+            <p className="mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed text-ink/80">
               We start with ingredients that are remarkable individually and
               bring them together deliberately — because when thoughtfully
               constructed,{" "}
@@ -183,7 +183,7 @@ function Philosophy() {
               loading="lazy"
               className="aspect-[4/3] w-full rounded-sm object-cover"
             />
-            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+            <p className="mt-4 text-[11px] uppercase tracking-[0.2em] text-ink/55">
               The parts, before the theory
             </p>
           </FadeUp>
@@ -206,7 +206,7 @@ function ExploreProducts() {
       data-testid={`home-explore-tab-${id}`}
       onClick={() => setTab(id)}
       className={`relative pb-2 text-[13px] uppercase tracking-[0.18em] transition-colors duration-300 ${
-        tab === id ? "text-olive" : "text-ink/45 hover:text-olive"
+        tab === id ? "text-olive" : "text-ink/60 hover:text-olive"
       }`}
     >
       {label}
@@ -264,7 +264,7 @@ function ExploreProducts() {
                         </span>
                       </span>
                       <span className="flex items-center gap-6">
-                        <span className="hidden text-[11px] uppercase tracking-[0.2em] text-ink/40 sm:block">
+                        <span className="hidden text-[11px] uppercase tracking-[0.2em] text-ink/55 sm:block">
                           {countForCat(c.id)} products
                         </span>
                         <ArrowUpRight
@@ -291,13 +291,13 @@ function ExploreProducts() {
                           <span className="block font-display text-2xl font-light tracking-tight text-ink transition-colors duration-300 group-hover:text-olive md:text-3xl">
                             {l.name}
                           </span>
-                          <span className="mt-2 block max-w-lg text-sm font-light leading-relaxed text-ink/55">
+                          <span className="mt-2 block max-w-lg text-sm font-light leading-relaxed text-ink/70">
                             {l.description}
                           </span>
                         </span>
                       </span>
                       <span className="flex items-center gap-6">
-                        <span className="hidden text-[11px] uppercase tracking-[0.2em] text-ink/40 sm:block">
+                        <span className="hidden text-[11px] uppercase tracking-[0.2em] text-ink/55 sm:block">
                           {countForLife(l.id)} products
                         </span>
                         <ArrowUpRight
@@ -374,7 +374,7 @@ function Approach() {
               <h2 className="mt-6 font-display text-4xl font-light leading-[1.06] tracking-tight text-ink md:text-5xl">
                 Ingredients, taken <span className="font-accent italic">seriously.</span>
               </h2>
-              <p className="mt-8 max-w-sm text-base font-light leading-relaxed text-ink/65">
+              <p className="mt-8 max-w-sm text-base font-light leading-relaxed text-ink/80">
                 Quality you can taste is mostly a chain of small, unglamorous
                 decisions — made early, made honestly.
               </p>
@@ -403,7 +403,7 @@ function Approach() {
                     <h3 className="font-display text-2xl font-light tracking-tight text-ink md:text-3xl">
                       {a.title}
                     </h3>
-                    <p className="mt-3 max-w-md text-sm md:text-base font-light leading-relaxed text-ink/60">
+                    <p className="mt-3 max-w-md text-sm md:text-base font-light leading-relaxed text-ink/75">
                       {a.line}
                     </p>
                   </div>
@@ -456,7 +456,7 @@ function Sourcing() {
         </div>
         <div className="lg:col-span-4 lg:col-start-8">
           <FadeUp delay={0.1}>
-            <p className="text-base font-light leading-relaxed text-ink/65 md:text-lg">
+            <p className="text-base font-light leading-relaxed text-ink/80 md:text-lg">
               We work close to the source — small growers, gardens and presses
               we can name — and finish everything in contemporary formats that
               respect both the ingredient and your day.
@@ -530,7 +530,7 @@ function FinalCta() {
 
 export default function Home() {
   return (
-    <Page>
+    <Page className="limewash">
       <Hero />
       <Marquee />
       <ExploreProducts />

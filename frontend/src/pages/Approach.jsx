@@ -55,7 +55,7 @@ const TRUST = [
 
 export default function Approach() {
   return (
-    <Page>
+    <Page className="limewash">
       <header className="mx-auto max-w-[1500px] px-6 pt-32 pb-16 md:px-10 md:pt-40 lg:px-16">
         <FadeUp y={12}>
           <Breadcrumb items={[{ to: "/", label: "Home" }, { label: "Our Approach" }]} />
@@ -70,7 +70,7 @@ export default function Approach() {
           className="mt-8 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-light leading-[1.02] tracking-[-0.02em] text-ink"
         />
         <FadeUp delay={0.4}>
-          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+          <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
             Quality you can taste is mostly a chain of small, unglamorous
             decisions — made early, made honestly. This is how we make them.
           </p>
@@ -99,13 +99,13 @@ export default function Approach() {
                 <h2 className="mt-4 font-display text-3xl font-light tracking-tight text-ink md:text-4xl">
                   {p.title}
                 </h2>
-                <p className="mt-6 font-accent text-2xl italic leading-snug text-olive/80 md:text-3xl">
+                <p className="mt-6 font-accent text-2xl italic leading-snug text-olive md:text-3xl">
                   {p.lead}
                 </p>
                 {p.body.map((t, i) => (
                   <p
                     key={i}
-                    className="mt-6 max-w-md text-base font-light leading-relaxed text-ink/65 md:text-lg"
+                    className="mt-6 max-w-md text-base font-light leading-relaxed text-ink/80 md:text-lg"
                   >
                     {t}
                   </p>
@@ -145,13 +145,13 @@ export default function Approach() {
                   <h3 className="font-display text-xl font-light tracking-tight text-ink md:text-2xl">
                     {t.label}
                   </h3>
-                  <p className="mt-2 text-sm font-light text-ink/50">{t.value}</p>
+                  <p className="mt-2 text-sm font-light text-ink/65">{t.value}</p>
                 </div>
               </FadeUp>
             ))}
           </div>
           <FadeUp delay={0.1}>
-            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-ink/50">
+            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-ink/65">
               Laboratory reports, batch-level traceability, manufacturing
               information and export certifications arrive with the next
               release — the structure is ready for them.

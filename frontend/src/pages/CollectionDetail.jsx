@@ -11,7 +11,7 @@ export default function CollectionDetail() {
   const teas = collectionProducts(collection);
 
   return (
-    <Page>
+    <Page className="limewash">
       <article data-testid="collection-detail">
         <div className="mx-auto max-w-[1500px] px-6 pt-32 md:px-10 md:pt-40 lg:px-16">
           <FadeUp y={12}>
@@ -43,13 +43,13 @@ export default function CollectionDetail() {
                 <h1 className="mt-5 font-display text-4xl font-light leading-[1.02] tracking-tight text-ink md:text-6xl">
                   {collection.name}
                 </h1>
-                <p className="mt-6 max-w-lg font-accent text-2xl italic leading-snug text-olive/80">
+                <p className="mt-6 max-w-lg font-accent text-2xl italic leading-snug text-olive">
                   {collection.tagline}
                 </p>
-                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/65 md:text-lg">
+                <p className="mt-8 max-w-lg text-base font-light leading-relaxed text-ink/80 md:text-lg">
                   {collection.description}
                 </p>
-                <p className="mt-8 border-l-2 border-gold/60 pl-5 text-sm font-light leading-relaxed text-ink/60">
+                <p className="mt-8 border-l-2 border-gold/60 pl-5 text-sm font-light leading-relaxed text-ink/75">
                   {collection.note}
                 </p>
               </FadeUp>
