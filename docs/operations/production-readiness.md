@@ -1,6 +1,6 @@
 # Production readiness ledger
 
-Status: implementation in progress; production is not connected or verified.
+Status: Tasks 1–39 complete locally (Gate A/B `verified_local`); Tasks 40–44 `deferred_user_inputs`. Production is not connected or verified.
 
 Baseline: `main` at `5ea0ba7494e41899c71cd366d93581cf271c8fe3` (2026-10-17). The active checkout is used as requested. Existing `.agents/`, `.pui/`, `graphify-out/` and `skills-lock.json` are preserved.
 
@@ -57,7 +57,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 36: Prepare Cloudflare Pages assets and validate deep links | complete | Seven artifact fixture checks passed. Local artifact verified and production target rejected. All 92 browser checks passed through Wrangler 4.151.1 local Pages runtime; direct headers, action caching and JS assets verified. Actual cloud/edge remains deferred. |
 | 37: Define the Render service and version-aware deploy helper | complete | 14 new helper/settings checks and 21 existing configuration checks pass. Exact SHA, queued 202 discovery, old-deploy rejection, failure/timeout and readiness are tested with HTTP transport fixtures. Blueprint structure and shared contract path verified locally; no Render service created. |
 | 38: Create a manually activated, same-commit release workflow | complete | 11 release verification tests and 14 Render checks pass; actionlint with ShellCheck passes all three workflows. Local artifact dry-run reports zero provider calls. Manual main-only workflow remains disabled; exact artifact precedes deploy/upload/smoke and rollback runbook is prepared. |
-| 39: Complete local readiness and prepare the final handoff packet | not_started | Pending. |
+| 39: Complete local readiness and prepare the final handoff packet | complete | Final implementation SHA 7d24f64: 289 backend tests, 38 frontend tests, 92 development browser checks and 26 release-bundle checks passed; build/artifact/workflow checks and local rollback passed. Provider handoff prepared. Review app running on 4300/8300 with real local Mongo and simulated delivery. |
 | 40: Collect the final provider and owner inputs once | deferred_user_inputs | Pending. |
 | 41: Provision and connect services without changing the public domain | deferred_user_inputs | Pending. |
 | 42: Prove actual database, Gmail, Slack and newsletter delivery | deferred_user_inputs | Pending. |
@@ -66,23 +66,81 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 
 ## Acceptance evidence
 
-| ID | Requirement | Status | Evidence / tested SHA / UTC time / environment |
-| --- | --- | --- | --- |
-| A01 | Nine enquiry types enforce their own fields and limits | not_started | No evidence yet. |
-| A02 | Success follows acknowledged persistence; DB failure never shows success | not_started | No evidence yet. |
-| A03 | Concurrent/retried requests do not duplicate records/jobs | not_started | No evidence yet. |
-| A04 | Team receives useful email with correct reply-to | not_started | No evidence yet. |
-| A05 | Slack receives minimal notification independently | not_started | No evidence yet. |
-| A06 | Restarts/outages recover jobs with bounded retries | not_started | No evidence yet. |
-| A07 | Newsletter consent/confirmation/unsubscribe is real and idempotent | not_started | No evidence yet. |
-| A08 | Public API cannot list customer data or expose secrets | not_started | No evidence yet. |
-| A09 | Validation, rate limits and bot protection resist direct requests | not_started | No evidence yet. |
-| A10 | Current site behavior and mobile usability remain intact | not_started | No evidence yet. |
-| A11 | CI blocks bad changes and deploys exactly the tested release | not_started | No evidence yet. |
-| A12 | Retention, privacy and operational owners are explicit | not_started | No evidence yet. |
-| A13 | App can be prepared without provider credentials | not_started | No evidence yet. |
-| A14 | Publishing is reversible and preserves customer records | not_started | No evidence yet. |
-| A15 | Prompt-delivery target is measured and ongoing failures visible | not_started | No evidence yet. |
+All local rows below refer to implementation SHA `7d24f648607877355452919ca3e49b64257f8a72`, verified on 2026-10-17 in the isolated local environment. `verified_local` covers the named engineering evidence only. The production part of every row except A13 remains `deferred_user_inputs`.
+
+| ID | Requirement | Local status | Local evidence | External gate |
+| --- | --- | --- | --- | --- |
+| A01 | Nine enquiry types enforce their own fields and limits | verified_local | Contract/model/API cases plus nine browser submissions on desktop/mobile; exact normalized fields checked in Mongo | All nine preview submissions |
+| A02 | Success follows acknowledged persistence; DB failure never shows success | verified_local | Unique insert acknowledgement, injected before/after-write failures, real browser 503 and receipt checks | Browser reference matched to Atlas |
+| A03 | Concurrent/retried requests do not duplicate records/jobs | verified_local | Concurrent repository races, replay/conflict, lost-response retry and double-submit browser checks | Deployed same-key replay |
+| A04 | Team receives useful email with correct reply-to | verified_local | Escaped immutable email rendering and HTTP adapter/capture assertions | Resend ID/status and observed Gmail/reply behavior |
+| A05 | Slack receives minimal notification independently | verified_local | Minimal type/time/reference payload, HTTP capture, independent channel failure and redaction checks | Approved actual channel message |
+| A06 | Restarts/outages recover jobs with bounded retries | verified_local | Real subprocess crash/restart, lease fencing, same job identity, persisted attempts and 23-hour ambiguity pause | Actual service worker/queue inspection; safe preview recovery |
+| A07 | Newsletter consent/confirmation/unsubscribe is real and idempotent | verified_local | Mongo generation/state transitions, token validation, explicit POST actions and captured-link browser lifecycle | Received real inbox link and Atlas state |
+| A08 | Public API cannot list customer data or expose secrets | verified_local | Absent list/template/docs routes, sanitized errors, redacted logging, output secret scans and safe public health | Deployed endpoint probes and secret-store configuration |
+| A09 | Validation, rate limits and bot protection resist direct requests | verified_local | Size/media/strict field tests, atomic shared quotas, proxy spoofing and strict fake Siteverify response tests | Genuine Turnstile, actual Render proxy/IP behavior |
+| A10 | Current site behavior and mobile usability remain intact | verified_local | 31 content/action routes, reload/assets, filters/prefills/keyboard checks on desktop/mobile; local Pages runtime also checked | Actual final-domain headers/TLS/routes/mobile forms |
+| A11 | CI blocks bad changes and deploys exactly the tested release | verified_local | Underlying suites, actionlint/ShellCheck, manifest SHA/config/bytes, mocked queued/failing Render and remote smoke gates | Real GitHub reusable run, Render SHA and Pages deployment/artifact |
+| A12 | Retention, privacy and operational owners are explicit | verified_local | Scoped dry-run/apply/export/delete tests, unresolved-job protection, synthetic BSON restore, draft owner checklist | Owner policy/content approval, actual schedules/owners/encrypted backup restore |
+| A13 | App can be prepared without provider credentials | verified_local | Pinned installs, loopback Mongo, bounded simulator, owned launcher, release dry-run with zero provider requests | No external gate for this local preparation requirement |
+| A14 | Publishing is reversible and preserves customer records | verified_local | Current → compatible prior backend → current drill preserves one enquiry/two pending jobs and replay; no DB rollback | Actual deployment/DNS snapshots and rehearsed published rollback |
+| A15 | Prompt-delivery target is measured and ongoing failures visible | verified_local | Poll/concurrency/timeout/retry/heartbeat tests, redacted aggregate metrics and separate delivery health | Measure acknowledgement/attempt/acceptance timing, actual alert receipt and 24-hour observation |
+
+### Evidence boundaries
+
+- The healthy-system latency targets remain **unmeasured in production**: API p95 below 2 seconds excluding bot round trip, first attempt within 10 seconds, normal provider acceptance within 30 seconds. Local scheduling tests do not prove those service levels or inbox arrival.
+- Atlas, real email/Slack, genuine Turnstile, Render, actual Pages edge, GitHub execution/alerts and DNS have not been exercised. Workflow lint and mocked HTTP tests are not a successful cloud deployment.
+- Privacy is a draft. Business identity, support/privacy contacts, retention, product facts and other owner approvals are intentionally unresolved and block production builds.
+- Delivery is at least once. Ambiguous Slack acknowledgement can duplicate a message; email deduplication has a bounded provider window. Paused unknown outcomes require reconciliation, not blind replay.
+- Existing CRA/Yarn peer/resolution warnings and upstream Starlette TestClient/httpx deprecation warnings remain. Tested installs/builds pass; no claim of zero dependency advisories is made.
+
+## Final local verification record
+
+Implementation SHA: `7d24f648607877355452919ca3e49b64257f8a72`. The final handoff commit changes documentation only. Verification date: 2026-10-17 UTC. macOS arm64, Python 3.12.15, Node 22.23.3, Yarn 1.22.22, Playwright 1.64.1 Chromium. Backend and browser verification use the pinned Mongo 8.0.17 replica set on loopback 27127, real Mongo persistence and majority write concern; all provider/bot traffic is simulated.
+
+| Check | Actual result |
+| --- | --- |
+| Full backend `pytest tests -q --tb=short`, unchanged xdist configuration | 289 passed, 2 upstream deprecation warnings, 22.33 seconds |
+| Full frontend `yarn --cwd frontend test --watchAll=false --runInBand` | 8 suites, 38 tests passed |
+| `yarn --cwd frontend install --frozen-lockfile`; backend `python -m pip check` | Frozen lock install and dependency check passed; existing Yarn override warnings remain |
+| Local release `yarn --cwd frontend build` | Optimized build and environment-specific headers passed |
+| Manifest, static artifact and dry-run checks | SHA/config/bytes match; dry run reports zero provider HTTP requests; local artifact is rejected as production |
+| Final development browser suite | 92 passed, desktop/mobile, 3.6 minutes |
+| Final release-bundle core suite | 26 passed, desktop/mobile, 1.4 minutes |
+| Pages-compatible preview | Earlier same frontend implementation passed all 92 cases under Wrangler 4.151.1, plus explicit headers/assets/deep links; public API origin forwarding to isolated real API was exercised |
+| Workflow and shell checks | actionlint 1.7.12 with ShellCheck 0.11.0 passed all three workflows; standalone shell syntax/ShellCheck passed |
+| Operator entrypoints and hygiene | Outbox/data/local/deploy/verify CLI help commands succeed; no tracked environment secrets, local state, build or test artifacts |
+| Local compatible-code rollback | At 11:31:29 UTC: one enquiry and two pending jobs preserved across current → `5d6a078` → current; same receipt replay; zero provider calls |
+| Synthetic BSON restore | At 11:02:43 UTC: two enquiries/one subscriber and indexes matched; pending job preserved; generated DBs/plaintext archive removed |
+
+Local artifact SHA-256: `2601acfe2da9b2f72a5718bc9f9ff7dab4c9bcbd4bb3a09164dccf720f53bbe2`.
+Public configuration SHA-256: `723fdd2a77f0448c47de27c70229979536ee2927d5507dff3b58f6321f2156ee`.
+
+Reproduction from repo root (with pinned tools installed):
+
+```bash
+CI_MONGO_PORT=27127 bash scripts/ci-mongo-replica-set.sh start
+export TEST_MONGO_URL='mongodb://127.0.0.1:27127/?replicaSet=rs0&directConnection=true'
+(cd backend && .venv-intake/bin/python -m pytest tests -q --tb=short)
+CI=true REACT_APP_TURNSTILE_MODE=fake yarn --cwd frontend test --watchAll=false --runInBand
+CI=true E2E_FRONTEND_MODE=dev yarn --cwd frontend test:e2e
+export BUILD_TARGET=local REACT_APP_BACKEND_URL=http://127.0.0.1:8300
+export REACT_APP_TURNSTILE_MODE=live REACT_APP_TURNSTILE_SITE_KEY=local-test-site-key
+CI=true GENERATE_SOURCEMAP=false yarn --cwd frontend build
+backend/.venv-intake/bin/python scripts/check-release-config.py --target local --build frontend/build --sha "$(git rev-parse HEAD)"
+backend/.venv-intake/bin/python scripts/check-static-artifact.py --build frontend/build --target local
+backend/.venv-intake/bin/python scripts/verify-release.py --phase dry-run --target local --sha "$(git rev-parse HEAD)"
+CI=true E2E_FRONTEND_MODE=build yarn --cwd frontend test:e2e intake.spec.js newsletter.spec.js
+bash scripts/ci-mongo-replica-set.sh stop
+```
+
+The local artifact has a test-only public widget key; browser tests intercept the widget script. Use the development profile for manual local review. A real production build must use approved owner facts, HTTPS API origin and genuine Turnstile site key and rerun CI.
+
+## Running owner-review app
+
+At 2026-10-17 11:35 UTC, the owned `local` profile was started with UI `http://127.0.0.1:4300`, API `http://127.0.0.1:8300` and the existing loopback Mongo on 27017. Liveness, readiness and delivery returned 200; API version reports the tested implementation SHA. The worker and provider simulator are running. Enquiry/subscriber listing and old template routes return 404/405. The temporary CI Mongo container was stopped by its ownership-checked script. Pre-existing processes on 3000/8000 remain intact.
+
+Use the [local start/stop commands](local-development.md) for this review session. Only synthetic data belongs in the local simulator. See the [provider handoff](provider-handoff.md) for the complete final input checklist and [publishing/rollback](publishing-and-rollback.md) for the disabled release procedure.
 
 ## External gates
 

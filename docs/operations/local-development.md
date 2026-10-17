@@ -25,3 +25,19 @@ Initial harness proof on 2026-10-17: one synthetic general enquiry returned `201
 Browser verification: run `yarn --cwd frontend test:e2e` under Node 22 after installing Playwright Chromium. Global setup creates an owned isolated stack and teardown stops it. Set `E2E_FRONTEND_MODE=build` to test the prebuilt local release. `E2E_REUSE_OWNED=1` is an explicit debugging option for an already-running test profile; normal verification starts fresh. Browser helpers read only the test namespace through a private CLI. Persistence fault controls live in the test-only application factory, never the production server or a public HTTP route.
 
 The full development suite passed 92 desktop/mobile cases; the release bundle passed 26 core intake/newsletter cases. A recently closed TCP connection initially caused a false occupied-port warning; a failing regression test reproduced it and the probe now permits normal address reuse while still refusing an active listener. Five harness tests pass.
+
+## Owner review session and restart
+
+Use the `local` profile for the app left running for owner review:
+
+```bash
+backend/.venv-intake/bin/python scripts/run-local.py status --profile local
+backend/.venv-intake/bin/python scripts/run-local.py stop --profile local
+backend/.venv-intake/bin/python scripts/run-local.py start --profile local
+```
+
+Stop/restart creates a new review database; prior synthetic records and captures remain in the previous run directory/database. This launcher is for synthetic local use, not customer-data migration. Review at `http://127.0.0.1:4300/contact`; the tested API is port 8300. Any pre-existing processes on 3000/8000 are separate and are not the verified implementation.
+
+For CI-equivalent database verification, Docker must be running. Use `CI_MONGO_PORT=27127 bash scripts/ci-mongo-replica-set.sh start`, then set `TEST_MONGO_URL='mongodb://127.0.0.1:27127/?replicaSet=rs0&directConnection=true'` for tests. Stop with `bash scripts/ci-mongo-replica-set.sh stop`; ownership labels/state prevent stopping unrelated containers. The final review session uses the existing loopback Mongo on 27017 so it does not depend on the temporary CI container.
+
+Wrangler 4.151.1 local Pages verification passed all 92 browser cases and explicit deep-link/header/asset probes. This adds local Pages-runtime evidence to the generic static-server tests; real edge/TLS/domain checks remain deferred. Browser API forwarding is restricted to the configured API origin and an isolated loopback server; the production bundle bytes are preserved.

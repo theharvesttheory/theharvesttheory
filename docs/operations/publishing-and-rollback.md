@@ -36,7 +36,7 @@ This validates local artifact identity and reports zero provider HTTP requests. 
 ## Rollback without losing intake
 
 - Stop further release dispatches; keep the database and workers available where safe. Record the failure and current queue metadata using the private outbox CLI. Do not delete records, reset attempts or change signing keys merely to roll back code.
-- If only the UI is broken, use the Cloudflare dashboard's rollback control for the recorded last known good production deployment. Confirm its baked API URL still addresses a compatible backend, then verify contact/product/article/privacy/action routes and headers.
+- If only the UI is broken, use the Cloudflare dashboard's rollback control for the recorded last known good production deployment ([official rollback procedure](https://developers.cloudflare.com/pages/configuration/rollbacks/), checked 2026-10-17). Confirm its baked API URL still addresses a compatible backend, then verify contact/product/article/privacy/action routes and headers.
 - If the backend must roll back, first verify the prior commit understands the current enquiry/newsletter/job schema. Trigger that exact commit through the version-aware Render helper using the approved credentials in the protected release context; verify the reported version and readiness. Never use an unreviewed older template backend as a rollback target.
 - Preserve Mongo data and job IDs. Leases expire naturally; the compatible worker resumes pending work. Slack can duplicate after ambiguous acceptance; reconcile stable references instead of blindly re-enqueuing.
 - Restore prior DNS only from the captured reviewed snapshot, preserving MX and unrelated records. Confirm TLS and exact CORS/Turnstile origins. Never restore an old Mongo backup merely to revert application code.
@@ -46,3 +46,7 @@ This validates local artifact identity and reports zero provider HTTP requests. 
 ## Failure response and ownership
 
 The disabled five-minute monitor is best effort. At activation, assign an owner for GitHub failure notifications, daily queue review, Resend/Slack quotas, backup/retention execution and rollback decisions. Require actual alert receipt and a 24-hour observation record before closing production readiness. No automatic rollback can safely resolve an ambiguous delivery or incompatible schema.
+
+## Local rollback evidence
+
+At `2026-10-17T11:31:29.363440+00:00`, the isolated drill ran implementation `7d24f648607877355452919ca3e49b64257f8a72`, saved one synthetic enquiry, stopped only its owned API process and started compatible backend `5d6a078e6cb5bffc9885dbfbeb119d010639908d` from a Git archive. The same idempotency key returned the original receipt, the document remained byte-for-byte equal as decoded by Mongo, and both pending job identities/states survived. Restoring the current backend preserved the same data and readiness. Worker delivery was disabled deliberately to retain pending work; separate subprocess tests prove lease/retry recovery. No provider was contacted and the drill-owned database was removed afterward. This does not prove Cloudflare/Render/DNS rollback.
