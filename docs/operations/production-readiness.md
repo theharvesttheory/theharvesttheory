@@ -43,7 +43,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 22: Persist retry schedules and isolate provider failures | complete | Twelve retry tests plus ten lease tests pass, including independent channels, bounded jitter/Retry-After, attempt/23-hour limits, historical jobs and lost completion. Ambiguous exhausted jobs remain paused for reconciliation. |
 | 23: Run and supervise the worker inside app lifespan | complete | Five worker tests plus eight lifecycle/health tests pass: overlapping workers, independent channels, transient DB recovery, bounded shutdown and failed-loop readiness. Local HTTP adapter only reports simulated delivery. |
 | 24: Add private delivery diagnostics and guarded recovery commands | complete | Seven admin/health tests pass: redacted metadata, historical jobs, dry-run, stale identity/cancelled-generation rejection, explicit ambiguous replay and independent public delivery health. Recovery runbook added; production alert wiring remains deferred. |
-| 25: Add one API client with bounded timeouts and deliberate retry keys | not_started | Pending. |
+| 25: Add one API client with bounded timeouts and deliberate retry keys | complete | Ten request tests pass: 15-second abort, safe error parsing, valid receipt checks, no automatic POST retry, unchanged-body UUID reuse and membership POST bodies. |
 | 26: Replace Contact's local success toggle with durable submission states | not_started | Pending. |
 | 27: Connect newsletter signup with explicit consent and honest copy | not_started | Pending. |
 | 28: Add explicit newsletter confirmation and unsubscribe pages | not_started | Pending. |
