@@ -5,6 +5,7 @@ from pymongo.errors import DuplicateKeyError
 from models import normalize_newsletter
 from delivery_models import new_job
 from errors import APIError
+from newsletter_tokens import verify_action_token, invalid_link
 
 RECEIPT={'status':'requested'}
 UNRESOLVED=['pending','sending','retry','unknown','dead']
@@ -13,6 +14,14 @@ UNRESOLVED=['pending','sending','retry','unknown','dead']
 def initial_confirmation_job(record,settings,now):
     return new_job('confirmation_email',{'reference':record['_id'],'rendering_pending':True},
                    record['generation'],now)
+
+def initial_ops_jobs(record,settings,now):
+    return {slot:new_job(slot,{'reference':record['_id'],'rendering_pending':True},
+                         record['generation'],now) for slot in ('ops_email','slack')}
+
+def cancel_unfinished_confirmation():
+    return {'$cond':[{'$in':['$jobs.confirmation_email.state',UNRESOLVED]},
+                     'cancelled','$jobs.confirmation_email.state']}
 
 class NewsletterService:
     def __init__(self,repository,settings,clock,confirmation_factory=None,ops_factory=None):
@@ -56,3 +65,38 @@ class NewsletterService:
             # A losing compare-and-set means another signup or consent action won.
             # Never overwrite that newer choice; the public receipt is deliberately generic.
         return dict(RECEIPT)
+
+    async def confirm(self,token):
+        now=self.clock()
+        claims=verify_action_token(token,'confirm',self.settings,now)
+        collection=self.repo.db.newsletter_subscribers
+        identity={'_id':claims['sub'],'generation':claims['generation']}
+        record=await collection.find_one(identity)
+        if not record or record['state']=='unsubscribed': raise invalid_link()
+        if record['state']=='subscribed': return {'status':'subscribed'}
+        if record['confirmation_expires_at']<=now: raise invalid_link()
+        jobs=(self.ops_factory or initial_ops_jobs)({**record,'state':'subscribed','confirmed_at':now},self.settings,now)
+        changes={'state':'subscribed','confirmed_at':now,
+                 'jobs.confirmation_email.state':cancel_unfinished_confirmation(),
+                 'jobs.confirmation_email.lease_owner':None,'jobs.confirmation_email.lease_until':None}
+        changes.update({f'jobs.{slot}':{'$literal':job} for slot,job in jobs.items()})
+        result=await collection.update_one({**identity,'state':'pending',
+            'confirmation_expires_at':{'$gt':now}},[{'$set':changes}])
+        if not result.modified_count:
+            current=await collection.find_one(identity)
+            if not current or current['state']!='subscribed': raise invalid_link()
+        return {'status':'subscribed'}
+
+    async def unsubscribe(self,token):
+        now=self.clock()
+        claims=verify_action_token(token,'unsubscribe',self.settings,now)
+        collection=self.repo.db.newsletter_subscribers
+        identity={'_id':claims['sub'],'generation':claims['generation']}
+        result=await collection.update_one({**identity,'state':{'$in':['pending','subscribed']}},
+            [{'$set':{'state':'unsubscribed','unsubscribed_at':now,
+                'jobs.confirmation_email.state':cancel_unfinished_confirmation(),
+                'jobs.confirmation_email.lease_owner':None,'jobs.confirmation_email.lease_until':None}}])
+        if not result.modified_count:
+            current=await collection.find_one(identity)
+            if not current or current['state']!='unsubscribed': raise invalid_link()
+        return {'status':'unsubscribed'}
