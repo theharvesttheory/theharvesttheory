@@ -1,9 +1,25 @@
 """Mongo persistence, initialized inside the application's event loop."""
+from copy import deepcopy
+from dataclasses import dataclass
+from uuid import uuid4
+from pymongo.errors import DuplicateKeyError
 from pymongo import AsyncMongoClient
 from pymongo.write_concern import WriteConcern
 
 JOB_SLOTS=('ops_email','slack','confirmation_email')
 COLLECTIONS=('enquiries','newsletter_subscribers')
+
+class IdempotencyConflict(ValueError):
+    pass
+
+@dataclass(frozen=True)
+class SavedEnquiry:
+    record: dict
+    created: bool
+
+    @property
+    def receipt(self):
+        return {'id':self.record['_id'],'status':'received'}
 
 class MongoRepository:
     def __init__(self, settings):
@@ -35,3 +51,33 @@ class MongoRepository:
 
     async def close(self):
         await self.client.close()
+
+    async def lookup_enquiry(self, key, payload_hash):
+        record=await self.db.enquiries.find_one({'idempotency_key':key})
+        if record is None:
+            return None
+        if record['payload_hash'] != payload_hash:
+            raise IdempotencyConflict()
+        return SavedEnquiry(record,False)
+
+    async def insert_enquiry(self, document):
+        await self.db.enquiries.insert_one(document)
+
+    async def save_enquiry(self, normalized, key, payload_hash, jobs, now, record_id=None):
+        existing=await self.lookup_enquiry(key,payload_hash)
+        if existing:
+            return existing
+        record={'_id':record_id or str(uuid4()), 'schema_version':1,
+                'type':normalized['type'], 'fields':deepcopy(normalized['fields']),
+                'privacy_notice_version':normalized['privacy_notice_version'],
+                'source_path':normalized['source_path'], 'received_at':now,
+                'idempotency_key':key, 'payload_hash':payload_hash, 'jobs':deepcopy(jobs)}
+        try:
+            await self.insert_enquiry(record)
+            return SavedEnquiry(record,True)
+        except DuplicateKeyError:
+            # Concurrent insertion is resolved by the unique key, never a second record.
+            existing=await self.lookup_enquiry(key,payload_hash)
+            if existing is None:
+                raise
+            return existing
