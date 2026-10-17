@@ -182,3 +182,5 @@ Request the following only after Gate B is complete:
 | GitHub and business owner | Environment/branch controls, final domain, privacy contact/identity, policies, owners and publishing approval | Repository settings and reviewed documentation |
 
 Credentials should be entered into provider secret stores or a secure local mechanism, not committed or pasted into plans. The owner approves the concrete deployment, cost and test-message destinations at the final stage. Domain change comes after preview acceptance. If an existing site serves traffic, preserve its settings for rollback and retire it only after a successful observation period. Deployment approval is not authorization to delete an account.
+
+Retention implementation clarification: after detailed delivery outcomes expire, active slots retain only job identity, generation, channel and terminal state until parent deletion, preserving dedupe/consent transitions. Completed historical slots are removed. Confirmed/suppression retention remains an owner policy input; no default destructive schedule is enabled.
