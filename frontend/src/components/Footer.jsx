@@ -1,4 +1,4 @@
-import { useState } from "react";
+import Newsletter from "./Newsletter";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Logo from "./Logo";
@@ -27,45 +27,6 @@ const social = [
   { label: "Instagram", testid: "footer-social-instagram" },
   { label: "LinkedIn", testid: "footer-social-linkedin" },
 ];
-
-function Newsletter() {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-  return done ? (
-    <p data-testid="newsletter-success" className="mt-6 text-sm font-light text-cream/85">
-      Thank you — you&rsquo;re on the list.
-    </p>
-  ) : (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (email) setDone(true);
-      }}
-      className="mt-6"
-    >
-      <p className="text-[11px] uppercase tracking-[0.24em] text-cream/55">The seasonal letter</p>
-      <div className="mt-4 flex max-w-xs items-center border-b border-cream/25 transition-colors duration-300 focus-within:border-gold">
-        <input
-          data-testid="newsletter-input"
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Your email"
-          className="w-full bg-transparent py-3 text-sm font-light text-cream placeholder:text-cream/50 focus:outline-none"
-        />
-        <button
-          type="submit"
-          data-testid="newsletter-submit"
-          aria-label="Subscribe"
-          className="p-2 text-cream/75 transition-colors duration-300 hover:text-gold"
-        >
-          <ArrowRight size={16} strokeWidth={1.5} />
-        </button>
-      </div>
-    </form>
-  );
-}
 
 export default function Footer() {
   return (
