@@ -1,4 +1,4 @@
-const {test,expect,db,captures,syntheticEmail}=require('./support');
+const {test,expect,db,captures,syntheticEmail,forwardUrl}=require('./support');
 const contract=require('../src/data/intake-contract.json');
 async function fill(page,schema,email){
  await page.goto(`/contact?type=${schema.id}`);
@@ -18,7 +18,7 @@ for(const schema of contract.types){
 }
 test('lost browser response retries same key and keeps exactly one record',async({page})=>{
  const email=syntheticEmail();const keys=[];let drop=true;
- await page.route('**/api/enquiries',async route=>{if(route.request().method()!=='POST')return route.continue();keys.push(route.request().headers()['idempotency-key']);const response=await route.fetch();if(drop){drop=false;await route.abort('failed');}else await route.fulfill({response});});
+ await page.route('**/api/enquiries',async route=>{if(route.request().method()!=='POST')return route.continue();keys.push(route.request().headers()['idempotency-key']);const response=await route.fetch({url:forwardUrl(route.request().url())});if(drop){drop=false;await route.abort('failed');}else await route.fulfill({response});});
  await fill(page,contract.types.find(t=>t.id==='general'),email);await page.getByTestId('contact-submit').click();
  await expect(page.getByRole('alert')).toContainText('Connection interrupted');expect(db('enquiry',email).count).toBe(1);await expect(page.getByTestId('contact-field-email')).toHaveValue(email);
  await page.getByTestId('contact-submit').click();await expect(page.getByTestId('contact-success')).toBeVisible();expect(keys).toHaveLength(2);expect(keys[0]).toBe(keys[1]);expect(db('enquiry',email).count).toBe(1);

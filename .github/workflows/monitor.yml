@@ -1,0 +1,28 @@
+name: Intake delivery monitor
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+permissions:
+  contents: read
+jobs:
+  probe:
+    if: vars.DEPLOYMENT_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+    steps:
+      - name: Check liveness, intake readiness and independent delivery status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          from urllib.parse import urlsplit
+          p = urlsplit(os.environ['PUBLIC_API_URL'])
+          assert p.scheme == 'https' and p.hostname and not p.username and not p.password and not p.query and not p.fragment and p.path in ('', '/')
+          PY
+          for endpoint in live ready delivery; do
+            curl --fail --silent --show-error --retry 2 --retry-delay 5 --connect-timeout 5 --max-time 15 "${PUBLIC_API_URL%/}/api/health/$endpoint"
+          done
