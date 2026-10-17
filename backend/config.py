@@ -55,6 +55,8 @@ class Settings:
         if env is None:
             env = {**dotenv_values(Path(__file__).with_name('.env')), **os.environ}
         env = {k:v for k,v in env.items() if v is not None}
+        if 'APP_GIT_SHA' not in env and env.get('RENDER_GIT_COMMIT'):
+            env = {**env, 'APP_GIT_SHA': env['RENDER_GIT_COMMIT']}
         base = cls(); values = {}
         for f in fields(cls):
             default = getattr(base, f.name)

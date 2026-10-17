@@ -1,0 +1,54 @@
+# Prepared only. Owner must approve account, Singapore region and paid Starter plan.
+# Do not apply until Tasks 40/41. Repository-root context includes the intake contract.
+services:
+  - type: web
+    name: theharvesttheory-api
+    runtime: python
+    plan: starter
+    region: singapore
+    branch: main
+    autoDeployTrigger: 'off'
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn server:app --app-dir backend --host 0.0.0.0 --port "$PORT" --workers 1 --no-proxy-headers
+    healthCheckPath: /api/health/ready
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.15
+      - key: APP_ENV
+        value: production
+      - key: NOTIFICATION_MODE
+        value: live
+      - key: BOT_MODE
+        value: turnstile
+      - key: WORKER_ENABLED
+        value: 'true'
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PUBLIC_FRONTEND_URL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM_NAME
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
+      - key: NOTIFY_EMAILS
+        sync: false
+      - key: SUPPORT_EMAIL
+        sync: false
+      - key: SLACK_WEBHOOK_URL
+        sync: false
+      - key: NEWSLETTER_SIGNING_KEY
+        sync: false
+      - key: RATE_LIMIT_HMAC_KEY
+        sync: false
+      - key: TURNSTILE_SECRET_KEY
+        sync: false
+      - key: TURNSTILE_HOSTNAMES
+        sync: false
+      - key: TRUSTED_PROXY_CIDRS
+        sync: false

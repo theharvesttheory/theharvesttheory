@@ -65,3 +65,11 @@ Cloudflare Direct Upload serves `frontend/build`. The build creates an API-speci
 Local Pages verification uses Wrangler 4.151.1 (`wrangler pages dev frontend/build --ip 127.0.0.1 --port 4400 --compatibility-date 2026-10-12`). All 92 desktop/mobile browser checks passed against this local Pages runtime, plus direct header/asset checks. Actual Pages edge headers, TLS and custom domains remain final activation checks.
 
 The disabled monitor checks liveness, readiness and delivery health every five minutes after `DEPLOYMENT_ENABLED=true`. GitHub schedules are best effort; assign workflow-failure notification ownership, verify alert receipt and inspect the queue daily. This is not a realtime monitoring SLA.
+
+## Prepared Render service
+
+`render.yaml` proposes a Python 3.12 web service in Singapore on the always-on Starter tier. This is a proposal, not a purchase or a configured service. Confirm region, plan, current price and budget at Task 40. No `rootDir` is set, so the backend can load the shared frontend intake contract. Git auto-deploy is explicitly off; the worker runs within the single Uvicorn process. Render's `RENDER_GIT_COMMIT` supplies the version unless `APP_GIT_SHA` is explicitly set; leave that override absent during ordinary Render releases.
+
+`deploy-render.py` pins the tested SHA in the hook query, checks the service's deployment status and then requires the same API version plus readiness. A queued 202 response starts polling for a new matching deployment; an old matching release is insufficient. Hook/API credentials never go to the public API or command output. HTTP failure, provider failure, wrong commit and bounded timeout all block the release. [Render hook behavior](https://render.com/docs/deploy-hooks) and [Blueprint auto-deploy settings](https://render.com/docs/blueprint-spec) were checked on 2026-10-17. The prepared blueprint has only local structural validation; provider validation is deferred until activation.
+
+Additional nonsecret GitHub repository variables: `RENDER_PLAN` (approved tier), `PUBLIC_FRONTEND_URL` (the current Pages preview or final origin), and `TURNSTILE_SITE_KEY`. Repository variables are available to preflight/reusable CI; only deployment secrets belong in the protected `production` environment. Configure required reviewers and main-only deployment restrictions at final activation.
