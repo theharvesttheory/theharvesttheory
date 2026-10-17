@@ -51,3 +51,5 @@ Start Uvicorn with `--no-proxy-headers`. The app interprets X-Forwarded-For only
 ## Newsletter signing-key rotation
 
 Rotating NEWSLETTER_SIGNING_KEY invalidates outstanding confirmation and unsubscribe links. Keep the current key stable during normal releases. If a key is exposed, rotate it, preserve subscription state, and let users request fresh confirmation; operators handle unsubscribe requests through the reviewed private data workflow. Tokens have fixed HS256/issuer/audience/purpose and no email claim.
+
+Frontend builds now require `REACT_APP_TURNSTILE_MODE=live`, a public site key and an explicit API origin. Use `BUILD_TARGET=local` with a loopback API and a test-only intercepted widget script for local release-bundle verification. Fake mode is only allowed by the development server/tests, never by the release build. Widget implementation follows [Cloudflare explicit rendering](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/), checked 2026-10-17.

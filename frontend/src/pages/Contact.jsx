@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeUp, MaskedLines, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import { CONTACT_TYPES } from "@/data/contact-options";
+import IntakeChallenge from "@/components/IntakeChallenge";
 import contract from "@/data/intake-contract.json";
 import { submitEnquiry, requestIdentity } from "@/lib/intakeApi";
 
@@ -60,6 +61,8 @@ export default function Contact() {
   const [receipt, setReceipt] = useState(null);
   const [error, setError] = useState(null);
   const [website, setWebsite] = useState("");
+  const [token, setToken] = useState("");
+  const challenge = useRef(null);
   const identity = useRef(null);
   const request = useRef(null);
   const statusRef = useRef(null);
@@ -97,9 +100,9 @@ export default function Contact() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (request.current || !schema) return;
+    if (request.current || !schema || !token) return;
     const body = { type: typeId, fields: values, privacy_notice_version: contract.version,
-      source_path: "/contact", website, turnstile_token: "" };
+      source_path: "/contact", website, turnstile_token: token };
     identity.current = requestIdentity(identity.current, body);
     const controller = new AbortController(); request.current = controller;
     setStatus("submitting"); setError(null);
@@ -107,7 +110,7 @@ export default function Contact() {
       const saved = await submitEnquiry({ body, idempotencyKey: identity.current.key, signal: controller.signal });
       if (request.current === controller && !controller.signal.aborted) { setReceipt(saved); setStatus("success"); }
     } catch (failure) {
-      if (request.current === controller && !controller.signal.aborted) { setError(failure); setStatus("error"); }
+      if (request.current === controller && !controller.signal.aborted) { setError(failure); setStatus("error"); challenge.current?.reset(); }
     } finally { if (request.current === controller) request.current = null; }
   };
 
@@ -234,12 +237,13 @@ export default function Contact() {
                         <input id="contact-website" name="website" value={website} onChange={e => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
                       </div>
                       <p className="mt-6 text-sm text-ink/75">We use your details to respond to this enquiry. Read our <Link className="underline" to="/privacy">Privacy Policy</Link>.</p>
+                      <IntakeChallenge ref={challenge} action="enquiry" onToken={setToken} />
                       {status === "error" && <div id="contact-status" ref={statusRef} tabIndex={-1} role="alert" className="mt-6 text-sm text-red-800">
                         <p>{error?.message || "We could not confirm your submission. Please try again."}</p>
                         {schema.fields.filter(f => error?.fields?.includes(f.id)).map(f => <p key={f.id}>{f.label}: please check this value.</p>)}
                       </div>}
                       <button
-                        disabled={status === "submitting"}
+                        disabled={status === "submitting" || !token}
                         type="submit"
                         data-testid="contact-submit"
                         className="btn-primary mt-12 w-full md:w-auto"

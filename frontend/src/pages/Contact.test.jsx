@@ -5,7 +5,7 @@ import Contact from './Contact';
 import { CONTACT_TYPES } from '../data/contact-options';
 import { submitEnquiry } from '../lib/intakeApi';
 jest.mock('../lib/intakeApi',()=>({...jest.requireActual('../lib/intakeApi'),submitEnquiry:jest.fn()}));
-jest.mock('framer-motion',()=>{const React=require('react');return {AnimatePresence:({children})=>children,motion:new Proxy({}, {get:(_,tag)=>React.forwardRef(({children,initial,animate,exit,transition,whileInView,viewport,...props},ref)=>React.createElement(tag,{...props,ref},children))})};});
+jest.mock('framer-motion',()=>{const React=require('react');const cache={};return {AnimatePresence:({children})=>children,motion:new Proxy({}, {get:(_,tag)=>cache[tag]||(cache[tag]=React.forwardRef(({children,initial,animate,exit,transition,whileInView,viewport,...props},ref)=>React.createElement(tag,{...props,ref},children)))})};});
 const receipt={status:'received',id:'b769038c-d26a-4aa6-b8bf-23d818089e43'};
 const mount=(url='/contact')=>render(<MemoryRouter initialEntries={[url]}><Contact /></MemoryRouter>);
 function fill(schema){for(const field of schema.fields)fireEvent.change(screen.getByTestId(`contact-field-${field.id}`),{target:{value:field.id==='email'?'visitor@example.test':`Test ${field.id}`}});}
@@ -13,7 +13,7 @@ beforeEach(()=>submitEnquiry.mockReset());
 test.each(CONTACT_TYPES)('$id waits for receipt and submits its schema',async schema=>{
  let resolve;submitEnquiry.mockReturnValue(new Promise(r=>{resolve=r;}));mount();fireEvent.click(screen.getByTestId(`contact-type-${schema.id}`));fill(schema);
  fireEvent.submit(screen.getByTestId('contact-form'));
- expect(submitEnquiry).toHaveBeenCalledTimes(1);expect(submitEnquiry.mock.calls[0][0].body.type).toBe(schema.id);
+ expect(submitEnquiry).toHaveBeenCalledTimes(1);expect(submitEnquiry.mock.calls[0][0].body.type).toBe(schema.id);expect(submitEnquiry.mock.calls[0][0].body.turnstile_token).toBeTruthy();
  expect(Object.keys(submitEnquiry.mock.calls[0][0].body.fields).sort()).toEqual(schema.fields.map(f=>f.id).sort());
  expect(screen.queryByTestId('contact-success')).not.toBeInTheDocument();expect(screen.getByTestId('contact-submit')).toBeDisabled();expect(screen.getByTestId('contact-type-general')).toBeDisabled();
  await act(async()=>resolve(receipt));expect(await screen.findByTestId('contact-success')).toHaveTextContent(receipt.id);
@@ -34,4 +34,17 @@ test('prefill and unmount abort; late response cannot update new form',async()=>
  let resolve;submitEnquiry.mockReturnValue(new Promise(r=>{resolve=r;}));const view=mount('/contact?type=product-orders&item=Golden%20Latte');expect(screen.getByTestId('contact-field-products')).toHaveValue('Golden Latte');
  fireEvent.submit(screen.getByTestId('contact-form'));const signal=submitEnquiry.mock.calls[0][0].signal;view.unmount();expect(signal.aborted).toBe(true);
  mount('/contact?type=general');await act(async()=>resolve(receipt));expect(screen.queryByTestId('contact-success')).not.toBeInTheDocument();
+});
+
+test('fresh challenge token after failure preserves the business retry key',async()=>{
+ process.env.REACT_APP_TURNSTILE_MODE='live';process.env.REACT_APP_TURNSTILE_SITE_KEY='fixture';
+ let options;window.turnstile={render:jest.fn((node,config)=>{options=config;return 'widget';}),remove:jest.fn(),reset:jest.fn()};
+ try{
+  submitEnquiry.mockRejectedValue(Error('Retry'));mount('/contact?type=general');
+  await waitFor(()=>expect(options).toBeDefined());act(()=>options.callback('first-token'));fill(CONTACT_TYPES.find(t=>t.id==='general'));
+  fireEvent.submit(screen.getByTestId('contact-form'));await screen.findByRole('alert');expect(window.turnstile.reset).toHaveBeenCalledWith('widget');
+  expect(screen.getByTestId('contact-submit')).toBeDisabled();act(()=>options.callback('fresh-token'));fireEvent.submit(screen.getByTestId('contact-form'));await waitFor(()=>expect(submitEnquiry).toHaveBeenCalledTimes(2));
+  expect(submitEnquiry.mock.calls[1][0].idempotencyKey).toBe(submitEnquiry.mock.calls[0][0].idempotencyKey);
+  expect(submitEnquiry.mock.calls[1][0].body.turnstile_token).toBe('fresh-token');await screen.findByRole('alert');
+ }finally{delete process.env.REACT_APP_TURNSTILE_MODE;delete process.env.REACT_APP_TURNSTILE_SITE_KEY;}
 });
