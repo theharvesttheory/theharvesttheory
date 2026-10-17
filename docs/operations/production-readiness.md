@@ -35,7 +35,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 14: Implement newsletter action tokens | complete | Twelve tests pass for deterministic signed actions, required claims, issuer/audience/purpose, UUID identity, expiry, key changes and algorithm rejection. |
 | 15: Persist newsletter requests and suppress repeated confirmation sends | complete | Nine real-Mongo tests pass: consent validation, concurrent canonical-email dedupe, cooldown/resend generation, subscribed privacy and preserved pending operational jobs across re-signup. |
 | 16: Make confirmation and unsubscribe atomic and idempotent | implemented | Five transition tests pass, including concurrent confirm/unsubscribe and one job set. Stale worker completion proof is scheduled with Task 18 lease implementation. |
-| 17: Expose safe newsletter endpoints | not_started | Pending. |
+| 17: Expose safe newsletter endpoints | complete | Six API tests passed for generic signup receipts, explicit POST actions, safe token errors, DB failure, action limits and honeypot; 32 newsletter tests passed together. |
 | 18: Claim due jobs with expiring leases and fenced completion | not_started | Pending. |
 | 19: Build immutable, escaped notification payloads | not_started | Pending. |
 | 20: Implement the Resend adapter and its error classification | not_started | Pending. |
