@@ -3,18 +3,9 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 import httpx
 from fastapi import FastAPI
-from pymongo import AsyncMongoClient
+from repository import MongoRepository
+from health import router as health_router
 from config import Settings
-
-class MongoResources:
-    def __init__(self, settings):
-        self.client = AsyncMongoClient(settings.mongo_url, tz_aware=True,
-                                      serverSelectionTimeoutMS=3000, timeoutMS=5000)
-        self.db = self.client[settings.db_name]
-    async def start(self):
-        await self.db.command('ping')
-    async def close(self):
-        await self.client.close()
 
 def create_app(settings=None, repository_factory=None, provider_factory=None, clock=None):
     @asynccontextmanager
@@ -23,7 +14,7 @@ def create_app(settings=None, repository_factory=None, provider_factory=None, cl
         active.validate()
         app.state.settings = active
         app.state.clock = clock or (lambda: datetime.now(timezone.utc))
-        repo = (repository_factory or MongoResources)(active)
+        repo = (repository_factory or MongoRepository)(active)
         app.state.repository = repo
         providers = None
         try:
@@ -43,6 +34,7 @@ def create_app(settings=None, repository_factory=None, provider_factory=None, cl
     @app.get('/api/')
     async def identity():
         return {'service':'theharvesttheory'}
+    app.include_router(health_router)
     return app
 
 app = create_app()

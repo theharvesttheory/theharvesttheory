@@ -26,7 +26,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 5: Build isolated real-Mongo test fixtures | complete | Five real-Mongo/isolation guard tests pass with the unchanged two xdist workers; test-owned namespaces are dropped on teardown. |
 | 6: Extract the nine-type contract without changing visible form fields | complete | Three backend contract tests and frontend schema parity test pass after missing-contract failures; same field IDs, labels and required flags retained. |
 | 7: Validate and normalize enquiry payloads | complete | 49 validation tests pass: all nine types, required/unknown fields, strict types, limits, normalized hashes and safe source paths. |
-| 8: Create Mongo repositories, indexes and truthful health endpoints | not_started | Pending. |
+| 8: Create Mongo repositories, indexes and truthful health endpoints | complete | Real unique-index/duplicate-write checks, index failure, DB outage, safe health/version and absent public data/docs routes passed. |
 | 9: Atomically save an enquiry with its pending jobs | not_started | Pending. |
 | 10: Expose enquiry creation with safe receipts and errors | not_started | Pending. |
 | 11: Bound public requests and configure CORS explicitly | not_started | Pending. |
