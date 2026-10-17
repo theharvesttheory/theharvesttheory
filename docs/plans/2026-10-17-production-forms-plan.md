@@ -270,7 +270,7 @@ assert first.json()["status"] == "received"
 
 **Files:** Create `backend/outbox.py`, `backend/tests/test_outbox_leases.py`; modify `backend/repository.py`, `backend/delivery_models.py`.
 
-1. Test two workers racing for one job, future jobs not claimed, recovery after lease expiry, and an old worker unable to complete a job after another worker acquires it. Cover both collections and all three slots: `ops_email`, `slack`, `confirmation_email`.
+1. Test two workers racing for one job, future jobs not claimed, recovery after lease expiry, and an old worker unable to complete a job after another worker acquires it. Cover both collections, newsletter `job_history` (see design refinement), and all three slots: `ops_email`, `slack`, `confirmation_email`.
 2. Run `.venv/bin/python -m pytest tests/test_outbox_leases.py -v`; expect missing lease operations.
 3. Use one `find_one_and_update` per claim, returning the updated document. Increment attempts at claim time; store a fresh lease-owner UUID, 60-second lease and first-attempt timestamp if absent. Job transitions must include `_id`, job ID, generation and lease owner in the update filter. Expired `sending` leases are recoverable. Require the subscriber generation/state to remain eligible before claiming a confirmation job.
 4. Rerun tests and assert only one worker owns an unexpired lease. Use this completion pattern, adapting the fixed slot name:
@@ -461,7 +461,7 @@ if (receipt.status !== "received" || !receipt.id) {
 
 **Files:** Create `backend/scripts/data_admin.py`, `backend/tests/test_data_admin.py`, `docs/operations/data-retention-and-recovery.md`; update configuration docs.
 
-1. Test dry-run retention counts, pending/dead/unknown job exclusion, completed payload redaction after 7 days, pending signup expiry after 7 days, scoped export/deletion and no plaintext payload in default output. Keep consent/suppression policy configurable and owner-approved before use.
+1. Test dry-run retention counts, active and historical pending/dead/unknown job exclusion, completed payload redaction after 7 days, pending signup expiry after 7 days, scoped export/deletion and no plaintext payload in default output. Keep consent/suppression policy configurable and owner-approved before use.
 2. Run `.venv/bin/python -m pytest tests/test_data_admin.py -v`; expect commands missing.
 3. Implement read-only default commands with explicit `--apply`, database name and scope required for mutation. Use exact identity/reference selection; no arbitrary user-provided Mongo query strings. Redaction must preserve dedupe fields/job outcomes until their retention expires. An old pending signup with unresolved delivery is reported for review rather than silently deleted.
 4. Rerun tests. Document safe credential handling, secret rotation, backup creation, encrypted storage, restore into a separate database and count/sample checks. Do a local backup/restore drill using synthetic records and log evidence; selecting/configuring Atlas backups remains Task 41.

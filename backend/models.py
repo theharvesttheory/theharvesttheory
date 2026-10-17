@@ -71,3 +71,26 @@ def payload_hash(normalized):
     business = {key:normalized[key] for key in ('type','fields','privacy_notice_version','source_path')}
     canonical=json.dumps(business,sort_keys=True,separators=(',',':'),ensure_ascii=False)
     return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+
+class NewsletterInput(BaseModel):
+    model_config=ConfigDict(extra='forbid',strict=True)
+    email: str = Field(max_length=254)
+    consent: bool
+    privacy_notice_version: str = Field(max_length=32)
+    source_path: str = Field(max_length=256)
+    website: str = Field(default='',max_length=500)
+    turnstile_token: str = Field(default='',max_length=2048)
+
+
+def normalize_newsletter(payload, *, allow_test_domains=False):
+    try:
+        data=NewsletterInput.model_validate(payload)
+    except ValidationError:
+        raise IntakeValidationError() from None
+    if data.consent is not True:
+        raise IntakeValidationError('consent','Please choose whether to receive the newsletter.')
+    if data.privacy_notice_version!=CONTRACT['version']:
+        raise IntakeValidationError('privacy_notice_version','Refresh this page before submitting.')
+    validate_source(data.source_path)
+    result=data.model_dump();result['email']=normalize_email(data.email,allow_test_domains=allow_test_domains)
+    return result
