@@ -25,3 +25,17 @@ async def ready(request: Request):
 @router.get('/version')
 async def version(request: Request):
     return {'sha':request.app.state.settings.app_git_sha}
+
+@router.get('/health/delivery')
+async def delivery(request: Request):
+    from scripts.outbox_admin import summary
+    healthy=True
+    try:
+        metrics=await summary(request.app.state.repository,request.app.state.clock())
+        healthy=not metrics['degraded']
+    except PyMongoError:
+        healthy=False
+    if request.app.state.settings.worker_enabled:
+        worker=request.app.state.worker
+        healthy=healthy and worker is not None and worker.healthy()
+    return JSONResponse({'status':'ok' if healthy else 'degraded'},status_code=200 if healthy else 503)
