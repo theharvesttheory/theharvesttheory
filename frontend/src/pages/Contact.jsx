@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FadeUp, MaskedLines, Page, EASE, Breadcrumb } from "@/components/Reveal";
 import { CONTACT_TYPES } from "@/data/contact-options";
+import contract from "@/data/intake-contract.json";
+import { submitEnquiry, requestIdentity } from "@/lib/intakeApi";
 
-function Field({ f, value, onChange }) {
+function Field({ f, value, onChange, invalid, disabled }) {
   const id = `contact-field-${f.id}`;
   if (f.type === "textarea") {
     return (
@@ -18,6 +20,10 @@ function Field({ f, value, onChange }) {
           data-testid={`contact-field-${f.id}`}
           className="field-input min-h-[110px] resize-none"
           required={f.required}
+          maxLength={f.maxLength}
+          disabled={disabled}
+          aria-invalid={invalid || undefined}
+          aria-describedby={invalid ? "contact-status" : undefined}
           value={value}
           onChange={onChange}
         />
@@ -36,6 +42,10 @@ function Field({ f, value, onChange }) {
         className="field-input"
         type={f.type}
         required={f.required}
+          maxLength={f.maxLength}
+          disabled={disabled}
+          aria-invalid={invalid || undefined}
+          aria-describedby={invalid ? "contact-status" : undefined}
         value={value}
         onChange={onChange}
       />
@@ -46,7 +56,15 @@ function Field({ f, value, onChange }) {
 export default function Contact() {
   const [typeId, setTypeId] = useState(null);
   const [values, setValues] = useState({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const [receipt, setReceipt] = useState(null);
+  const [error, setError] = useState(null);
+  const [website, setWebsite] = useState("");
+  const identity = useRef(null);
+  const request = useRef(null);
+  const statusRef = useRef(null);
+  useEffect(() => () => { request.current?.abort(); request.current = null; }, []);
+  useEffect(() => { if (status === "error" || status === "success") statusRef.current?.focus(); }, [status]);
 
   const [params] = useSearchParams();
 
@@ -69,18 +87,39 @@ export default function Contact() {
   const pick = (id) => {
     setTypeId(id);
     setValues({});
-    setSent(false);
+    setStatus("idle");
+    setError(null);
+    setReceipt(null);
+    identity.current = null;
+    request.current?.abort();
+    request.current = null;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    if (request.current || !schema) return;
+    const body = { type: typeId, fields: values, privacy_notice_version: contract.version,
+      source_path: "/contact", website, turnstile_token: "" };
+    identity.current = requestIdentity(identity.current, body);
+    const controller = new AbortController(); request.current = controller;
+    setStatus("submitting"); setError(null);
+    try {
+      const saved = await submitEnquiry({ body, idempotencyKey: identity.current.key, signal: controller.signal });
+      if (request.current === controller && !controller.signal.aborted) { setReceipt(saved); setStatus("success"); }
+    } catch (failure) {
+      if (request.current === controller && !controller.signal.aborted) { setError(failure); setStatus("error"); }
+    } finally { if (request.current === controller) request.current = null; }
   };
 
   const reset = () => {
     setTypeId(null);
     setValues({});
-    setSent(false);
+    setStatus("idle");
+    setError(null);
+    setReceipt(null);
+    identity.current = null;
+    request.current?.abort();
+    request.current = null;
   };
 
   return (
@@ -119,8 +158,8 @@ export default function Contact() {
 
         <div className="lg:col-span-6 lg:col-start-7">
           <div className="border border-linewarm bg-creamdeep/50 p-8 md:p-14">
-            {sent && schema ? (
-              <div data-testid="contact-success" className="py-12 text-center">
+            {status === "success" && schema ? (
+              <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" data-testid="contact-success" className="py-12 text-center">
                 <span className="mx-auto block h-10 w-10 rotate-45 border border-gold" />
                 <h2 className="mt-8 font-display text-3xl font-light text-ink">
                   {schema.successTitle}
@@ -129,7 +168,7 @@ export default function Contact() {
                   {schema.successNote}
                 </p>
                 <p className="mt-8 text-[10px] uppercase tracking-[0.2em] text-ink/50">
-                  Preview build — submissions aren&rsquo;t sent anywhere yet
+                  Reference: {receipt?.id}
                 </p>
                 <button
                   data-testid="contact-send-another"
@@ -152,6 +191,7 @@ export default function Contact() {
                       key={t.id}
                       data-testid={`contact-type-${t.id}`}
                       onClick={() => pick(t.id)}
+                      disabled={status === "submitting"}
                       className={`border px-4 py-3 text-left text-[12px] leading-snug tracking-[0.06em] transition-colors duration-300 ${
                         typeId === t.id
                           ? "border-olive bg-olive text-cream"
@@ -180,6 +220,8 @@ export default function Contact() {
                           <Field
                             key={f.id}
                             f={f}
+                            invalid={error?.fields?.includes(f.id)}
+                            disabled={status === "submitting"}
                             value={values[f.id] || ""}
                             onChange={(e) =>
                               setValues((v) => ({ ...v, [f.id]: e.target.value }))
@@ -187,12 +229,22 @@ export default function Contact() {
                           />
                         ))}
                       </div>
+                      <div className="hidden" aria-hidden="true">
+                        <label htmlFor="contact-website">Leave this field blank</label>
+                        <input id="contact-website" name="website" value={website} onChange={e => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
+                      </div>
+                      <p className="mt-6 text-sm text-ink/75">We use your details to respond to this enquiry. Read our <Link className="underline" to="/privacy">Privacy Policy</Link>.</p>
+                      {status === "error" && <div id="contact-status" ref={statusRef} tabIndex={-1} role="alert" className="mt-6 text-sm text-red-800">
+                        <p>{error?.message || "We could not confirm your submission. Please try again."}</p>
+                        {schema.fields.filter(f => error?.fields?.includes(f.id)).map(f => <p key={f.id}>{f.label}: please check this value.</p>)}
+                      </div>}
                       <button
+                        disabled={status === "submitting"}
                         type="submit"
                         data-testid="contact-submit"
                         className="btn-primary mt-12 w-full md:w-auto"
                       >
-                        Send Message
+                        {status === "submitting" ? "Sending…" : "Send Message"}
                       </button>
                     </motion.form>
                   )}
