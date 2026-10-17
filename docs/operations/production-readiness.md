@@ -22,7 +22,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 1: Record the baseline and a traceable acceptance ledger | complete | Baseline source/status inspected; plan committed. |
 | 2: Stop tracking environment files and define safe configuration templates | complete | Ignored local files retained; templates and configuration/exposure review recorded. |
 | 3: Make clean installation independent of Emergent | complete | Python 3.12.15 fresh pinned install passes dependency check; Node 22.23.3 frozen Yarn install and production build passed. Development server compiled and HTTP smoke passed at 4300. Existing Yarn override/peer warnings retained. |
-| 4: Introduce validated settings and an app factory | not_started | Pending. |
+| 4: Introduce validated settings and an app factory | complete | 24 configuration/lifecycle tests passed after observed missing-feature failures. No import-time database access; startup/shutdown cleanup verified. TestClient emits upstream httpx deprecation warnings. |
 | 5: Build isolated real-Mongo test fixtures | not_started | Pending. |
 | 6: Extract the nine-type contract without changing visible form fields | not_started | Pending. |
 | 7: Validate and normalize enquiry payloads | not_started | Pending. |
