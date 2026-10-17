@@ -19,9 +19,12 @@ LOCATIONS=[('enquiries','ops_email',False),('enquiries','slack',False),
 
 class Worker:
     def __init__(self,repo,settings,client,clock,adapter_factory=None):
+        if not logger.hasHandlers():
+            handler=logging.StreamHandler();handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'));logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
         self.repo=repo;self.settings=settings;self.client=client;self.clock=clock
         self.outbox=Outbox(repo,settings,clock);self.id=str(uuid4())
-        self.stopping=asyncio.Event();self.task=None;self.last_heartbeat=None
+        self.stopping=asyncio.Event();self.task=None;self.last_heartbeat=None;self.last_metrics=None
         self.semaphore=asyncio.Semaphore(2)
         self.adapters={c:(adapter_factory(c) if adapter_factory else self.adapter(c)) for c in ('ops_email','confirmation_email','slack')}
 
@@ -84,6 +87,12 @@ class Worker:
         results=await asyncio.gather(*(self.deliver(*location) for location in LOCATIONS),return_exceptions=True)
         for result in results:
             if isinstance(result,BaseException):raise result
+        if self.last_metrics is None or (self.clock()-self.last_metrics).total_seconds()>=30:
+            from scripts.outbox_admin import summary
+            metrics=await summary(self.repo,self.clock())
+            logger.info('delivery_metrics pending=%s oldest_due_seconds=%s dead=%s unknown=%s heartbeat_age_seconds=%s',
+                metrics['pending'],metrics['oldest_due_seconds'],metrics['dead'],metrics['unknown'],metrics['heartbeat_age_seconds'])
+            self.last_metrics=self.clock()
 
     async def deliver(self,collection,channel,history):
         async with self.semaphore:

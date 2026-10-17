@@ -91,3 +91,17 @@ def test_lifespan_worker_failure_changes_readiness(settings,clock,provider_facto
         assert client.get('/api/health/ready').status_code==200
         client.portal.call(client.app.state.worker.stop)
         assert client.get('/api/health/ready').status_code==503
+
+@pytest.mark.asyncio
+async def test_worker_emits_aggregate_metrics_without_payload(settings,clock,caplog):
+    import logging
+    from worker import Worker
+    repo,outbox,doc=await prepare(settings,clock)
+    class Adapter:
+        async def send(self,job):return Outcome('simulated','local')
+    worker=Worker(repo,settings,None,clock,adapter_factory=lambda c:Adapter())
+    try:
+        with caplog.at_level(logging.INFO):await worker.tick()
+        assert 'delivery_metrics' in caplog.text and 'pending=0' in caplog.text
+        assert 'synthetic' not in caplog.text
+    finally:await repo.close()
