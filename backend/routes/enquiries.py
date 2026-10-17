@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from models import normalize_enquiry, payload_hash, IntakeValidationError
 from delivery_models import new_job
 from abuse import enforce_limits, reject_honeypot
+from bot_verification import verify_token
 
 router=APIRouter(prefix='/api')
 
@@ -27,6 +28,7 @@ async def submit(request: Request):
     existing=await state.repository.lookup_enquiry(key,digest)
     if existing:
         return JSONResponse(existing.receipt,status_code=200,headers={'Cache-Control':'no-store'})
+    await verify_token(state.settings,state.providers,normalized['turnstile_token'],'enquiry')
     reference=str(uuid4());now=state.clock()
     factory=getattr(state,'enquiry_job_factory',initial_jobs)
     jobs=factory(normalized,reference,state.settings,now)
