@@ -42,6 +42,7 @@ class MongoRepository:
         await self.db.enquiries.create_index('received_at')
         await self.db.newsletter_subscribers.create_index('email',unique=True)
         await self.db.newsletter_subscribers.create_index('state')
+        await self.db.newsletter_subscribers.create_index([('job_history.state',1),('job_history.next_attempt_at',1),('job_history.lease_until',1)])
         await self.db.rate_limits.create_index('expires_at',expireAfterSeconds=0)
         await self.db.service_heartbeats.create_index('expires_at',expireAfterSeconds=0)
         for name in COLLECTIONS:
