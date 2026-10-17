@@ -38,8 +38,8 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 17: Expose safe newsletter endpoints | complete | Six API tests passed for generic signup receipts, explicit POST actions, safe token errors, DB failure, action limits and honeypot; 32 newsletter tests passed together. |
 | 18: Claim due jobs with expiring leases and fenced completion | complete | Ten real-Mongo lease tests passed: competing workers, expiry/recovery, stale completion, historical jobs and generation changes. |
 | 19: Build immutable, escaped notification payloads | complete | Thirteen rendering tests and dependent intake/newsletter tests passed. Email escapes field content; Slack contains only type/time/reference; newsletter links use fragments. No placeholder payloads remain in production builders. |
-| 20: Implement the Resend adapter and its error classification | not_started | Pending. |
-| 21: Implement the Slack adapter independently | not_started | Pending. |
+| 20: Implement the Resend adapter and its error classification | complete | Eleven HTTP transport tests pass: fixed endpoint/key/payload, acceptance ID, retry classification, ambiguous timeout and bounded Retry-After. No live email sent. |
+| 21: Implement the Slack adapter independently | complete | Eleven HTTP transport tests pass: approved destination, fixed timeout, response classification and webhook log redaction. Ambiguous retries can duplicate Slack messages; stable references support reconciliation. |
 | 22: Persist retry schedules and isolate provider failures | not_started | Pending. |
 | 23: Run and supervise the worker inside app lifespan | not_started | Pending. |
 | 24: Add private delivery diagnostics and guarded recovery commands | not_started | Pending. |
