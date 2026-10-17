@@ -19,7 +19,7 @@ def test_missing_indexes_are_not_ready(client):
 
 def test_template_and_public_data_routes_are_absent(client):
     for path in ('/api/status','/api/enquiries','/api/submissions','/api/newsletter/subscribers'):
-        assert client.get(path).status_code==404
+        assert client.get(path).status_code in (404,405)
     assert client.post('/api/status',json={'client_name':'test'}).status_code==404
 
 def test_production_has_no_documentation_routes():

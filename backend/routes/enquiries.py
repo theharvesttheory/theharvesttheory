@@ -1,0 +1,32 @@
+from uuid import UUID, uuid4
+from fastapi import APIRouter, Request
+from fastapi.responses import JSONResponse
+from models import normalize_enquiry, payload_hash, IntakeValidationError
+from delivery_models import new_job
+
+router=APIRouter(prefix='/api')
+
+def initial_jobs(normalized, reference, settings, now):
+    # A pending snapshot only; production rendering is wired before worker activation.
+    return {slot:new_job(slot,{'reference':reference,'type':normalized['type'],
+                              'rendering_pending':True},'initial',now)
+            for slot in ('ops_email','slack')}
+
+@router.post('/enquiries')
+async def submit(request: Request):
+    state=request.app.state
+    normalized=normalize_enquiry(await request.json(),allow_test_domains=state.settings.app_env!='production')
+    try:
+        key=str(UUID(request.headers.get('Idempotency-Key','')))
+    except ValueError:
+        raise IntakeValidationError('idempotency_key','A valid retry key is required.') from None
+    digest=payload_hash(normalized)
+    existing=await state.repository.lookup_enquiry(key,digest)
+    if existing:
+        return JSONResponse(existing.receipt,status_code=200,headers={'Cache-Control':'no-store'})
+    reference=str(uuid4());now=state.clock()
+    factory=getattr(state,'enquiry_job_factory',initial_jobs)
+    jobs=factory(normalized,reference,state.settings,now)
+    result=await state.repository.save_enquiry(normalized,key,digest,jobs,now,record_id=reference)
+    return JSONResponse(result.receipt,status_code=201 if result.created else 200,
+                        headers={'Cache-Control':'no-store'})

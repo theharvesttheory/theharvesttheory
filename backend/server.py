@@ -6,6 +6,8 @@ from fastapi import FastAPI
 from repository import MongoRepository
 from health import router as health_router
 from config import Settings
+from errors import register_handlers
+from routes.enquiries import router as enquiry_router
 
 def create_app(settings=None, repository_factory=None, provider_factory=None, clock=None):
     @asynccontextmanager
@@ -34,6 +36,8 @@ def create_app(settings=None, repository_factory=None, provider_factory=None, cl
     @app.get('/api/')
     async def identity():
         return {'service':'theharvesttheory'}
+    register_handlers(app)
+    app.include_router(enquiry_router)
     app.include_router(health_router)
     return app
 
