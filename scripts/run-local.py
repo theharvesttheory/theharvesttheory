@@ -26,6 +26,7 @@ def ensure_ports_free(ports):
     for port in ports:
         if not 1024<=port<=65535:raise ValueError('Invalid local port')
         with socket.socket() as probe:
+            probe.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
             try:probe.bind(('127.0.0.1',port))
             except OSError:
                 details=subprocess.run(['lsof','-nP',f'-iTCP:{port}','-sTCP:LISTEN'],capture_output=True,text=True).stdout if sys.platform=='darwin' else 'Inspect the listener with ss -ltnp.'
@@ -70,6 +71,7 @@ def supervise(args):
     env={**os.environ,'APP_ENV':'test','APP_GIT_SHA':state['sha'],'MONGO_URL':state['mongo_url'],'DB_NAME':state['database'],
          'CORS_ORIGINS':f'http://127.0.0.1:{front},http://localhost:{front}','PUBLIC_FRONTEND_URL':f'http://127.0.0.1:{front}',
          'NOTIFICATION_MODE':'fake','BOT_MODE':'fake','LOCAL_PROVIDER_BASE_URL':f'http://127.0.0.1:{provider}',
+         'HARVEST_LOCAL_FAULT_FILE':str(directory/'application-faults.json'),
          'WORKER_ENABLED':'true','IP_RATE_LIMIT':'500','GLOBAL_RATE_LIMIT':'5000','POLL_SECONDS':'0.5',
          'RESEND_API_KEY':'','SLACK_WEBHOOK_URL':'','TURNSTILE_SECRET_KEY':'','TRUSTED_PROXY_CIDRS':'',
          'SENDER_EMAIL':'harvest@example.test','NOTIFY_EMAILS':'team@example.test','SUPPORT_EMAIL':'team@example.test',
@@ -83,7 +85,7 @@ def supervise(args):
         children.append(child);state['children'][name]=child.pid;write_state(path,state)
     try:
         launch('provider',[sys.executable,str(ROOT/'backend/tests/support/provider_server.py'),'--port',str(provider),'--directory',str(directory)])
-        launch('api',[sys.executable,'-m','uvicorn','server:app','--app-dir','backend','--host','127.0.0.1','--port',str(api),'--workers','1','--no-proxy-headers','--no-access-log'])
+        launch('api',[sys.executable,'-m','uvicorn','local_test_app:app','--app-dir','backend/tests/support','--host','127.0.0.1','--port',str(api),'--workers','1','--no-proxy-headers','--no-access-log'])
         if state['frontend_mode']=='build':
             launch('frontend',[sys.executable,str(Path(__file__).resolve()),'serve-static','--port',str(front)])
         else:

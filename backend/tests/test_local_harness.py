@@ -35,3 +35,12 @@ def test_stop_refuses_unowned_or_reused_process(monkeypatch):
     monkeypatch.setattr(mod.os,'kill',lambda *args:calls.append(args))
     with pytest.raises(RuntimeError,match='ownership'):mod.stop_owned({'supervisor_pid':123,'token':'synthetic-token'})
     assert calls==[]
+
+def test_recently_closed_listener_is_reusable():
+    mod=launcher()
+    with socket.socket() as server:
+        server.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+        server.bind(('127.0.0.1',0));port=server.getsockname()[1];server.listen()
+        with socket.create_connection(('127.0.0.1',port)) as client:
+            connection,_=server.accept();connection.close();assert client.recv(1)==b''
+    mod.ensure_ports_free([port])
