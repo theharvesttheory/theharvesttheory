@@ -1,0 +1,81 @@
+name: Production release
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+env:
+  DEPLOYMENT_ENABLED: ${{ vars.DEPLOYMENT_ENABLED }}
+  PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
+  PUBLIC_FRONTEND_URL: ${{ vars.PUBLIC_FRONTEND_URL }}
+  REACT_APP_BACKEND_URL: ${{ vars.PUBLIC_API_URL }}
+  REACT_APP_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+  REACT_APP_TURNSTILE_MODE: live
+  RENDER_SERVICE_ID: ${{ vars.RENDER_SERVICE_ID }}
+  RENDER_PLAN: ${{ vars.RENDER_PLAN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/main' && vars.DEPLOYMENT_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv backend/.venv
+          backend/.venv/bin/pip install -r backend/requirements.txt
+          backend/.venv/bin/python scripts/verify-release.py --phase preflight --sha "$GITHUB_SHA"
+  ci:
+    needs: validate
+    uses: ./.github/workflows/ci.yml
+    with:
+      public_api_url: ${{ vars.PUBLIC_API_URL }}
+      turnstile_site_key: ${{ vars.TURNSTILE_SITE_KEY }}
+      build_target: production
+  deploy:
+    needs: ci
+    environment: production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+      - run: |
+          python -m venv backend/.venv
+          backend/.venv/bin/pip install -r backend/requirements.txt
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: frontend-release
+          path: frontend/build
+      - name: Verify the exact tested artifact before mutation
+        run: backend/.venv/bin/python scripts/verify-release.py --phase artifact --sha "$GITHUB_SHA"
+      - name: Deploy backend and wait for matching SHA and readiness
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          RENDER_API_TOKEN: ${{ secrets.RENDER_API_TOKEN }}
+        run: backend/.venv/bin/python scripts/deploy-render.py --sha "$GITHUB_SHA"
+      - name: Recheck backend before publishing frontend
+        run: backend/.venv/bin/python scripts/verify-release.py --phase backend --sha "$GITHUB_SHA"
+      - name: Upload tested Pages artifact without rebuilding
+        working-directory: frontend
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WRANGLER_SEND_METRICS: 'false'
+        run: npm exec --yes --package=wrangler@4.151.1 -- wrangler pages deploy build --project-name "$CLOUDFLARE_PAGES_PROJECT" --branch main --commit-hash "$GITHUB_SHA" --commit-dirty=false
+      - name: Verify public deployment bytes, headers and deep links
+        run: backend/.venv/bin/python scripts/verify-release.py --phase smoke --sha "$GITHUB_SHA"

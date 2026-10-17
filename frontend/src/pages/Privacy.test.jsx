@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Privacy from './Privacy';
 import Footer from '../components/Footer';
 import Contact from './Contact';
+jest.mock('../data/launch-config.json',()=>({businessApproved:false,privacyApproved:false,retentionApproved:false,enquiryDays:180,unconfirmedSignupDays:7,completedPayloadDays:7,jobOutcomeDays:30,ownerName:'',ownerAddress:'',privacyEmail:'',supportEmail:'',suppressionPolicy:'',instagramUrl:'',linkedinUrl:'',termsUrl:'',shippingUrl:'',faqUrl:''}));
 test('privacy explains actual intake and marks unresolved owner decisions',()=>{
  render(<MemoryRouter><Privacy /></MemoryRouter>);
  for(const label of ['Information we collect','How we use information','Service providers','Retention','Your choices and contact'])expect(screen.getByRole('heading',{name:label})).toBeInTheDocument();

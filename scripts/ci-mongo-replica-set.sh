@@ -23,14 +23,14 @@ printf '%s %s\n' "$container_id" "$owner" > "$state"
 cleanup_failed() { docker rm --force "$container_id" >/dev/null; rm -f "$state"; }
 trap cleanup_failed EXIT
 ready=false
-for attempt in {1..60}; do
+for _attempt in {1..60}; do
   if docker exec "$container_id" mongosh --quiet --port "$port" --eval 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)' >/dev/null 2>&1; then ready=true; break; fi
   sleep 1
 done
 [[ "$ready" == true ]] || { echo 'Mongo ping timed out' >&2; exit 1; }
 docker exec "$container_id" mongosh --quiet --port "$port" --eval "rs.initiate({_id:'rs0',members:[{_id:0,host:'127.0.0.1:$port'}]})" >/dev/null
 ready=false
-for attempt in {1..60}; do
+for _attempt in {1..60}; do
   if docker exec "$container_id" mongosh --quiet --port "$port" --eval 'quit(db.hello().isWritablePrimary ? 0 : 1)' >/dev/null 2>&1; then ready=true; break; fi
   sleep 1
 done
