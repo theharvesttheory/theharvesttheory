@@ -3,21 +3,13 @@ from datetime import timedelta
 from uuid import uuid4
 from pymongo.errors import DuplicateKeyError
 from models import normalize_newsletter
-from delivery_models import new_job
+from notifications.rendering import build_confirmation_job, build_newsletter_ops_jobs
 from errors import APIError
 from newsletter_tokens import verify_action_token, invalid_link
 
 RECEIPT={'status':'requested'}
 UNRESOLVED=['pending','sending','retry','unknown','dead']
 
-
-def initial_confirmation_job(record,settings,now):
-    return new_job('confirmation_email',{'reference':record['_id'],'rendering_pending':True},
-                   record['generation'],now)
-
-def initial_ops_jobs(record,settings,now):
-    return {slot:new_job(slot,{'reference':record['_id'],'rendering_pending':True},
-                         record['generation'],now) for slot in ('ops_email','slack')}
 
 def cancel_unfinished_confirmation():
     return {'$cond':[{'$in':['$jobs.confirmation_email.state',UNRESOLVED]},
@@ -26,7 +18,7 @@ def cancel_unfinished_confirmation():
 class NewsletterService:
     def __init__(self,repository,settings,clock,confirmation_factory=None,ops_factory=None):
         self.repo=repository;self.settings=settings;self.clock=clock
-        self.confirmation_factory=confirmation_factory or initial_confirmation_job
+        self.confirmation_factory=confirmation_factory or build_confirmation_job
         self.ops_factory=ops_factory
 
     async def request_signup(self,payload):
@@ -75,7 +67,7 @@ class NewsletterService:
         if not record or record['state']=='unsubscribed': raise invalid_link()
         if record['state']=='subscribed': return {'status':'subscribed'}
         if record['confirmation_expires_at']<=now: raise invalid_link()
-        jobs=(self.ops_factory or initial_ops_jobs)({**record,'state':'subscribed','confirmed_at':now},self.settings,now)
+        jobs=(self.ops_factory or build_newsletter_ops_jobs)({**record,'state':'subscribed','confirmed_at':now},self.settings,now)
         changes={'state':'subscribed','confirmed_at':now,
                  'jobs.confirmation_email.state':cancel_unfinished_confirmation(),
                  'jobs.confirmation_email.lease_owner':None,'jobs.confirmation_email.lease_until':None}
