@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from repository import MongoRepository
 from health import router as health_router
 from config import Settings
+from middleware import PublicBoundaryMiddleware, RuntimeCORSMiddleware
 from errors import register_handlers
 from routes.enquiries import router as enquiry_router
 
@@ -36,6 +37,8 @@ def create_app(settings=None, repository_factory=None, provider_factory=None, cl
     @app.get('/api/')
     async def identity():
         return {'service':'theharvesttheory'}
+    app.add_middleware(PublicBoundaryMiddleware)
+    app.add_middleware(RuntimeCORSMiddleware,settings_getter=lambda:app.state.settings)
     register_handlers(app)
     app.include_router(enquiry_router)
     app.include_router(health_router)

@@ -29,7 +29,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 8: Create Mongo repositories, indexes and truthful health endpoints | complete | Real unique-index/duplicate-write checks, index failure, DB outage, safe health/version and absent public data/docs routes passed. |
 | 9: Atomically save an enquiry with its pending jobs | complete | Four real-Mongo tests passed: atomic record/jobs, replay/conflict, ten concurrent retries, and lost acknowledgement after commit. |
 | 10: Expose enquiry creation with safe receipts and errors | complete | API tests pass for all nine types, UUID keys, replay/conflict, safe validation and database outage responses. Delivery snapshots await Task 19 rendering; no provider calls occur. |
-| 11: Bound public requests and configure CORS explicitly | not_started | Pending. |
+| 11: Bound public requests and configure CORS explicitly | complete | Eight boundary tests pass: byte/stream limits, media type, safe malformed/unexpected errors, exact CORS and non-browser validation. |
 | 12: Add shared rate limits and a honeypot | not_started | Pending. |
 | 13: Verify Turnstile server-side and handle safe retries | not_started | Pending. |
 | 14: Implement newsletter action tokens | not_started | Pending. |
