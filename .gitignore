@@ -83,3 +83,13 @@ android-sdk/
 
 # overlay black-box crash/user-report dumps — session data, never history
 **/.emergent/recordings/
+
+# Local application configuration and verification artifacts
+.env
+.env.*
+!.env.example
+frontend/build/
+.local/
+frontend/test-results/
+frontend/playwright-report/
+backend/.pytest_cache/

@@ -20,7 +20,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | Task | Status | Evidence |
 | --- | --- | --- |
 | 1: Record the baseline and a traceable acceptance ledger | complete | Baseline source/status inspected; plan committed. |
-| 2: Stop tracking environment files and define safe configuration templates | not_started | Pending. |
+| 2: Stop tracking environment files and define safe configuration templates | complete | Ignored local files retained; templates and configuration/exposure review recorded. |
 | 3: Make clean installation independent of Emergent | not_started | Pending. |
 | 4: Introduce validated settings and an app factory | not_started | Pending. |
 | 5: Build isolated real-Mongo test fixtures | not_started | Pending. |
