@@ -24,7 +24,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 3: Make clean installation independent of Emergent | complete | Python 3.12.15 fresh pinned install passes dependency check; Node 22.23.3 frozen Yarn install and production build passed. Development server compiled and HTTP smoke passed at 4300. Existing Yarn override/peer warnings retained. |
 | 4: Introduce validated settings and an app factory | complete | 24 configuration/lifecycle tests passed after observed missing-feature failures. No import-time database access; startup/shutdown cleanup verified. TestClient emits upstream httpx deprecation warnings. |
 | 5: Build isolated real-Mongo test fixtures | complete | Five real-Mongo/isolation guard tests pass with the unchanged two xdist workers; test-owned namespaces are dropped on teardown. |
-| 6: Extract the nine-type contract without changing visible form fields | not_started | Pending. |
+| 6: Extract the nine-type contract without changing visible form fields | complete | Three backend contract tests and frontend schema parity test pass after missing-contract failures; same field IDs, labels and required flags retained. |
 | 7: Validate and normalize enquiry payloads | not_started | Pending. |
 | 8: Create Mongo repositories, indexes and truthful health endpoints | not_started | Pending. |
 | 9: Atomically save an enquiry with its pending jobs | not_started | Pending. |

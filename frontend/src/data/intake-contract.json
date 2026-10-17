@@ -1,0 +1,396 @@
+{
+  "version": "2026-10-17",
+  "types": [
+    {
+      "id": "product-orders",
+      "label": "Product Orders",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        },
+        {
+          "id": "products",
+          "label": "Products",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "quantity",
+          "label": "Quantity",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "notes",
+          "label": "Notes",
+          "type": "textarea",
+          "maxLength": 5000
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "label": "General Enquiries",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "message",
+          "label": "Message",
+          "type": "textarea",
+          "required": true,
+          "maxLength": 5000
+        }
+      ]
+    },
+    {
+      "id": "retail",
+      "label": "Retail / Distribution",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "maxLength": 160
+        },
+        {
+          "id": "city",
+          "label": "City / region",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "business",
+          "label": "Type of business",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "products",
+          "label": "Products of interest",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "volume",
+          "label": "Expected volume",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "gifting",
+      "label": "Corporate Gifting",
+      "fields": [
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "occasion",
+          "label": "Occasion",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "quantity",
+          "label": "Quantity",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "date",
+          "label": "Expected date",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "customisation",
+          "label": "Customisation requirements",
+          "type": "textarea",
+          "maxLength": 5000
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "label": "Export Enquiries",
+      "fields": [
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "country",
+          "label": "Country",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "status",
+          "label": "Distributor / importer status",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "products",
+          "label": "Product interest",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "volume",
+          "label": "Estimated volume",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "collaborations",
+      "label": "Collaborations",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "maxLength": 160
+        },
+        {
+          "id": "about",
+          "label": "About the collaboration",
+          "type": "textarea",
+          "maxLength": 5000
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "press",
+      "label": "Press / Media",
+      "fields": [
+        {
+          "id": "publication",
+          "label": "Publication / company",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "subject",
+          "label": "Subject",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "deadline",
+          "label": "Deadline",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "wholesale",
+      "label": "Wholesale",
+      "fields": [
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "products",
+          "label": "Products of interest",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "volume",
+          "label": "Expected volume",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    },
+    {
+      "id": "sourcing",
+      "label": "Sourcing Partnerships",
+      "fields": [
+        {
+          "id": "company",
+          "label": "Company",
+          "type": "text",
+          "required": true,
+          "maxLength": 160
+        },
+        {
+          "id": "offering",
+          "label": "Ingredient / product offered",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "origin",
+          "label": "Origin",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "certifications",
+          "label": "Certifications",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "capacity",
+          "label": "Capacity",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true,
+          "maxLength": 254
+        },
+        {
+          "id": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "maxLength": 40
+        }
+      ]
+    }
+  ]
+}
