@@ -3,6 +3,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from models import normalize_enquiry, payload_hash, IntakeValidationError
 from delivery_models import new_job
+from abuse import enforce_limits, reject_honeypot
 
 router=APIRouter(prefix='/api')
 
@@ -15,7 +16,9 @@ def initial_jobs(normalized, reference, settings, now):
 @router.post('/enquiries')
 async def submit(request: Request):
     state=request.app.state
+    await enforce_limits(request)
     normalized=normalize_enquiry(await request.json(),allow_test_domains=state.settings.app_env!='production')
+    reject_honeypot(normalized)
     try:
         key=str(UUID(request.headers.get('Idempotency-Key','')))
     except ValueError:

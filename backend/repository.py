@@ -3,7 +3,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from uuid import uuid4
 from pymongo.errors import DuplicateKeyError
-from pymongo import AsyncMongoClient
+from pymongo import AsyncMongoClient, ReturnDocument
 from pymongo.write_concern import WriteConcern
 
 JOB_SLOTS=('ops_email','slack','confirmation_email')
@@ -81,3 +81,14 @@ class MongoRepository:
             if existing is None:
                 raise
             return existing
+
+    async def increment_rate(self, key, expires_at):
+        query={'_id':key}
+        update={'$inc':{'count':1},'$setOnInsert':{'expires_at':expires_at}}
+        try:
+            result=await self.db.rate_limits.find_one_and_update(query,update,upsert=True,
+                                                                 return_document=ReturnDocument.AFTER)
+        except DuplicateKeyError:
+            result=await self.db.rate_limits.find_one_and_update(query,{'$inc':{'count':1}},
+                                                                 return_document=ReturnDocument.AFTER)
+        return result['count']

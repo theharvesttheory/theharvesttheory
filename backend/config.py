@@ -3,6 +3,7 @@ from dataclasses import dataclass, field, fields
 from pathlib import Path
 from urllib.parse import urlsplit
 import os
+import ipaddress
 import re
 from dotenv import dotenv_values
 
@@ -86,6 +87,12 @@ class Settings:
         require(self.notification_mode in ('fake','live') and self.bot_mode in ('fake','turnstile'), 'Invalid delivery/bot mode')
         require(self.cors_origins and all(origin(x,prod) and not x.endswith('/') for x in self.cors_origins), 'CORS_ORIGINS must be exact origins')
         require(origin(self.public_frontend_url,prod), 'Invalid PUBLIC_FRONTEND_URL')
+        for cidr in self.trusted_proxy_cidrs:
+            try:
+                network=ipaddress.ip_network(cidr)
+                require(network.prefixlen>0, 'Proxy trust cannot cover the entire internet')
+            except ValueError:
+                raise ConfigurationError('Invalid TRUSTED_PROXY_CIDRS') from None
         if self.local_provider_base_url:
             require(origin(self.local_provider_base_url) and urlsplit(self.local_provider_base_url).hostname in ('localhost','127.0.0.1','::1'), 'Local provider must be loopback')
         require(1 <= self.max_attempts <= 8 and self.lease_seconds > self.http_timeout_seconds * 2 and self.poll_seconds <= 10, 'Invalid worker bounds')

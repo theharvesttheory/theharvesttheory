@@ -517,7 +517,7 @@ permissions:
 1. Write a blueprint with repository-root context, build command `pip install -r backend/requirements.txt`, start command below, `/api/health/ready` health check, auto-deploy disabled, and secret references using manual input (`sync: false`) rather than real values. Document the proposed always-on plan/region without applying the blueprint or purchasing resources.
 
 ```bash
-uvicorn server:app --app-dir backend --host 0.0.0.0 --port "$PORT" --workers 1
+uvicorn server:app --app-dir backend --host 0.0.0.0 --port "$PORT" --workers 1 --no-proxy-headers
 ```
 
 2. Test deploy helper input validation, pinning the chosen SHA, a hook `200` with deploy ID, `202` without one, failed deployment, timeout and a healthy older SHA. Run `.venv/bin/python -m pytest tests/test_render_deploy.py -v`; expect helper missing.

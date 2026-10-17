@@ -43,3 +43,7 @@ No runtime provider secret belongs in `REACT_APP_*`, a Pages build artifact or a
 ## Runtime isolation
 
 Use Python 3.12 in `backend/.venv-intake` for this implementation. The old `.venv` is left intact while the previously started backend is running. Replace `.venv/bin/python` with `.venv-intake/bin/python` in plan commands. Node 22 and Yarn 1.22.22 are the frontend targets. Runtime dependency pins are compiled from requirements.in; dev pins include runtime pins. The optional image generator is excluded from web installation.
+
+## Proxy boundary
+
+Start Uvicorn with `--no-proxy-headers`. The app interprets X-Forwarded-For only when the original socket peer belongs to configured TRUSTED_PROXY_CIDRS, walking from the right through trusted hops. Keep this list empty locally. Final Render setup must verify the actual proxy addresses/header behavior before claiming client-specific rate enforcement. Never trust a blanket 0.0.0.0/0 or ::/0.
