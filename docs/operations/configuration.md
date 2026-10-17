@@ -55,3 +55,13 @@ Rotating NEWSLETTER_SIGNING_KEY invalidates outstanding confirmation and unsubsc
 Frontend builds now require `REACT_APP_TURNSTILE_MODE=live`, a public site key and an explicit API origin. Use `BUILD_TARGET=local` with a loopback API and a test-only intercepted widget script for local release-bundle verification. Fake mode is only allowed by the development server/tests, never by the release build. Widget implementation follows [Cloudflare explicit rendering](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/), checked 2026-10-17.
 
 Retention runs are private CLI operations, read-only by default. Configure reviewed day values with explicit CLI options and require `--database`, `--policy-approved` and `--apply` for scheduled retention. See [data lifecycle and restore](data-retention-and-recovery.md). Active terminal slots retain minimal dedupe markers after detailed outcome expiry; historical completed slots are removed. No automatic subscribed/suppression deletion schedule is enabled.
+
+## CI and Pages artifact identity
+
+CI uses a pinned Mongo 8.0.17 image as a single-node replica set, fresh dependencies, backend/frontend tests and desktop/mobile browser flows. The manifest binds the commit SHA, approved public configuration and every artifact file's checksum. Deployment must download that exact artifact without rebuilding. Production-configured browser checks forward only the configured API origin to an isolated real local API; Turnstile/provider HTTP remains simulated. This proves local behavior, not provider connectivity.
+
+Cloudflare Direct Upload serves `frontend/build`. The build creates an API-specific CSP, allows the existing Google fonts and same-origin images, and disables caching/indexing on newsletter action routes. With no top-level `404.html`, Pages provides native SPA fallback; `_redirects` deliberately has no catch-all rewrite that could shadow real assets. [Pages serving behavior](https://developers.cloudflare.com/pages/configuration/serving-pages/) and [headers](https://developers.cloudflare.com/pages/configuration/headers/) were checked on 2026-10-17.
+
+Local Pages verification uses Wrangler 4.151.1 (`wrangler pages dev frontend/build --ip 127.0.0.1 --port 4400 --compatibility-date 2026-10-12`). All 92 desktop/mobile browser checks passed against this local Pages runtime, plus direct header/asset checks. Actual Pages edge headers, TLS and custom domains remain final activation checks.
+
+The disabled monitor checks liveness, readiness and delivery health every five minutes after `DEPLOYMENT_ENABLED=true`. GitHub schedules are best effort; assign workflow-failure notification ownership, verify alert receipt and inspect the queue daily. This is not a realtime monitoring SLA.

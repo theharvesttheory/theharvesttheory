@@ -1,0 +1,3 @@
+# Pages native SPA fallback serves index.html for non-asset paths when no
+# top-level 404.html is present. No catch-all rewrite shadows real assets.
+# Canonical-domain redirects are configured only after the final domain is reviewed.

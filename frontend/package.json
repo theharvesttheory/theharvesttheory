@@ -63,7 +63,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "node scripts/check-build-config.cjs && craco build",
+    "build": "node scripts/check-build-config.cjs && craco build && node scripts/prepare-static.cjs",
     "test": "craco test",
     "test:e2e": "playwright test"
   },
