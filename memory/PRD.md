@@ -180,6 +180,14 @@ Build a premium consumer food and wellness brand website for The Harvest Theory 
 - Shiva Chaitanya's portrait added (founders/shiva.jpg, from "Shiv founder pic.png") — all three founders now show real portraits; placeholder path retained in Story.jsx as fallback for any future null image
 - Vartika's portrait replaced with the newer upload (brown blazer version) — same vartika.jpg filename, drop-in replacement, no code change
 
+## Implemented (2026-10-14f) — product image replacement (PAUSED, nothing shipped)
+- User requested a cohesive replacement of all 13 product images (one photographic system: pack as hero + prepared drink + loose product + 1-2 props, warm cream plaster/sage/stone studio world, 4:3 landscape); brief said change NOTHING else on the site
+- Built /app/backend/scripts/generate_product_images.py (emergentintegrations + EMERGENT_LLM_KEY in backend/.env): passes each current pack image as reference to keep packaging, one shared art-direction block + per-product direction, post-crops to 4:3
+- gemini-3-pro-image-preview blocked on universal key (heavy-model credit tier); gemini-3.1-flash-image-preview worked — 10/13 generated (root-and-leaf, lopchu, coco-matcha, woodland-brew, teesi, crimson-berry, blue-spice, golden-glow, dream-weaver, minty-lemon), quality verified premium and cohesive (minor AI artefacts in tiny label fine-print only, invisible at display sizes)
+- Remaining 3 (blue-magic, floral-blends, dhaba-delight) blocked: universal key budget cap hit mid-run — user must top up (Profile → Manage plan → Universal Key → Add Balance)
+- USER DECISION: keep the site as is for now — NO images swapped, site verified untouched (git status clean of modifications); the 10 finished images preserved at /app/product_images_staged/ so only 3 need generating when the key is topped up, then copy all into frontend/public/images/products/ (same filenames) + update product alt text + verify
+- To resume: top up key → run script for the 3 missing slugs → swap 13 files → screenshot products grid + detail page
+
 ## Backlog
 - P1: Real pricing (placeholders ₹ 320–₹ 550 currently shown) + real provenance data (field exists, blank); real founder portraits; FSSAI details
 - P1: Journal growth — provenance-led stories on turmeric, lemongrass, moringa, matcha and the farms/suppliers behind THT ingredients (user direction); backend for contact/orders → email → Slack integration → Slackbot reconciliation (form schemas ready)
