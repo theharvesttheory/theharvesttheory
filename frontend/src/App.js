@@ -14,6 +14,7 @@ import CollectionDetail from "@/pages/CollectionDetail";
 import Approach from "@/pages/Approach";
 import Story from "@/pages/Story";
 import Contact from "@/pages/Contact";
+import NewsletterAction from "@/pages/NewsletterAction";
 import Journal from "@/pages/Journal";
 import JournalArticle from "@/pages/JournalArticle";
 import { IntroContext, lenisRef } from "@/context/app";
@@ -51,6 +52,8 @@ function AnimatedRoutes() {
         <Route path="/approach" element={<Approach />} />
         <Route path="/story" element={<Story />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/newsletter/confirm" element={<NewsletterAction action="confirm" />} />
+        <Route path="/newsletter/unsubscribe" element={<NewsletterAction action="unsubscribe" />} />
         <Route path="/journal" element={<Journal />} />
         <Route path="/journal/:slug" element={<JournalArticle />} />
         <Route path="*" element={<Home />} />
