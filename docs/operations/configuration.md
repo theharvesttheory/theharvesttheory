@@ -47,3 +47,7 @@ Use Python 3.12 in `backend/.venv-intake` for this implementation. The old `.ven
 ## Proxy boundary
 
 Start Uvicorn with `--no-proxy-headers`. The app interprets X-Forwarded-For only when the original socket peer belongs to configured TRUSTED_PROXY_CIDRS, walking from the right through trusted hops. Keep this list empty locally. Final Render setup must verify the actual proxy addresses/header behavior before claiming client-specific rate enforcement. Never trust a blanket 0.0.0.0/0 or ::/0.
+
+## Newsletter signing-key rotation
+
+Rotating NEWSLETTER_SIGNING_KEY invalidates outstanding confirmation and unsubscribe links. Keep the current key stable during normal releases. If a key is exposed, rotate it, preserve subscription state, and let users request fresh confirmation; operators handle unsubscribe requests through the reviewed private data workflow. Tokens have fixed HS256/issuer/audience/purpose and no email claim.
