@@ -48,7 +48,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 27: Connect newsletter signup with explicit consent and honest copy | complete | Component tests pass for unchecked required consent, duplicate-click prevention, pending state, keyboard operation, focused errors and retained values. Success asks the visitor to check email for confirmation. |
 | 28: Add explicit newsletter confirmation and unsubscribe pages | complete | Three action-page tests pass: explicit POST only, fragment removal, StrictMode token preservation, metadata and invalid/expired-link recovery. |
 | 29: Integrate the challenge widget without losing retry state | complete | Twenty widget/build/form tests pass: shared loader, separate actions, expiry/cleanup, visible errors, fresh-token retries retaining the UUID, and release rejection of fake/missing widget configuration. Genuine Turnstile remains a provider gate. |
-| 30: Provide the intake privacy page and review business-facing copy | not_started | Pending. |
+| 30: Provide the intake privacy page and review business-facing copy | complete | Privacy route/link and production approval-guard tests pass; all 38 frontend tests pass. Owner identity, contacts, retention and business facts remain explicitly pending in the launch checklist. Desktop/mobile proof is Task 32. |
 | 31: Provide a repeatable local stack and deterministic provider simulator | not_started | Pending. |
 | 32: Exercise every form through a real browser, API and database | not_started | Pending. |
 | 33: Prove recovery after restart, outage and ambiguous acknowledgement | not_started | Pending. |

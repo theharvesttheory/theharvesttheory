@@ -1,0 +1,19 @@
+{
+  "businessApproved": false,
+  "privacyApproved": false,
+  "ownerName": "",
+  "ownerAddress": "",
+  "privacyEmail": "",
+  "supportEmail": "",
+  "retentionApproved": false,
+  "enquiryDays": 180,
+  "unconfirmedSignupDays": 7,
+  "completedPayloadDays": 7,
+  "jobOutcomeDays": 30,
+  "suppressionPolicy": "",
+  "instagramUrl": "",
+  "linkedinUrl": "",
+  "termsUrl": "",
+  "shippingUrl": "",
+  "faqUrl": ""
+}

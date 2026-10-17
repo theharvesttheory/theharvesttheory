@@ -1,4 +1,5 @@
 import Newsletter from "./Newsletter";
+import { launch } from "@/data/privacy";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Logo from "./Logo";
@@ -21,11 +22,11 @@ const trust = [
   { label: "Export enquiries", to: "/contact" },
 ];
 
-const legal = ["Privacy Policy", "Terms", "Shipping & Returns", "FAQ"];
+const legal = [{label:"Privacy Policy",to:"/privacy"}, {label:"Terms",to:launch.termsUrl}, {label:"Shipping & Returns",to:launch.shippingUrl}, {label:"FAQ",to:launch.faqUrl}];
 
 const social = [
-  { label: "Instagram", testid: "footer-social-instagram" },
-  { label: "LinkedIn", testid: "footer-social-linkedin" },
+  { label: "Instagram", to:launch.instagramUrl, testid: "footer-social-instagram" },
+  { label: "LinkedIn", to:launch.linkedinUrl, testid: "footer-social-linkedin" },
 ];
 
 export default function Footer() {
@@ -101,24 +102,11 @@ export default function Footer() {
               <ul className="mt-6 space-y-3 font-light">
                 {social.map((s) => (
                   <li key={s.label}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      data-testid={s.testid}
-                      className="text-cream/90 transition-colors duration-300 hover:text-gold"
-                    >
-                      {s.label}
-                    </a>
+                    {s.to ? <a href={s.to} data-testid={s.testid} className="text-cream/90 hover:text-gold">{s.label}</a> : <span data-testid={s.testid} className="text-cream/70">{s.label} — coming soon</span>}
                   </li>
                 ))}
                 <li>
-                  <a
-                    href="mailto:hello@theharvesttheory.com"
-                    data-testid="footer-email"
-                    className="text-cream/90 transition-colors duration-300 hover:text-gold"
-                  >
-                    hello@theharvesttheory.com
-                  </a>
+                  {launch.supportEmail ? <a href={`mailto:${launch.supportEmail}`} data-testid="footer-email" className="text-cream/90 hover:text-gold">{launch.supportEmail}</a> : <span data-testid="footer-email" className="text-cream/70">Support contact pending owner review</span>}
                 </li>
               </ul>
             </FadeUp>
@@ -126,17 +114,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-cream/10 pt-8">
-          {legal.map((l) => (
-            <a
-              key={l}
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              data-testid={`footer-legal-${l.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
-              className="text-[11px] uppercase tracking-[0.18em] text-cream/55 transition-colors duration-300 hover:text-cream"
-            >
-              {l}
-            </a>
-          ))}
+          {legal.map(l => {
+            const props = {"data-testid":`footer-legal-${l.label.toLowerCase().replace(/\s+&?\s*/g,"-")}`,className:"text-[11px] uppercase tracking-[0.18em] text-cream/70"};
+            return l.to ? <Link key={l.label} to={l.to} {...props}>{l.label}</Link> : <span key={l.label} {...props}>{l.label} — coming soon</span>;
+          })}
         </div>
 
         <div className="mt-8 flex flex-col md:flex-row md:items-end justify-between gap-8">

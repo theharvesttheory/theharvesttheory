@@ -14,6 +14,7 @@ import CollectionDetail from "@/pages/CollectionDetail";
 import Approach from "@/pages/Approach";
 import Story from "@/pages/Story";
 import Contact from "@/pages/Contact";
+import Privacy from "@/pages/Privacy";
 import NewsletterAction from "@/pages/NewsletterAction";
 import Journal from "@/pages/Journal";
 import JournalArticle from "@/pages/JournalArticle";
@@ -51,6 +52,7 @@ function AnimatedRoutes() {
         <Route path="/collections/:slug" element={<CollectionDetail />} />
         <Route path="/approach" element={<Approach />} />
         <Route path="/story" element={<Story />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/newsletter/confirm" element={<NewsletterAction action="confirm" />} />
         <Route path="/newsletter/unsubscribe" element={<NewsletterAction action="unsubscribe" />} />
