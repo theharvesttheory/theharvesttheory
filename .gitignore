@@ -93,3 +93,4 @@ frontend/build/
 frontend/test-results/
 frontend/playwright-report/
 backend/.pytest_cache/
+.venv-intake/

@@ -40,3 +40,6 @@ Templates contain names and safe local examples, never actual production credent
 
 No runtime provider secret belongs in `REACT_APP_*`, a Pages build artifact or a CI artifact. No password is needed for Gmail under the selected architecture. The production environment and Pages project are prepared in code locally but created/configured only at final activation.
 
+## Runtime isolation
+
+Use Python 3.12 in `backend/.venv-intake` for this implementation. The old `.venv` is left intact while the previously started backend is running. Replace `.venv/bin/python` with `.venv-intake/bin/python` in plan commands. Node 22 and Yarn 1.22.22 are the frontend targets. Runtime dependency pins are compiled from requirements.in; dev pins include runtime pins. The optional image generator is excluded from web installation.

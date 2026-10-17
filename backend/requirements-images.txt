@@ -1,0 +1,6 @@
+# Optional legacy offline generator only. Not installed by the web service.
+# emergentintegrations requires the original vendor registry; not on default PyPI.
+# This script also uses /app paths and paid provider credentials; do not run implicitly.
+emergentintegrations==0.2.2
+Pillow>=11,<13
+python-dotenv>=1,<2
