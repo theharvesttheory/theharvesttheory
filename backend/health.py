@@ -13,6 +13,9 @@ async def live():
 async def ready(request: Request):
     repo=request.app.state.repository
     healthy=repo.indexes_ready
+    worker=request.app.state.worker
+    if request.app.state.settings.worker_enabled:
+        healthy=healthy and worker is not None and worker.healthy()
     try:
         await repo.ping()
     except PyMongoError:

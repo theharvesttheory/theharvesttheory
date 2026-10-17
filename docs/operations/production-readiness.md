@@ -41,7 +41,7 @@ Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md
 | 20: Implement the Resend adapter and its error classification | complete | Eleven HTTP transport tests pass: fixed endpoint/key/payload, acceptance ID, retry classification, ambiguous timeout and bounded Retry-After. No live email sent. |
 | 21: Implement the Slack adapter independently | complete | Eleven HTTP transport tests pass: approved destination, fixed timeout, response classification and webhook log redaction. Ambiguous retries can duplicate Slack messages; stable references support reconciliation. |
 | 22: Persist retry schedules and isolate provider failures | complete | Twelve retry tests plus ten lease tests pass, including independent channels, bounded jitter/Retry-After, attempt/23-hour limits, historical jobs and lost completion. Ambiguous exhausted jobs remain paused for reconciliation. |
-| 23: Run and supervise the worker inside app lifespan | not_started | Pending. |
+| 23: Run and supervise the worker inside app lifespan | complete | Five worker tests plus eight lifecycle/health tests pass: overlapping workers, independent channels, transient DB recovery, bounded shutdown and failed-loop readiness. Local HTTP adapter only reports simulated delivery. |
 | 24: Add private delivery diagnostics and guarded recovery commands | not_started | Pending. |
 | 25: Add one API client with bounded timeouts and deliberate retry keys | not_started | Pending. |
 | 26: Replace Contact's local success toggle with durable submission states | not_started | Pending. |

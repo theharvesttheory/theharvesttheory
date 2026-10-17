@@ -59,7 +59,7 @@ def clock():
 @pytest.fixture
 def settings(mongo_url, database_name):
     from config import Settings
-    return Settings.from_env({'APP_ENV':'test','MONGO_URL':mongo_url,'DB_NAME':database_name})
+    return Settings.from_env({'APP_ENV':'test','MONGO_URL':mongo_url,'DB_NAME':database_name,'WORKER_ENABLED':'false'})
 
 @pytest.fixture
 def captured_requests():
