@@ -1,6 +1,6 @@
 {
   "businessApproved": true,
-  "privacyApproved": false,
+  "privacyApproved": true,
   "ownerName": "The Harvest Theory",
   "ownerAddress": "Jakkur, Bengaluru 560064",
   "privacyEmail": "contact@theharvesttheory.com",
@@ -10,8 +10,8 @@
   "unconfirmedSignupDays": 7,
   "completedPayloadDays": 7,
   "jobOutcomeDays": 30,
-  "suppressionPolicy": "",
-  "instagramUrl": "",
+  "suppressionPolicy": "We retain newsletter email and consent records while you remain subscribed. After you unsubscribe, we retain the email address and minimal consent and opt-out records to honor your preference until a verified deletion request or closure of the newsletter service. These records are not used to send marketing messages without renewed confirmed consent. Where backup copies are created, our retention limit is 30 days; deleted information may remain in those restricted copies until expiry. Before restoring service from a backup, we reapply recorded deletions and opt-outs.",
+  "instagramUrl": "https://www.instagram.com/theharvesttheory/",
   "linkedinUrl": "",
   "termsUrl": "",
   "shippingUrl": "",

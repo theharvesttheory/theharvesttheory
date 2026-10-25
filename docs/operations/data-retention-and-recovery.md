@@ -1,6 +1,13 @@
 # Data lifecycle and restore procedures
 
-Production owner, policy approval, backup tier, encrypted-storage destination, recovery objectives and schedule remain pending final activation. Proposed values are not approved deletion instructions. Local verification uses synthetic data only.
+The owner approved the standard retention periods and delegated newsletter opt-out/backup policy defaults on 2026-10-25. The defaults below are now the selected operating policy. Backup mechanism/tier, encrypted-storage destination, execution owner, recovery objectives and schedule still require configuration and verification; policy approval does not create a backup or run deletion. Local verification uses synthetic data only.
+
+## Approved newsletter and backup defaults
+
+- Keep active newsletter email and consent records while subscribed. Keep minimal email, consent and opt-out records after unsubscribe until a verified deletion request or closure of the newsletter service. Renewed confirmed consent is required before future marketing; the current app does not include a campaign sender.
+- Honor verified deletion requests through the exact-record process below after reconciling unresolved deliveries. Apply the approved enquiry/payload/outcome periods to copies in email and other processors through their separate operating procedures; database deletion alone does not delete those copies.
+- Retain any application-managed backup for at most 30 days from creation. Restrict access, encrypt it and expire copies independently of database retention. Reapply recorded deletions and opt-outs before reopening a restored service. Do not restore removed contacts into a marketing list.
+- Backup cadence and storage are not yet configured. Use a daily backup as the setup target, with a recovery-point target of 24 hours; these are targets, not measured guarantees. Select a consistent mechanism compatible with the actual Atlas tier and the owner's no-paid-upgrade preference. Record failed/missed backups and verify a restore before claiming recovery readiness.
 
 ## Review and retention
 
@@ -10,9 +17,9 @@ Run from the repo root with a trusted backend environment. This workstation uses
 backend/.venv-intake/bin/python backend/scripts/data_admin.py retention --scope all --dry-run
 ```
 
-The default report contains counts, not personal fields or payloads. Proposed defaults: enquiries 180 days; unconfirmed signup generations 7 days; completed notification payloads 7 days; detailed delivery outcomes 30 days. Options `--enquiry-days`, `--pending-days`, `--payload-days`, `--outcome-days` make the reviewed policy explicit. A new signup generation starts its own pending-retention clock.
+The default report contains counts, not personal fields or payloads. Approved defaults: enquiries 180 days; unconfirmed signup generations 7 days; completed notification payloads 7 days; detailed delivery outcomes 30 days. Options `--enquiry-days`, `--pending-days`, `--payload-days`, `--outcome-days` make the reviewed policy explicit. A new signup generation starts its own pending-retention clock.
 
-Any active or historical pending/sending/retry/unknown/dead job prevents automatic record deletion and appears in `review_required`. Completed payloads can still be redacted independently. After 30 days, completed historical jobs are removed; active slots retain only a minimal identity/generation/channel/terminal-state marker so receipt deduplication and newsletter transitions remain safe. Detailed outcomes and payloads are removed. This minimal marker remains until parent-record deletion. Confirmed subscribers and unsubscribed suppression addresses are not automatically deleted by this initial policy; the owner must define their consent/suppression schedule before launch.
+Any active or historical pending/sending/retry/unknown/dead job prevents automatic record deletion and appears in `review_required`. Completed payloads can still be redacted independently. After 30 days, completed historical jobs are removed; active slots retain only a minimal identity/generation/channel/terminal-state marker so receipt deduplication and newsletter transitions remain safe. Detailed outcomes and payloads are removed. This minimal marker remains until parent-record deletion. Confirmed subscribers and unsubscribed suppression addresses are not automatically deleted by this policy; apply the approved consent/suppression defaults above and exact deletion on verified requests.
 
 After the owner has approved actual values, inspect a dry-run for the exact environment, record the operator/incident and apply with the exact configured database name:
 

@@ -8,6 +8,12 @@ The owner selected Free and authorized adapting deployment expectations. The [ad
 
 Baseline: `main` at `5ea0ba7494e41899c71cd366d93581cf271c8fe3` (2026-10-17). The active checkout is used as requested. Existing `.agents/`, `.pui/`, `graphify-out/` and `skills-lock.json` are preserved.
 
+## 2026-10-25 Owner configuration update
+
+Owner provided The Harvest Theory, Jakkur, Bengaluru 560064 and contact@theharvesttheory.com for support/privacy, approved the four standard retention periods, then explicitly authorized default privacy/opt-out/backup policy. Launch approval flags are now true; the initial notice specifies retention of active consent while subscribed, minimal opt-out records until verified deletion or service closure, and a maximum 30-day retention for backups where created. Instagram now links to the owner-supplied profile without the sharing query. Backup scheduling/storage, mailbox receipt, live provider delivery and release/observation evidence remain separate pending operations. Earlier references below to missing owner approval describe the original local verification snapshot.
+
+Local verification of these owner updates: production preflight passes using current GitHub public variables and `RENDER_PLAN=free`, with enablement overridden only inside the local validation process. The optimized production frontend build passes and all 39 frontend tests pass. GitHub deployment remains disabled; no release or provider delivery was triggered. These checks supersede the prior owner-configuration blocker without establishing live release readiness.
+
 Authoritative [implementation plan](../plans/2026-10-17-production-forms-plan.md) and [design](../plans/2026-10-17-production-forms-design.md).
 
 ## Baseline evidence
