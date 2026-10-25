@@ -1,10 +1,10 @@
 # Publishing and rollback
 
-Status: locally prepared. No provider resource has been provisioned, no public release has run, and publishing remains disabled.
+Status: release procedure prepared; owner has provisioned Render and populated GitHub configuration. The 2026-10-25 Free-tier adaptation is local until committed/pushed. Public frontend release and live delivery verification remain pending; publishing remains disabled.
 
 ## Release prerequisites
 
-Complete the [provider handoff](provider-handoff.md), owner content/privacy/retention approval and final activation tasks. Review current pricing before purchasing the proposed always-on Render service. Create a protected GitHub `production` environment with main-only deployments and required reviewers. Keep Render Git auto-deploy off and use a Cloudflare Pages Direct Upload project with production branch `main`; disable any independent Git deployment path.
+Complete the [provider handoff](provider-handoff.md), owner content/privacy/retention approval and final activation tasks. The owner selected Render Free; use `RENDER_PLAN=free` and review its [operating limitations](configuration.md) without upgrading the service. Create a protected GitHub `production` environment with main-only deployments and required reviewers. Keep Render Git auto-deploy off and use a Cloudflare Pages Direct Upload project with production branch `main`; disable any independent Git deployment path.
 
 Repository variables: `DEPLOYMENT_ENABLED` (absent/false until activation), `PUBLIC_API_URL`, `PUBLIC_FRONTEND_URL`, `TURNSTILE_SITE_KEY`, `RENDER_SERVICE_ID`, `RENDER_PLAN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PAGES_PROJECT`. Put only `RENDER_API_TOKEN`, `RENDER_DEPLOY_HOOK_URL`, `CLOUDFLARE_API_TOKEN` in GitHub production environment secrets. Runtime Atlas/Resend/Slack/Turnstile secrets remain in Render. No secret values belong in workflow inputs, frontend variables, Git or this document.
 
@@ -45,7 +45,7 @@ This validates local artifact identity and reports zero provider HTTP requests. 
 
 ## Failure response and ownership
 
-The disabled five-minute monitor is best effort. At activation, assign an owner for GitHub failure notifications, daily queue review, Resend/Slack quotas, backup/retention execution and rollback decisions. Require actual alert receipt and a 24-hour observation record before closing production readiness. No automatic rollback can safely resolve an ambiguous delivery or incompatible schema.
+Scheduled five-minute probes run only on known paid tiers. On Free, explicitly dispatch the monitor when checking health; this wakes the service and consumes usage. At activation, assign an owner for GitHub failure notifications, daily queue review, Resend/Slack quotas, backup/retention execution and rollback decisions. Verify a real submission after idle sleep, eventual Gmail/Slack delivery and worker recovery of queued jobs. Record cold-start time and delayed retries honestly; the original continuous-worker latency targets do not apply while asleep. Require actual manual-check failure notification receipt and a 24-hour observation record before closing production readiness. No automatic rollback can safely resolve an ambiguous delivery or incompatible schema.
 
 ## Local rollback evidence
 

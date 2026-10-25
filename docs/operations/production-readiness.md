@@ -1,6 +1,10 @@
 # Production readiness ledger
 
-Status: Tasks 1–39 complete locally (Gate A/B `verified_local`); Tasks 40–44 `deferred_user_inputs`. Production is not connected or verified.
+Status: Tasks 1–39 complete locally (Gate A/B `verified_local`); Tasks 40–44 remain incomplete. Provider setup has begun; end-to-end production delivery is not yet verified.
+
+## 2026-10-25 Render Free adaptation
+
+The owner selected Free and authorized adapting deployment expectations. The [adaptation plan](../plans/2026-10-25-render-free.md) supersedes the original paid-only requirement: blueprint and release validators accept Free, forms allow 90 seconds for a response, and scheduled monitoring skips Free rather than acting as a keep-alive. Main-only releases, owner approvals, exact commit/artifact verification, TLS and readiness checks remain enforced. Notification work pauses during sleep; saved Atlas records survive. This change is not proof of live cold-start behavior or email/Slack delivery. Business/privacy/retention approval, release, custom-domain cutover and observation remain pending. The verification tables below describe the original 2026-10-17 implementation, including its former 15-second request timeout.
 
 Baseline: `main` at `5ea0ba7494e41899c71cd366d93581cf271c8fe3` (2026-10-17). The active checkout is used as requested. Existing `.agents/`, `.pui/`, `graphify-out/` and `skills-lock.json` are preserved.
 

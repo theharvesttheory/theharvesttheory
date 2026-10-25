@@ -35,6 +35,7 @@ export default function NewsletterAction({ action }) {
     {status==='success'?<p data-testid="newsletter-action-success" ref={result} tabIndex={-1} role="status" className="mt-8 text-lg">{confirm?'Subscription confirmed. Thank you for joining us.':'You have been unsubscribed.'}</p>:<>
       <p className="mt-8 text-ink/80">{token?'Use the button below to complete this action.':'This link is missing its confirmation token. Open the full link from your email or request a new confirmation.'}</p>
       {status==='error'&&<p ref={result} tabIndex={-1} role="alert" className="mt-6 text-red-800">{error}</p>}
+      {status==='submitting'&&<p role="status" className="mt-6 text-ink/80">Please keep this page open. Your request may take up to 90 seconds.</p>}
       {token&&<button type="button" className="btn-primary mt-8" onClick={submit} disabled={status==='submitting'}>{status==='submitting'?'Please wait…':confirm?'Confirm subscription':'Unsubscribe'}</button>}
     </>}
     <p className="mt-8"><Link className="underline" to="/#newsletter">Request a new confirmation email</Link></p>

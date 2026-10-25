@@ -18,11 +18,24 @@ test('malformed 2xx and non JSON errors never show receipt',async()=>{
  fetch.mockResolvedValue({status:503,ok:false,json:async()=>{throw Error('HTML SECRET');},headers:{get:()=>null}});
  await expect(submitEnquiry({body})).rejects.not.toThrow('HTML SECRET');
 });
-test('timeout aborts at 15 seconds and external navigation abort propagates',async()=>{
+test('timeout allows a cold start but aborts at 90 seconds; navigation still aborts',async()=>{
  jest.useFakeTimers();fetch.mockImplementation((url,{signal})=>new Promise((resolve,reject)=>signal.addEventListener('abort',()=>reject(new DOMException('Aborted','AbortError')))));
  const pending=submitEnquiry({body});const assertion=expect(pending).rejects.toMatchObject({code:'timeout'});
- jest.advanceTimersByTime(15000);await assertion;
+ jest.advanceTimersByTime(60000);
+ expect(fetch.mock.calls[0][1].signal.aborted).toBe(false);
+ jest.advanceTimersByTime(30000);await assertion;
  const controller=new AbortController();const next=submitEnquiry({body,signal:controller.signal});const aborted=expect(next).rejects.toMatchObject({name:'AbortError'});controller.abort();await aborted;
+});
+test('a submission can finish after a 60 second cold start without reposting',async()=>{
+ jest.useFakeTimers();
+ fetch.mockImplementation((url,{signal})=>new Promise((resolve,reject)=>{
+  signal.addEventListener('abort',()=>reject(new DOMException('Aborted','AbortError')));
+  setTimeout(()=>resolve(response(201,receipt)),60000);
+ }));
+ const pending=submitEnquiry({body,idempotencyKey:'cold-start-key'});
+ const assertion=expect(pending).resolves.toEqual(receipt);
+ jest.advanceTimersByTime(60000);await assertion;
+ expect(fetch).toHaveBeenCalledTimes(1);
 });
 test('business snapshot reuses retry key despite changed challenge; edits replace it',()=>{
  const first=requestIdentity(null,body);

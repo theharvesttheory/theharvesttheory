@@ -32,7 +32,9 @@ async function post(path, body, signal, idempotencyKey) {
   const onAbort = () => controller.abort();
   if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
   signal?.addEventListener('abort', onAbort, { once: true });
-  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 15000);
+  // Render Free can take about a minute to wake. Keep the request bounded and
+  // preserve the caller's cancellation/idempotency behavior; never auto-repost.
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 90000);
   try {
     const response = await fetch(`${origin}/api${path}`, {
       method: 'POST', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer',

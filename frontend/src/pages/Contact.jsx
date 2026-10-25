@@ -238,6 +238,7 @@ export default function Contact() {
                       </div>
                       <p className="mt-6 text-sm text-ink/75">We use your details to respond to this enquiry. Read our <Link className="underline" to="/privacy">Privacy Policy</Link>.</p>
                       <IntakeChallenge ref={challenge} action="enquiry" onToken={setToken} />
+                      {status === "submitting" && <p role="status" className="mt-6 text-sm text-ink/75">Please keep this page open. Your submission may take up to 90 seconds.</p>}
                       {status === "error" && <div id="contact-status" ref={statusRef} tabIndex={-1} role="alert" className="mt-6 text-sm text-red-800">
                         <p>{error?.message || "We could not confirm your submission. Please try again."}</p>
                         {schema.fields.filter(f => error?.fields?.includes(f.id)).map(f => <p key={f.id}>{f.label}: please check this value.</p>)}

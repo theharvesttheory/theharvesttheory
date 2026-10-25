@@ -29,7 +29,7 @@ def preflight(env):
     api=https_origin(env['PUBLIC_API_URL']);https_origin(env['PUBLIC_FRONTEND_URL'])
     if env['REACT_APP_BACKEND_URL'].rstrip('/')!=api:raise ValueError('Frontend and backend API origins differ')
     if not re.fullmatch('[a-f0-9]{32}',env['CLOUDFLARE_ACCOUNT_ID']) or not re.fullmatch('[a-z0-9][a-z0-9-]{0,57}[a-z0-9]',env['CLOUDFLARE_PAGES_PROJECT']):raise ValueError('Invalid Cloudflare project/account')
-    if not re.fullmatch('srv-[a-z0-9]+',env['RENDER_SERVICE_ID']) or env['RENDER_PLAN'] not in ('starter','standard','pro','pro_plus','pro_max','pro_ultra'):raise ValueError('Approved always-on Render service required')
+    if not re.fullmatch('srv-[a-z0-9]+',env['RENDER_SERVICE_ID']) or env['RENDER_PLAN'] not in ('free','starter','standard','pro','pro_plus','pro_max','pro_ultra'):raise ValueError('Valid Render service and supported plan required')
     return release.public_config(env,'production')
 
 def verify_artifact(build,sha,config):

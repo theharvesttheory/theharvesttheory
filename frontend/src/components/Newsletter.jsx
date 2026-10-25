@@ -35,6 +35,7 @@ export default function Newsletter() {
     <p className="mt-3 text-xs text-cream/80">Read our <Link className="underline" to="/privacy">Privacy Policy</Link>.</p>
     <div className="hidden" aria-hidden="true"><label htmlFor={`${id}-website`}>Leave this field blank</label><input id={`${id}-website`} value={website} onChange={e=>setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" /></div>
     <IntakeChallenge ref={challenge} action="newsletter" onToken={setToken}/>
+    {status==='submitting'&&<p role="status" className="mt-4 text-sm text-cream">Please keep this page open. Your request may take up to 90 seconds.</p>}
     {status==='error'&&<p ref={statusRef} tabIndex={-1} role="alert" className="mt-4 text-sm text-cream">{error||'Please try again later.'}</p>}
     <button type="submit" data-testid="newsletter-submit" aria-label="Subscribe" disabled={status==='submitting'||!token} className="mt-4 flex items-center gap-2 border border-cream/40 px-4 py-2 text-sm text-cream transition-colors hover:text-gold disabled:opacity-60">
       {status==='submitting'?'Sending…':'Subscribe'}<ArrowRight size={16} strokeWidth={1.5}/>

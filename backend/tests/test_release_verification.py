@@ -54,9 +54,17 @@ def test_smoke_requires_deep_links_headers_and_exact_remote_bytes(tmp_path,fault
         else:assert m.smoke(client,ENV['PUBLIC_FRONTEND_URL'],tmp_path)['sha']=='a'*40
 
 
-def test_complete_public_preflight_accepts_explicit_owner_approved_fixture(tmp_path,monkeypatch):
+@pytest.mark.parametrize('plan',['free','starter'])
+def test_complete_public_preflight_accepts_explicit_owner_approved_fixture(tmp_path,monkeypatch,plan):
     m=helper();path=tmp_path/'frontend/src/data/launch-config.json';path.parent.mkdir(parents=True)
     path.write_text(json.dumps({'businessApproved':True,'privacyApproved':True,'retentionApproved':True,'ownerName':'Fixture Owner','ownerAddress':'Fixture Address','privacyEmail':'privacy@fixture.org','supportEmail':'support@fixture.org','suppressionPolicy':'Reviewed minimal suppression policy'}))
     monkeypatch.setattr(m.release,'ROOT',tmp_path)
-    config=m.preflight(ENV)
+    config=m.preflight({**ENV,'RENDER_PLAN':plan})
     assert config['target']=='production' and config['api_url']==ENV['PUBLIC_API_URL']
+
+
+def test_free_plan_preserves_owner_approval_gate(tmp_path,monkeypatch):
+    m=helper();path=tmp_path/'frontend/src/data/launch-config.json';path.parent.mkdir(parents=True)
+    path.write_text('{}');monkeypatch.setattr(m.release,'ROOT',tmp_path)
+    with pytest.raises(ValueError,match='Owner approvals'):
+        m.preflight({**ENV,'RENDER_PLAN':'free'})

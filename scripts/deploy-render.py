@@ -18,7 +18,7 @@ def validate(env,sha):
     if not re.fullmatch('[0-9a-f]{40}',sha):raise ValueError('Exact tested SHA required')
     service=env.get('RENDER_SERVICE_ID','')
     if not re.fullmatch(r'srv-[a-z0-9]+',service):raise ValueError('Render service ID required')
-    if env.get('RENDER_PLAN') not in ('starter','standard','pro','pro_plus','pro_max','pro_ultra'):raise ValueError('Approved always-on Render plan required')
+    if env.get('RENDER_PLAN') not in ('free','starter','standard','pro','pro_plus','pro_max','pro_ultra'):raise ValueError('Supported Render plan required')
     if not env.get('RENDER_API_TOKEN'):raise ValueError('Render API token required')
     hook=urlsplit(env.get('RENDER_DEPLOY_HOOK_URL',''));query=dict(parse_qsl(hook.query))
     if hook.scheme!='https' or hook.netloc!='api.render.com' or hook.path!=f'/deploy/{service}' or hook.fragment or not query.get('key') or set(query)-{'key','ref'}:raise ValueError('Invalid Render deploy hook')

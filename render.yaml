@@ -1,10 +1,10 @@
-# Prepared only. Owner must approve account, Singapore region and paid Starter plan.
+# Owner selected Render Free on 2026-10-25; idle sleep and cold starts apply.
 # Do not apply until Tasks 40/41. Repository-root context includes the intake contract.
 services:
   - type: web
     name: theharvesttheory-api
     runtime: python
-    plan: starter
+    plan: free
     region: singapore
     branch: main
     autoDeployTrigger: 'off'

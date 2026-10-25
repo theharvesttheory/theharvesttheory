@@ -7,9 +7,10 @@ permissions:
   contents: read
 jobs:
   probe:
-    if: vars.DEPLOYMENT_ENABLED == 'true'
+    # Free services sleep when idle. Scheduled probes must not become keep-alives.
+    if: vars.DEPLOYMENT_ENABLED == 'true' && (github.event_name == 'workflow_dispatch' || contains(fromJSON('["starter","standard","pro","pro_plus","pro_max","pro_ultra"]'), vars.RENDER_PLAN))
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 6
     env:
       PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
     steps:
@@ -24,5 +25,5 @@ jobs:
           assert p.scheme == 'https' and p.hostname and not p.username and not p.password and not p.query and not p.fragment and p.path in ('', '/')
           PY
           for endpoint in live ready delivery; do
-            curl --fail --silent --show-error --retry 2 --retry-delay 5 --connect-timeout 5 --max-time 15 "${PUBLIC_API_URL%/}/api/health/$endpoint"
+            curl --fail --silent --show-error --connect-timeout 10 --max-time 90 "${PUBLIC_API_URL%/}/api/health/$endpoint"
           done
