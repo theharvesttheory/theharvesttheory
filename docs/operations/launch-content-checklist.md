@@ -1,12 +1,12 @@
 # Owner decisions before publication
 
-All entries are pending owner review. Local source/tests do not establish business, regulatory or legal facts. Keep `frontend/src/data/launch-config.json` approval flags false until the owner has supplied and reviewed actual values. Production builds reject unresolved required values; local release verification remains possible with `BUILD_TARGET=local`.
+Owner supplied the business identity and contact addresses and approved the four proposed retention periods on 2026-10-25. These values are recorded in `frontend/src/data/launch-config.json`; business and retention approval flags are true. Privacy approval remains false and suppression policy remains unset until reviewed. Local source/tests do not establish business, regulatory or legal facts. Production builds reject unresolved required values; local release verification remains possible with `BUILD_TARGET=local`.
 
 | Item | Required decision/evidence | Current status |
 | --- | --- | --- |
-| Business identity | Legal/trading name, address and responsible owner for enquiries/privacy | Pending |
-| Support and privacy contacts | Real monitored addresses; confirm who responds and how access/deletion requests are verified | Pending; previous hardcoded support address is no longer an active mailto link |
-| Retention | Approve/change enquiries 180 days, unconfirmed signup 7 days, completed payloads 7 days, redacted outcomes 30 days; define subscribed consent, suppression and backups | Proposed only; no production deletion schedule exists |
+| Business identity | Legal/trading name, address and responsible owner for enquiries/privacy | Owner supplied The Harvest Theory, Jakkur, Bengaluru 560064; operational response ownership still to be recorded |
+| Support and privacy contacts | Real monitored addresses; confirm who responds and how access/deletion requests are verified | Owner supplied contact@theharvesttheory.com for both; mailbox receipt and request handling remain to be verified |
+| Retention | Approve/change enquiries 180 days, unconfirmed signup 7 days, completed payloads 7 days, redacted outcomes 30 days; define subscribed consent, suppression and backups | Four periods approved unchanged on 2026-10-25. Consent/suppression/backups and execution schedule remain pending; approval does not run deletion |
 | Processors | Actual Atlas/Render/Cloudflare/Resend/Gmail/Slack configuration, region and access owners; review privacy notice against actual setup | Pending |
 | Product prices | Review every product/collection price, pack size and any placeholder values; choose honest enquiry-only copy where purchase is unavailable | Pending |
 | FSSAI and certifications | Supply actual licence/certification evidence and approved display text, or remove unsupported claims before launch | Existing footer placeholders remain visibly pending |
