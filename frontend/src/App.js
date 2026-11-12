@@ -17,6 +17,9 @@ import Contact from "@/pages/Contact";
 import Journal from "@/pages/Journal";
 import JournalArticle from "@/pages/JournalArticle";
 import { IntroContext, lenisRef } from "@/context/app";
+const AdminProducts = process.env.REACT_APP_ENABLE_ADMIN === "true"
+  ? require("@/pages/AdminProducts").default
+  : null;
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -53,6 +56,7 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/journal" element={<Journal />} />
         <Route path="/journal/:slug" element={<JournalArticle />} />
+        {AdminProducts && <Route path="/admin/products" element={<AdminProducts />} />}
         <Route path="*" element={<Home />} />
       </Routes>
     </AnimatePresence>
